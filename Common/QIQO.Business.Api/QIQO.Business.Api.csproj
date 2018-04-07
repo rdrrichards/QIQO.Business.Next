@@ -19,6 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Account\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj" />
+    <ProjectReference Include="..\..\Company\QIQO.Companies.Manager\QIQO.Companies.Manager.csproj" />
+    <ProjectReference Include="..\..\Invoice\QIQO.Invoices.Manager\QIQO.Invoices.Manager.csproj" />
+    <ProjectReference Include="..\..\Order\QIQO.Orders.Manager\QIQO.Orders.Manager.csproj" />
+    <ProjectReference Include="..\..\Product\QIQO.Products.Manager\QIQO.Products.Manager.csproj" />
+    <ProjectReference Include="..\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

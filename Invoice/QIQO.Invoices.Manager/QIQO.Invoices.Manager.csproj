@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+    <ProjectReference Include="..\QIQO.Invoices.Data\QIQO.Invoices.Data.csproj" />
+    <ProjectReference Include="..\QIQO.Invoices.Domain\QIQO.Invoices.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
