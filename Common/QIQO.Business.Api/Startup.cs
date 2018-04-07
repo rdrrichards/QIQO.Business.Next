@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using QIQO.Accounts.Manager;
+using QIQO.Business.Accounts.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace QIQO.Business.Api
@@ -28,6 +30,10 @@ namespace QIQO.Business.Api
             {
                 c.SwaggerDoc("v1", new Info { Title = "QIQO Business API", Version = "v1" });
             });
+
+            services.AddScoped<IAccountDbContext, AccountDbContext>();
+            services.AddTransient<IAccountsManager, AccountsManager>();
+
             services.AddMvc();
         }
 

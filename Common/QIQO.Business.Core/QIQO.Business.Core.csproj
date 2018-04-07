@@ -3,10 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Caching\" />
-    <Folder Include="Contracts\" />
     <Folder Include="ServiceBus\" />
   </ItemGroup>
 

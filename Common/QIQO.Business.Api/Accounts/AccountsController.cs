@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QIQO.Accounts.Manager;
 using System.Collections.Generic;
 
 namespace QIQO.Business.Api.Accounts
@@ -6,6 +7,12 @@ namespace QIQO.Business.Api.Accounts
     [Route("api/[controller]")]
     public class AccountsController : Controller
     {
+        private readonly IAccountsManager _accountsManager;
+
+        public AccountsController(IAccountsManager accountsManager)
+        {
+            _accountsManager = accountsManager;
+        }
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -14,9 +21,9 @@ namespace QIQO.Business.Api.Accounts
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "Account";
+            return Ok(_accountsManager.GetTest());
         }
 
         // POST api/values

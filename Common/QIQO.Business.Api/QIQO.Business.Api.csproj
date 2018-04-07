@@ -19,10 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Account\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />
     <ProjectReference Include="..\..\Account\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj" />
+    <ProjectReference Include="..\..\Company\QIQO.Companies.Data\QIQO.Companies.Data.csproj" />
     <ProjectReference Include="..\..\Company\QIQO.Companies.Manager\QIQO.Companies.Manager.csproj" />
+    <ProjectReference Include="..\..\Invoice\QIQO.Invoices.Data\QIQO.Invoices.Data.csproj" />
     <ProjectReference Include="..\..\Invoice\QIQO.Invoices.Manager\QIQO.Invoices.Manager.csproj" />
+    <ProjectReference Include="..\..\Order\QIQO.Orders.Data\QIQO.Orders.Data.csproj" />
     <ProjectReference Include="..\..\Order\QIQO.Orders.Manager\QIQO.Orders.Manager.csproj" />
+    <ProjectReference Include="..\..\Product\QIQO.Products.Data\QIQO.Products.Data.csproj" />
     <ProjectReference Include="..\..\Product\QIQO.Products.Manager\QIQO.Products.Manager.csproj" />
     <ProjectReference Include="..\QIQO.Business.Core\QIQO.Business.Core.csproj" />
   </ItemGroup>
