@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 
-namespace QIQO.Business.Accounts.Data
+namespace QIQO.Accounts.Data
 {
     public interface IAccountDbContext { }
     public class AccountDbContext : DbContextBase, IAccountDbContext

@@ -1,4 +1,4 @@
-﻿using QIQO.Business.Accounts.Data;
+﻿using QIQO.Accounts.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
