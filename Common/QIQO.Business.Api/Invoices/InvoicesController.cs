@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace QIQO.Business.Api.Controllers
+namespace QIQO.Business.Api.Invoices
 {
     [Route("api/[controller]")]
-    public class AccountsController : Controller
+    public class InvoicesController : Controller
     {
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Account1", "Account2" };
+            return new string[] { "Invoice1", "Invoice2" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "Account";
+            return "Invoice";
         }
 
         // POST api/values
