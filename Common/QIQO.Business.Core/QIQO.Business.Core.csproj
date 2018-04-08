@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <Folder Include="Caching\" />
-    <Folder Include="ServiceBus\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QIQO.MQ\QIQO.MQ.csproj" />
   </ItemGroup>
 
 </Project>

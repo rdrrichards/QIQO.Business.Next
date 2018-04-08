@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QIQO.Accounts.Manager;
 using QIQO.Accounts.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using QIQO.Business.Core.ServiceBus;
 
 namespace QIQO.Business.Api
 {
@@ -27,6 +28,8 @@ namespace QIQO.Business.Api
 
             services.AddScoped<IAccountDbContext, AccountDbContext>();
             services.AddTransient<IAccountsManager, AccountsManager>();
+            services.AddTransient<IMQPublisher, MQPublisher>();
+            services.AddTransient<IMQConsumer, MQConsumer>();
 
             services.AddMvc();
         }

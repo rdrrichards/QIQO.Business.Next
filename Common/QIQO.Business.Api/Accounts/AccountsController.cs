@@ -31,6 +31,7 @@ namespace QIQO.Business.Api.Accounts
         public void Post([FromBody]string value)
         {
             // throw new System.Exception("All hell broke loose!!!");
+            _accountsManager.SaveTest(new Test("All hell broke loose!!!"));
         }
 
         // PUT api/values/5
@@ -43,6 +44,7 @@ namespace QIQO.Business.Api.Accounts
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // _accountsManager.PullTest();
         }
     }
 }
