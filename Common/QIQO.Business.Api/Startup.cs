@@ -29,7 +29,7 @@ namespace QIQO.Business.Api
             services.AddScoped<IAccountDbContext, AccountDbContext>();
             services.AddTransient<IAccountsManager, AccountsManager>();
             services.AddTransient<IMQPublisher, MQPublisher>();
-            services.AddTransient<IMQConsumer, MQConsumer>();
+            // services.AddTransient<IMQConsumer, MQConsumer>();
 
             services.AddMvc();
         }

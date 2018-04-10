@@ -10,19 +10,16 @@ namespace QIQO.Accounts.Manager
     {
         Test GetTest();
         void SaveTest(Test test);
-        void PullTest();
     }
     public class AccountsManager : IAccountsManager
     {
         private readonly IAccountDbContext _accountDbContext;
         private readonly IMQPublisher _mqPublisher;
-        private readonly IMQConsumer _mqConsumer;
 
-        public AccountsManager(IAccountDbContext accountDbContext, IMQPublisher mqPublisher, IMQConsumer mqConsumer)
+        public AccountsManager(IAccountDbContext accountDbContext, IMQPublisher mqPublisher)
         {
             _accountDbContext = accountDbContext;
             _mqPublisher = mqPublisher;
-            _mqConsumer = mqConsumer;
         }
         public Test GetTest()
         {
@@ -33,12 +30,6 @@ namespace QIQO.Accounts.Manager
         {
             _mqPublisher.Send(test, "payment.card");
             _mqPublisher.Send(test, "payment.purchaseorder");
-        }
-
-        public void PullTest()
-        {
-            _mqConsumer.Pull("payment.card");
-            // _mqConsumer.Pull("payment.purchaseorder");
         }
     }
 }

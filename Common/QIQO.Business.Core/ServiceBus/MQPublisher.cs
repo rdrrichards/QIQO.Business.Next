@@ -14,15 +14,15 @@ namespace QIQO.Business.Core.ServiceBus
         }
     }
 
-    public interface IMQConsumer
-    {
-        void Pull(string routingKey);
-    }
-    public class MQConsumer : Consumer, IMQConsumer
-    {
-        public void Pull(string routingKey)
-        {
-            ReceiveMessage();
-        }
-    }
+    //public interface IMQConsumer
+    //{
+    //    void Pull(string routingKey);
+    //}
+    //public class MQConsumer : Consumer, IMQConsumer
+    //{
+    //    public void Pull(string routingKey)
+    //    {
+    //        ReceiveMessage();
+    //    }
+    //}
 }
