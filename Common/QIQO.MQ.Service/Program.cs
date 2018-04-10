@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.WindowsServices;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace QIQO.MQ.Service
 {
@@ -16,6 +12,7 @@ namespace QIQO.MQ.Service
     {
         public static void Main(string[] args)
         {
+            // var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             bool isService = true;
             if (Debugger.IsAttached || args.Contains("--console"))
             {
@@ -32,7 +29,13 @@ namespace QIQO.MQ.Service
             var host = WebHost.CreateDefaultBuilder(args)
                 .UseContentRoot(pathToContentRoot)
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Trace);
+                })
+                .UseNLog()
+                //.UseApplicationInsights()
                 .Build();
 
             if (isService)

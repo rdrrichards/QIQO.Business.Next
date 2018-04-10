@@ -1,47 +1,63 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.MessagePatterns;
 
 namespace QIQO.MQ.Service
 {
-    public class Consumer
+    public interface IConsumer
     {
+        void ReceiveMessage(string exchgName, string qName, string rtKey);
+    }
+    public class Consumer : IConsumer
+    {
+        private readonly IConfiguration _configuration;
+        private readonly string hostName;
+        private readonly string userName;
+        private readonly string password;
+        private string exchangeName = "Account";
+        private string queueName = "account.add";
+        private string routingKey = "account.*";
         private ConnectionFactory _factory;
         private IConnection _connection;
 
-        private const string ExchangeName = "Topic_Exchange";
-        private const string AllQueueName = "AllTopic_Queue";
 
-        public void ReceiveMessage() {
+        public Consumer(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            hostName = _configuration["QueueConfig:Server"];
+            userName = _configuration["QueueConfig:User"];
+            password = _configuration["QueueConfig:Password"];
+        }
+
+        public void ReceiveMessage(string exchgName, string qName, string rtKey) {
+            exchangeName = exchgName;
+            queueName = qName;
+            routingKey = rtKey;
             ProcessMessages();
         }
 
         private void ProcessMessages()
         {
-            _factory = new ConnectionFactory { HostName = "localhost", UserName = "guest", Password = "guest" };
+            _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
             using (_connection = _factory.CreateConnection())
             {
                 using (var channel = _connection.CreateModel())
                 {
-                    Console.WriteLine("Listening for Topic <payment.*>");
-                    Console.WriteLine("------------------------------");
-                    Console.WriteLine();
-
-                    channel.ExchangeDeclare(ExchangeName, "topic");
-                    channel.QueueDeclare(AllQueueName, true, false, false, null);
-                    channel.QueueBind(AllQueueName, ExchangeName, "payment.*");
+                    channel.ExchangeDeclare(exchangeName, "topic");
+                    channel.QueueDeclare(queueName, true, false, false, null);
+                    channel.QueueBind(queueName, exchangeName, routingKey);
 
                     channel.BasicQos(0, 10, false);
-                    var subscription = new Subscription(channel, AllQueueName, false);
+                    var subscription = new Subscription(channel, queueName, false);
 
                     while (true)
                     {
-                        BasicDeliverEventArgs deliveryArguments = subscription.Next();
+                        var deliveryArguments = subscription.Next();
+                        // var message = deliveryArguments.Body.DeSerializeText();
 
-                        var message = deliveryArguments.Body.DeSerializeText();
-
-                        Console.WriteLine("Message Received '{0}'", message);
+                        // Console.WriteLine("Message Received '{0}'", message);
                         subscription.Ack(deliveryArguments);
                     }
                 }
