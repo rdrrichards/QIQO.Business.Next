@@ -1,8 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using RabbitMQ.Client.MessagePatterns;
 
 namespace QIQO.MQ.Service
@@ -14,22 +12,13 @@ namespace QIQO.MQ.Service
     }
     public class Consumer : IConsumer
     {
-        private readonly IConfiguration _configuration;
         private ConnectionFactory _factory;
         private IConnection _connection;
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        public Consumer(IConfiguration configuration)
+        public void ReceiveMessages(string exchgName, string qName, string rtKey)
         {
-            _configuration = configuration;
-        }
-
-        public void ReceiveMessages(string exchgName, string qName, string rtKey) {
-            var hostName = _configuration["QueueConfig:Server"];
-            var userName = _configuration["QueueConfig:User"];
-            var password = _configuration["QueueConfig:Password"];
-
-            ProcessMessages(hostName, userName, password, exchgName, qName, rtKey);
+            //ProcessMessages();
         }
 
         public void StopRecieving()
@@ -67,7 +56,7 @@ namespace QIQO.MQ.Service
                         }
                     }
                 }
-            }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);            
+            }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
     }
 }

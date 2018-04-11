@@ -6,6 +6,8 @@ using QIQO.Accounts.Manager;
 using QIQO.Accounts.Data;
 using Swashbuckle.AspNetCore.Swagger;
 using QIQO.Business.Core.ServiceBus;
+using QIQO.Business.Api.Background;
+using Microsoft.Extensions.Hosting;
 
 namespace QIQO.Business.Api
 {
@@ -30,6 +32,8 @@ namespace QIQO.Business.Api
             services.AddTransient<IAccountsManager, AccountsManager>();
             services.AddTransient<IMQPublisher, MQPublisher>();
             // services.AddTransient<IMQConsumer, MQConsumer>();
+
+            services.AddSingleton<IHostedService, AccountAddConsumerService>();
 
             services.AddMvc();
         }

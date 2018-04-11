@@ -15,53 +15,51 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{7C82
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7C98BCCF-E95A-442B-BEE7-1D319E1AAACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Business.Core", "Common\QIQO.Business.Core\QIQO.Business.Core.csproj", "{EBC23D2D-7771-4121-AE68-D6AFFB5426A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Business.Core", "Common\QIQO.Business.Core\QIQO.Business.Core.csproj", "{EBC23D2D-7771-4121-AE68-D6AFFB5426A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Companies.Domain", "Company\QIQO.Companies.Domain\QIQO.Companies.Domain.csproj", "{857DD00D-80C2-4B85-8AF6-C064C5E2CC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Companies.Domain", "Company\QIQO.Companies.Domain\QIQO.Companies.Domain.csproj", "{857DD00D-80C2-4B85-8AF6-C064C5E2CC70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Companies.Data", "Company\QIQO.Companies.Data\QIQO.Companies.Data.csproj", "{55CD4178-54C2-4155-BD69-7F64335160E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Companies.Data", "Company\QIQO.Companies.Data\QIQO.Companies.Data.csproj", "{55CD4178-54C2-4155-BD69-7F64335160E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Accounts.Domain", "Account\QIQO.Accounts.Domain\QIQO.Accounts.Domain.csproj", "{4F02119A-BFEA-4D30-8B62-8F9BDBC23F34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Accounts.Domain", "Account\QIQO.Accounts.Domain\QIQO.Accounts.Domain.csproj", "{4F02119A-BFEA-4D30-8B62-8F9BDBC23F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Accounts.Data", "Account\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj", "{0680732A-F753-4EFD-A275-44D818C9890D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Accounts.Data", "Account\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj", "{0680732A-F753-4EFD-A275-44D818C9890D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Invoices.Domain", "Invoice\QIQO.Invoices.Domain\QIQO.Invoices.Domain.csproj", "{3A913391-A076-48DD-9E8E-1600B010F150}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Domain", "Invoice\QIQO.Invoices.Domain\QIQO.Invoices.Domain.csproj", "{3A913391-A076-48DD-9E8E-1600B010F150}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Invoices.Data", "Invoice\QIQO.Invoices.Data\QIQO.Invoices.Data.csproj", "{6DBB54CF-BFF2-481C-9518-6969E971FE3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Data", "Invoice\QIQO.Invoices.Data\QIQO.Invoices.Data.csproj", "{6DBB54CF-BFF2-481C-9518-6969E971FE3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Orders.Domain", "Order\QIQO.Orders.Domain\QIQO.Orders.Domain.csproj", "{94B28B45-EFE7-40A5-8B26-599644E0D9E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Orders.Domain", "Order\QIQO.Orders.Domain\QIQO.Orders.Domain.csproj", "{94B28B45-EFE7-40A5-8B26-599644E0D9E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Orders.Data", "Order\QIQO.Orders.Data\QIQO.Orders.Data.csproj", "{5C649969-2CCF-4810-8C6D-1F58D9DB44CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Orders.Data", "Order\QIQO.Orders.Data\QIQO.Orders.Data.csproj", "{5C649969-2CCF-4810-8C6D-1F58D9DB44CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Products.Domain", "Product\QIQO.Products.Domain\QIQO.Products.Domain.csproj", "{DEE6564D-3190-4963-8116-77635AEFD3E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Domain", "Product\QIQO.Products.Domain\QIQO.Products.Domain.csproj", "{DEE6564D-3190-4963-8116-77635AEFD3E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Products.Data", "Product\QIQO.Products.Data\QIQO.Products.Data.csproj", "{5CBF891E-576B-4C96-908A-726BDBB6E199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Data", "Product\QIQO.Products.Data\QIQO.Products.Data.csproj", "{5CBF891E-576B-4C96-908A-726BDBB6E199}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Business.Api", "Common\QIQO.Business.Api\QIQO.Business.Api.csproj", "{1FE62831-36EA-4613-AC45-171E0658DBE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Business.Api", "Common\QIQO.Business.Api\QIQO.Business.Api.csproj", "{1FE62831-36EA-4613-AC45-171E0658DBE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Accounts.Manager", "Account\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj", "{C1577204-F432-46FA-9D28-95D6F1D676A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Accounts.Manager", "Account\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj", "{C1577204-F432-46FA-9D28-95D6F1D676A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Companies.Manager", "Company\QIQO.Companies.Manager\QIQO.Companies.Manager.csproj", "{84FF20E0-95A5-41DA-A42D-61B82493C381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Companies.Manager", "Company\QIQO.Companies.Manager\QIQO.Companies.Manager.csproj", "{84FF20E0-95A5-41DA-A42D-61B82493C381}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Invoices.Manager", "Invoice\QIQO.Invoices.Manager\QIQO.Invoices.Manager.csproj", "{8868B415-2B12-4B03-ABE5-E309306204F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Manager", "Invoice\QIQO.Invoices.Manager\QIQO.Invoices.Manager.csproj", "{8868B415-2B12-4B03-ABE5-E309306204F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Orders.Manager", "Order\QIQO.Orders.Manager\QIQO.Orders.Manager.csproj", "{7496D1A8-C3CF-48A1-8E76-8B6DAEA003FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Orders.Manager", "Order\QIQO.Orders.Manager\QIQO.Orders.Manager.csproj", "{7496D1A8-C3CF-48A1-8E76-8B6DAEA003FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Products.Manager", "Product\QIQO.Products.Manager\QIQO.Products.Manager.csproj", "{FEC5F7B8-B0A3-44BB-A591-97E319A9D094}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Manager", "Product\QIQO.Products.Manager\QIQO.Products.Manager.csproj", "{FEC5F7B8-B0A3-44BB-A591-97E319A9D094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Accounts.Tests", "Account\QIQO.Accounts.Tests\QIQO.Accounts.Tests.csproj", "{88C8CFFC-25BA-4E6A-80B9-6BDC51889F32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Accounts.Tests", "Account\QIQO.Accounts.Tests\QIQO.Accounts.Tests.csproj", "{88C8CFFC-25BA-4E6A-80B9-6BDC51889F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Companies.Tests", "Company\QIQO.Companies.Tests\QIQO.Companies.Tests.csproj", "{BDCAA2AB-396C-43B7-A560-144723797C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Companies.Tests", "Company\QIQO.Companies.Tests\QIQO.Companies.Tests.csproj", "{BDCAA2AB-396C-43B7-A560-144723797C19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Invoices.Tests", "Invoice\QIQO.Invoices.Tests\QIQO.Invoices.Tests.csproj", "{10CF24BA-AAF4-434E-B470-5A6304330F6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Tests", "Invoice\QIQO.Invoices.Tests\QIQO.Invoices.Tests.csproj", "{10CF24BA-AAF4-434E-B470-5A6304330F6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Orders.Tests", "Order\QIQO.Orders.Tests\QIQO.Orders.Tests.csproj", "{36528029-4042-4976-B9DB-8F17CBFE314E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Orders.Tests", "Order\QIQO.Orders.Tests\QIQO.Orders.Tests.csproj", "{36528029-4042-4976-B9DB-8F17CBFE314E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Products.Tests", "Product\QIQO.Products.Tests\QIQO.Products.Tests.csproj", "{4A440300-A1E8-47C3-AB37-81D4ED8B2B84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Tests", "Product\QIQO.Products.Tests\QIQO.Products.Tests.csproj", "{4A440300-A1E8-47C3-AB37-81D4ED8B2B84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.MQ", "Common\QIQO.MQ\QIQO.MQ.csproj", "{B15EB576-81D0-430B-B247-758653C13A2E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.MQ.Service", "Common\QIQO.MQ.Service\QIQO.MQ.Service.csproj", "{9CD90142-95D3-4654-A53E-5F132F6A36FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.MQ", "Common\QIQO.MQ\QIQO.MQ.csproj", "{B15EB576-81D0-430B-B247-758653C13A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,10 +159,6 @@ Global
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CD90142-95D3-4654-A53E-5F132F6A36FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CD90142-95D3-4654-A53E-5F132F6A36FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CD90142-95D3-4654-A53E-5F132F6A36FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CD90142-95D3-4654-A53E-5F132F6A36FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,7 +187,6 @@ Global
 		{36528029-4042-4976-B9DB-8F17CBFE314E} = {0219908B-DFAD-4690-8F74-AE1A6F95BEB7}
 		{4A440300-A1E8-47C3-AB37-81D4ED8B2B84} = {7C82921A-220D-4778-810C-3AA90A39EA2A}
 		{B15EB576-81D0-430B-B247-758653C13A2E} = {7C98BCCF-E95A-442B-BEE7-1D319E1AAACC}
-		{9CD90142-95D3-4654-A53E-5F132F6A36FB} = {7C98BCCF-E95A-442B-BEE7-1D319E1AAACC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D30E9C8-D743-4661-A00F-DE0CBBA8E57D}
