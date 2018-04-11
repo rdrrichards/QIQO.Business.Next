@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -8,60 +9,65 @@ namespace QIQO.MQ.Service
 {
     public interface IConsumer
     {
-        void ReceiveMessage(string exchgName, string qName, string rtKey);
+        void ReceiveMessages(string exchgName, string qName, string rtKey);
+        void StopRecieving();
     }
     public class Consumer : IConsumer
     {
         private readonly IConfiguration _configuration;
-        private readonly string hostName;
-        private readonly string userName;
-        private readonly string password;
-        private string exchangeName = "Account";
-        private string queueName = "account.add";
-        private string routingKey = "account.*";
         private ConnectionFactory _factory;
         private IConnection _connection;
-
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         public Consumer(IConfiguration configuration)
         {
             _configuration = configuration;
-            hostName = _configuration["QueueConfig:Server"];
-            userName = _configuration["QueueConfig:User"];
-            password = _configuration["QueueConfig:Password"];
         }
 
-        public void ReceiveMessage(string exchgName, string qName, string rtKey) {
-            exchangeName = exchgName;
-            queueName = qName;
-            routingKey = rtKey;
-            ProcessMessages();
+        public void ReceiveMessages(string exchgName, string qName, string rtKey) {
+            var hostName = _configuration["QueueConfig:Server"];
+            var userName = _configuration["QueueConfig:User"];
+            var password = _configuration["QueueConfig:Password"];
+
+            ProcessMessages(hostName, userName, password, exchgName, qName, rtKey);
         }
 
-        private void ProcessMessages()
+        public void StopRecieving()
         {
-            _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
-            using (_connection = _factory.CreateConnection())
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource.Dispose();
+        }
+
+        private void ProcessMessages(string hostName, string userName, string password, string exchangeName, string queueName, string routingKey)
+        {
+            var token = cancellationTokenSource.Token;
+            var listener = Task.Factory.StartNew(() =>
             {
-                using (var channel = _connection.CreateModel())
+                _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
+                using (_connection = _factory.CreateConnection())
                 {
-                    channel.ExchangeDeclare(exchangeName, "topic");
-                    channel.QueueDeclare(queueName, true, false, false, null);
-                    channel.QueueBind(queueName, exchangeName, routingKey);
-
-                    channel.BasicQos(0, 10, false);
-                    var subscription = new Subscription(channel, queueName, false);
-
-                    while (true)
+                    using (var channel = _connection.CreateModel())
                     {
-                        var deliveryArguments = subscription.Next();
-                        // var message = deliveryArguments.Body.DeSerializeText();
+                        channel.ExchangeDeclare(exchangeName, "topic");
+                        channel.QueueDeclare(queueName, true, false, false, null);
+                        channel.QueueBind(queueName, exchangeName, routingKey);
 
-                        // Console.WriteLine("Message Received '{0}'", message);
-                        subscription.Ack(deliveryArguments);
+                        channel.BasicQos(0, 10, false);
+                        var subscription = new Subscription(channel, queueName, false);
+
+                        while (true)
+                        {
+                            var deliveryArguments = subscription.Next();
+                            // var message = deliveryArguments.Body.DeSerializeText();
+
+                            // Console.WriteLine("Message Received '{0}'", message);
+                            subscription.Ack(deliveryArguments);
+                            if (token.IsCancellationRequested)
+                                break;
+                        }
                     }
                 }
-            }
+            }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);            
         }
     }
 }
