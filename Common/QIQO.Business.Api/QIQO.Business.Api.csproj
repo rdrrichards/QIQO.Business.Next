@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\Product\QIQO.Products.Data\QIQO.Products.Data.csproj" />
     <ProjectReference Include="..\..\Product\QIQO.Products.Manager\QIQO.Products.Manager.csproj" />
     <ProjectReference Include="..\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+    <ProjectReference Include="..\QIQO.MQ\QIQO.MQ.csproj" />
   </ItemGroup>
 
   <ItemGroup>

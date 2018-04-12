@@ -1,6 +1,5 @@
-﻿using QIQO.MQ;
-
-namespace QIQO.Business.Core.ServiceBus
+﻿
+namespace QIQO.MQ
 {
     public interface IMQPublisher
     {

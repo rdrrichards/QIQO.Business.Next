@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using QIQO.Accounts.Manager;
 using QIQO.Accounts.Data;
 using Swashbuckle.AspNetCore.Swagger;
-using QIQO.Business.Core.ServiceBus;
 using QIQO.Business.Api.Background;
 using Microsoft.Extensions.Hosting;
+using QIQO.MQ;
 
 namespace QIQO.Business.Api
 {

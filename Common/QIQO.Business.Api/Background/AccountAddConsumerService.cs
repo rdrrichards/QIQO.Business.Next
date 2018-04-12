@@ -23,7 +23,7 @@ namespace QIQO.Business.Api.Background
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _log.LogDebug("AccountConsumerService -> ExecuteAsync started");
-            stoppingToken.Register(() => _log.LogDebug($" AccountConsumerService background task is stopping."));
+            stoppingToken.Register(() => _log.LogDebug($"AccountConsumerService background task is stopping."));
 
             var hostName = _configuration["QueueConfig:Server"];
             var userName = _configuration["QueueConfig:User"];
@@ -55,7 +55,7 @@ namespace QIQO.Business.Api.Background
                 }
             }
 
-            _log.LogDebug($"GracePeriod background task is stopping.");
+            _log.LogDebug($"AccountConsumerService background task is stopping.");
 
             return null;
         }

@@ -1,8 +1,5 @@
 ﻿using QIQO.Accounts.Data;
-using QIQO.Business.Core.ServiceBus;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using QIQO.MQ;
 
 namespace QIQO.Accounts.Manager
 {
