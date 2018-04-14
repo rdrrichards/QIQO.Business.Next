@@ -5,66 +5,72 @@ using System.Threading;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 using RabbitMQ.Client.MessagePatterns;
+using QIQO.MQ;
+using System;
 
 namespace QIQO.Business.Api.Background
 {
-    // This will not really work in tit's current form
     public class ConsumerServiceBase : BackgroundServiceBase
     {
-        private readonly ILogger<ConsumerServiceBase> _log;
+        private const string topic = "topic";
+        private const string confBase = "QueueConfig";
         private readonly string _section;
-        // private readonly IConfiguration _configuration;
+        private readonly string _action;
         private ConnectionFactory _factory;
         private IConnection _connection;
 
-        private const string confBase = "QueueConfig";
-        protected readonly string HostName;
-        protected readonly string UserName;
-        protected readonly string Password;
-        protected readonly string ExchangeName;
-        protected readonly string QueueName;
-        protected readonly string RoutingKey;
+        protected readonly ILogger<ConsumerServiceBase> _log;
+        protected readonly string hostName;
+        protected readonly string userName;
+        protected readonly string password;
+        protected readonly string exchangeName;
+        protected readonly string queueName;
+        protected readonly string routingKey;
 
-        public ConsumerServiceBase(IConfiguration configuration, ILogger<ConsumerServiceBase> logger, string section)
+        public ConsumerServiceBase(IConfiguration configuration, ILogger<ConsumerServiceBase> logger, string section, string action)
         {
             _log = logger;
             _section = section;
-            HostName = configuration[$"{confBase}:Server"];
-            UserName = configuration[$"{confBase}:User"];
-            Password = configuration[$"{confBase}:Password"];
-            ExchangeName = configuration[$"{confBase}:{_section}:Exchange"];
-            QueueName = configuration[$"{confBase}:{_section}:RecieveAddQueueName"];
-            RoutingKey = configuration[$"{confBase}:{_section}:RecieveAddQueueName"];
+            _action = action;
+            hostName = configuration[$"{confBase}:Server"];
+            userName = configuration[$"{confBase}:User"];
+            password = configuration[$"{confBase}:Password"];
+            exchangeName = configuration[$"{confBase}:{_section}:Exchange"];
+            queueName = configuration[$"{confBase}:{_section}:{_action}QueueName"];
+            routingKey = configuration[$"{confBase}:{_section}:{_action}QueueName"];
         }
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken) => null;
+
+        protected Task Listen(CancellationToken stoppingToken, Action<object> listenAction)
         {
-            _log.LogDebug($"{_section}ConsumerService -> ExecuteAsync started");
-            stoppingToken.Register(() => _log.LogDebug($"{_section}ConsumerService background task is stopping."));
-
-            _factory = new ConnectionFactory { HostName = HostName, UserName = UserName, Password = Password };
-            using (_connection = _factory.CreateConnection())
+            return Task.Factory.StartNew(() =>
             {
-                using (var channel = _connection.CreateModel())
+                _log.LogDebug($"{_section}{_action}ConsumerService -> ExecuteAsync started");
+                stoppingToken.Register(() => _log.LogDebug($"{_section}{_action}ConsumerService background task is stopping"));
+
+                _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
+                using (_connection = _factory.CreateConnection())
                 {
-                    channel.ExchangeDeclare(ExchangeName, "topic");
-                    channel.QueueDeclare(QueueName, true, false, false, null);
-                    channel.QueueBind(QueueName, ExchangeName, RoutingKey);
-
-                    channel.BasicQos(0, 10, false);
-                    var subscription = new Subscription(channel, QueueName, false);
-
-                    while (!stoppingToken.IsCancellationRequested)
+                    using (var channel = _connection.CreateModel())
                     {
-                        var deliveryArguments = subscription.Next();
-                        // var message = deliveryArguments.Body.DeSerializeText();
+                        channel.ExchangeDeclare(exchangeName, topic);
+                        channel.QueueDeclare(queueName, true, false, false, null);
+                        channel.QueueBind(queueName, exchangeName, routingKey);
 
-                        // Console.WriteLine("Message Received '{0}'", message);
-                        subscription.Ack(deliveryArguments);
+                        channel.BasicQos(0, 10, false);
+                        var subscription = new Subscription(channel, queueName, false);
+
+                        while (!stoppingToken.IsCancellationRequested)
+                        {
+                            var deliveryArguments = subscription.Next();
+                            var message = deliveryArguments.Body.DeSerializeText();
+
+                            listenAction.Invoke(message);
+                            subscription.Ack(deliveryArguments);
+                        }
                     }
                 }
-            }
-            _log.LogDebug($"{_section}ConsumerService background task is stopping.");
-            return null;
+            });
         }
     }
 }

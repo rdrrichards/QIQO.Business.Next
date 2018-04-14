@@ -33,7 +33,10 @@ namespace QIQO.Business.Api
             services.AddTransient<IMQPublisher, MQPublisher>();
             // services.AddTransient<IMQConsumer, MQConsumer>();
 
+            services.AddSingleton<IHostedService, AccountAuditConsumerService>();
             services.AddSingleton<IHostedService, AccountAddConsumerService>();
+            services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
+            services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
 
             services.AddMvc();
         }
