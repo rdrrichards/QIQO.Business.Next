@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QIQO.Accounts.Domain;
 using QIQO.Accounts.Manager;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Accounts
 {
@@ -28,10 +30,18 @@ namespace QIQO.Business.Api.Accounts
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]AccountAddViewModel accountAddViewModel)
         {
-            // throw new System.Exception("All hell broke loose!!!");
-            _accountsManager.SaveTest(new Test("All hell broke loose!!!"));
+            if (ModelState.IsValid)
+            {
+                await _accountsManager.SaveAccountAsync(new Account(accountAddViewModel.CompanyKey, accountAddViewModel.AccountType, accountAddViewModel.AccountCode,
+                    accountAddViewModel.AccountName, accountAddViewModel.AccountDesc, accountAddViewModel.AccountDba, accountAddViewModel.AccountStartDate, accountAddViewModel.AccountEndDate));
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/values/5

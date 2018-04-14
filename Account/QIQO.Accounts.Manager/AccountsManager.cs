@@ -1,21 +1,25 @@
-﻿using QIQO.Accounts.Data;
+﻿using Microsoft.Extensions.Logging;
+using QIQO.Accounts.Data;
+using QIQO.Accounts.Domain;
 using QIQO.MQ;
+using System.Threading.Tasks;
 
 namespace QIQO.Accounts.Manager
 {
     public interface IAccountsManager
     {
         Test GetTest();
-        void SaveTest(Test test);
+        // void SaveTest(Test test);
+        Task SaveAccountAsync(Account account);
     }
     public class AccountsManager : IAccountsManager
     {
-        private readonly IAccountDbContext _accountDbContext;
+        private readonly ILogger<AccountsManager> _log;
         private readonly IMQPublisher _mqPublisher;
 
-        public AccountsManager(IAccountDbContext accountDbContext, IMQPublisher mqPublisher)
+        public AccountsManager(ILogger<AccountsManager> logger, IMQPublisher mqPublisher)
         {
-            _accountDbContext = accountDbContext;
+            _log = logger;
             _mqPublisher = mqPublisher;
         }
         public Test GetTest()
@@ -23,10 +27,17 @@ namespace QIQO.Accounts.Manager
             return new Test("Testing IoC");
         }
 
-        public void SaveTest(Test test)
+        //public void SaveTest(Test test)
+        //{
+        //    _mqPublisher.Send(test, "payment.card");
+        //    _mqPublisher.Send(test, "payment.purchaseorder");
+        //}
+
+        public Task SaveAccountAsync(Account account)
         {
-            _mqPublisher.Send(test, "payment.card");
-            _mqPublisher.Send(test, "payment.purchaseorder");
+            return Task.Factory.StartNew(() => {
+                _mqPublisher.Send(account, "account", "account.add", "account.add");
+            });
         }
     }
 }

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+    <ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />
+  </ItemGroup>
+
 </Project>

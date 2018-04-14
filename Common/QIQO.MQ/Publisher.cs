@@ -1,55 +1,62 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 
 namespace QIQO.MQ
 {
     public class Publisher
     {
-        // private readonly ConsumerWorkService _something = new ConsumerWorkService();
         private ConnectionFactory _factory;
         private IConnection _connection;
         private IModel _model;
 
-        private const string ExchangeName = "Topic_Exchange";
-        private const string CardPaymentQueueName = "CardPaymentTopic_Queue";
-        private const string PurchaseOrderQueueName = "PurchaseOrderTopic_Queue";
-        private const string AllQueueName = "AllTopic_Queue";
+        private readonly IConfiguration _configuration;
+
+        public Publisher(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public void SendMessage(object thing, string routingKey)
         {
-            Publish(thing.Serialize(), routingKey);
+            Publish(thing.Serialize(), string.Empty, routingKey, routingKey);
         }
 
         public void SendMessage(byte[] message, string routingKey)
         {
-            Publish(message, routingKey);
+            Publish(message, string.Empty, routingKey, routingKey);
         }
-        private void Publish(byte[] message, string routingKey)
+        public void SendMessage(object thing, string exchangeName, string queueName, string routingKey)
         {
-            CreateConnection();
-            _model.BasicPublish(ExchangeName, routingKey, null, message);
+            Publish(thing.Serialize(), exchangeName, queueName, routingKey);
+        }
+
+        public void SendMessage(byte[] message, string exchangeName, string queueName, string routingKey)
+        {
+            Publish(message, exchangeName, queueName, routingKey);
+        }
+        private void Publish(byte[] message, string exchangeName, string queueName, string routingKey)
+        {
+            CreateConnection(exchangeName, queueName, routingKey);
+            _model.BasicPublish(exchangeName, routingKey, null, message);
             Close();
         }
 
-        private void CreateConnection()
+        private void CreateConnection(string exchangeName, string queueName, string routingKey)
         {
             _factory = new ConnectionFactory
             {
-                HostName = "localhost",
-                UserName = "guest",
-                Password = "guest"
+                HostName = _configuration["QueueConfig:Server"],
+                UserName = _configuration["QueueConfig:User"],
+                Password = _configuration["QueueConfig:Password"]
             };
 
             _connection = _factory.CreateConnection();
             _model = _connection.CreateModel();
-            _model.ExchangeDeclare(ExchangeName, "topic");
+            _model.ExchangeDeclare(exchangeName, "topic");
 
-            _model.QueueDeclare(CardPaymentQueueName, true, false, false, null);
-            _model.QueueDeclare(PurchaseOrderQueueName, true, false, false, null);
-            _model.QueueDeclare(AllQueueName, true, false, false, null);
+            _model.QueueDeclare(queueName, true, false, false, null);
 
-            _model.QueueBind(CardPaymentQueueName, ExchangeName, "payment.card");
-            _model.QueueBind(PurchaseOrderQueueName, ExchangeName, "payment.purchaseorder");
-            _model.QueueBind(AllQueueName, ExchangeName, "payment.*");
+            _model.QueueBind(queueName, exchangeName, routingKey);
         }
         private void Close()
         {

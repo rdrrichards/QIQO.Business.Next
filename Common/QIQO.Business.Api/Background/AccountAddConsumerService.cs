@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using QIQO.Business.Core;
+using QIQO.MQ;
 using RabbitMQ.Client;
 using RabbitMQ.Client.MessagePatterns;
 using System.Threading;
@@ -29,8 +30,8 @@ namespace QIQO.Business.Api.Background
             var userName = _configuration["QueueConfig:User"];
             var password = _configuration["QueueConfig:Password"];
             var exchangeName = _configuration["QueueConfig:Account:Exchange"];
-            var queueName = _configuration["QueueConfig:Account:RecieveAddQueueName"];
-            var routingKey = _configuration["QueueConfig:Account:RecieveAddQueueName"];
+            var queueName = _configuration["QueueConfig:Account:PublishAddQueueName"];
+            var routingKey = _configuration["QueueConfig:Account:PublishAddQueueName"];
 
             _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
             using (_connection = _factory.CreateConnection())
@@ -47,9 +48,9 @@ namespace QIQO.Business.Api.Background
                     while (!stoppingToken.IsCancellationRequested)
                     {
                         var deliveryArguments = subscription.Next();
-                        // var message = deliveryArguments.Body.DeSerializeText();
+                        var message = deliveryArguments.Body.DeSerializeText();
 
-                        // Console.WriteLine("Message Received '{0}'", message);
+                        _log.LogDebug($"Message Received '{message}'");
                         subscription.Ack(deliveryArguments);
                     }
                 }

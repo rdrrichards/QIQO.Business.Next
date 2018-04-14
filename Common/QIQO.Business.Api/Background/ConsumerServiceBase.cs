@@ -13,7 +13,7 @@ namespace QIQO.Business.Api.Background
     {
         private readonly ILogger<ConsumerServiceBase> _log;
         private readonly string _section;
-        private readonly IConfiguration _configuration;
+        // private readonly IConfiguration _configuration;
         private ConnectionFactory _factory;
         private IConnection _connection;
 
