@@ -1,16 +1,21 @@
-﻿using QIQO.Business.Core;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using QIQO.Business.Core;
+using QIQO.Business.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 
 namespace QIQO.Accounts.Data
 {
-    public interface IAccountDbContext { }
-    public class AccountDbContext : DbContextBase, IAccountDbContext
+    public interface IAccountDbContext : IDbContext { }
+    public class AccountDbContext : DbContextBase, IAccountDbContext //, IDisposable
     {
+        public AccountDbContext() : this(null, null)
+        {
+
+        }
         public AccountDbContext(ILogger<AccountDbContext> logger, IConfiguration configuration) : base(logger, configuration.GetConnectionString("AccountManagement"))
         {
             // Log.LogInformation("Hello from the AccountDbContext!");

@@ -45,17 +45,11 @@ namespace QIQO.Accounts.Domain
         public DateTime AddedDateTime { get; private set; }
         public string UpdateUserID { get; private set; }
         public DateTime UpdateDateTime { get; private set; }
-        //public List<Address> Addresses { get; private set; } = new List<Address>();
-        //public List<EntityAttribute> AccountAttributes { get; private set; } = new List<EntityAttribute>();
-        //public List<FeeSchedule> FeeSchedules { get; private set; } = new List<FeeSchedule>();
-        //public List<AccountPerson> Employees { get; private set; } = new List<AccountPerson>();
-        //public List<Contact> Contacts { get; private set; } = new List<Contact>();
-        //public List<Comment> Comments { get; private set; } = new List<Comment>();
-    }
-
-    public enum QIQOAccountType
-    {
-        TestAccount = 1,
-        Business = 2
+        public List<Address> Addresses { get; private set; } = new List<Address>();
+        public List<EntityAttribute> AccountAttributes { get; private set; } = new List<EntityAttribute>();
+        public List<FeeSchedule> FeeSchedules { get; private set; } = new List<FeeSchedule>();
+        public List<AccountPerson> Employees { get; private set; } = new List<AccountPerson>();
+        public List<Contact> Contacts { get; private set; } = new List<Contact>();
+        public List<Comment> Comments { get; private set; } = new List<Comment>();
     }
 }

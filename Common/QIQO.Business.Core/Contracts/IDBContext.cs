@@ -18,5 +18,4 @@ namespace QIQO.Business.Core.Contracts
         T ExecuteSqlStatementAsScalar<T>(string sqlStatement);
         T ExecuteSqlStatementAsScalar<T>(string sqlStatement, IEnumerable<SqlParameter> parameters);
     }
-
 }

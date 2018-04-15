@@ -12,10 +12,10 @@ namespace QIQO.Business.Core
         protected readonly IMapper<T> Mapper;
         protected readonly ILogger<T> Log;
 
-        public RepositoryBase(ILogger<T> logger, IMapper<T> map_factory)
+        public RepositoryBase(ILogger<T> logger, IMapper<T> map)
         {
             Log = logger;
-            Mapper = map_factory;
+            Mapper = map;
         }
 
         // What steps would we need to take in order to make this happen?
