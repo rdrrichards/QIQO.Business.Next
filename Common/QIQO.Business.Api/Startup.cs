@@ -5,9 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using QIQO.Accounts.Manager;
 using QIQO.Accounts.Data;
 using Swashbuckle.AspNetCore.Swagger;
-using QIQO.Business.Api.Background;
 using Microsoft.Extensions.Hosting;
 using QIQO.MQ;
+using QIQO.Companies.Manager;
+using QIQO.Companies.Data;
 
 namespace QIQO.Business.Api
 {
@@ -29,7 +30,11 @@ namespace QIQO.Business.Api
             });
 
             services.AddScoped<IAccountDbContext, AccountDbContext>();
+            services.AddScoped<ICompanyDbContext, CompanyDbContext>();
+
             services.AddTransient<IAccountsManager, AccountsManager>();
+            services.AddTransient<ICompaniesManager, CompaniesManager>();
+
             services.AddTransient<IMQPublisher, MQPublisher>();
             // services.AddTransient<IMQConsumer, MQConsumer>();
 
