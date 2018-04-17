@@ -8,4 +8,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+  </ItemGroup>
+
 </Project>

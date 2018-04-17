@@ -2,13 +2,16 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using QIQO.Accounts.Manager;
-using QIQO.Accounts.Data;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Hosting;
-using QIQO.MQ;
-using QIQO.Companies.Manager;
+using QIQO.Accounts.Data;
+using QIQO.Accounts.Manager;
 using QIQO.Companies.Data;
+using QIQO.Companies.Manager;
+using QIQO.Invoices.Manager;
+using QIQO.MQ;
+using QIQO.Orders.Manager;
+using QIQO.Products.Manager;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace QIQO.Business.Api
 {
@@ -34,6 +37,9 @@ namespace QIQO.Business.Api
 
             services.AddTransient<IAccountsManager, AccountsManager>();
             services.AddTransient<ICompaniesManager, CompaniesManager>();
+            services.AddTransient<IOrdersManager, OrdersManager>();
+            services.AddTransient<IInvoicesManager, InvoicesManager>();
+            services.AddTransient<IProductsManager, ProductsManager>();
 
             services.AddTransient<IMQPublisher, MQPublisher>();
             // services.AddTransient<IMQConsumer, MQConsumer>();
