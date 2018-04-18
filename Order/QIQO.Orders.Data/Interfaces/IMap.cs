@@ -7,5 +7,7 @@ namespace QIQO.Orders.Data
     public interface ICommentMap : IMapper<CommentData> { }
     public interface IFeeScheduleMap : IMapper<FeeScheduleData> { }
     public interface IPersonMap : IMapper<PersonData> { }
-
+    public interface IOrderHeaderMap : IMapper<OrderHeaderData> { }
+    public interface IOrderItemMap : IMapper<OrderItemData> { }
+    public interface IOrderStatusMap : IMapper<OrderStatusData> { }
 }
