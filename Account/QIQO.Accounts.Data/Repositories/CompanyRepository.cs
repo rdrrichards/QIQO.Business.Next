@@ -18,60 +18,53 @@ namespace QIQO.Accounts.Data
         public override IEnumerable<CompanyData> GetAll()
         {
             Log.LogInformation("Accessing CompanyRepo GetAll function");
-            using (entityContext)
-            {
-                return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_all"));
-            }
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_all"));
         }
 
         public IEnumerable<CompanyData> GetAll(PersonData person)
         {
             Log.LogInformation("Accessing CompanyRepo GetAll function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@employee_key", person.PersonKey) };
-            using (entityContext)
-            {
-                return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_all_by_person", pcol));
-            }
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_all_by_person", pcol));
         }
 
-        public override CompanyData GetByID(int company_key)
+        public override CompanyData GetByID(int companyKey)
         {
             Log.LogInformation("Accessing CompanyRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", company_key) };
-            using (entityContext)
-            {
-                return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_get", pcol));
-            }
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", companyKey) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_get", pcol));
         }
 
-        public override CompanyData GetByCode(string company_code, string entity_code)
+        public override CompanyData GetByCode(string companyCode, string entityCode)
         {
             Log.LogInformation("Accessing CompanyRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@company_code", company_code),
-                Mapper.BuildParam("@company_code", entity_code)
+                Mapper.BuildParam("@company_code", companyCode),
+                Mapper.BuildParam("@entity_code", entityCode)
             };
-            using (entityContext)
-            {
-                return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_get_c", pcol));
-            }
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_company_get_c", pcol));
         }
 
-        public string GetNextNumber(CompanyData company, int number_type)
+        public string GetNextNumber(CompanyData company, int numberType)
         {
             Log.LogInformation("Accessing AccountRepo GetNextNumber function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@entity_key", company.CompanyKey) };
-            switch (number_type)
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@entityKey", company.CompanyKey) };
+            var spName = "usp_get_next_emp_num";
+            switch (numberType)
             {
-                case 3:
-                    return entityContext.ExecuteSqlStatementAsScalar<string>("usp_get_next_emp_num", pcol);
-                case 4:
-                    return entityContext.ExecuteSqlStatementAsScalar<string>("usp_get_next_acct_num", pcol);
-                case 5:
-                    return entityContext.ExecuteSqlStatementAsScalar<string>("usp_get_next_vend_num", pcol);
+                case 2:
+                    spName = "usp_get_next_emp_num";
+                    break;
+                case 1:
+                    spName = "usp_get_next_acct_num";
+                    break;
+                case 6:
+                    spName = "usp_get_next_vend_num";
+                    break;
                 default:
-                    return "";
+                    return "usp_get_next_emp_num";
             }
+            using (entityContext) return entityContext.ExecuteSqlStatementAsScalar<string>(spName, pcol);
         }
 
         public override void Insert(CompanyData entity)
@@ -95,38 +88,26 @@ namespace QIQO.Accounts.Data
         public override void Delete(CompanyData entity)
         {
             Log.LogInformation("Accessing CompanyRepo Delete function");
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_company_del", Mapper.MapParamsForDelete(entity));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_company_del", Mapper.MapParamsForDelete(entity));
         }
 
-        public override void DeleteByCode(string entity_code)
+        public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing CompanyRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_code", entity_code) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_company_del_c", pcol);
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_company_del_c", pcol);
         }
 
-        public override void DeleteByID(int entity_key)
+        public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing CompanyRepo Delete function");
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_company_del", Mapper.MapParamsForDelete(entity_key));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_company_del", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(CompanyData entity)
         {
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_company_ups", Mapper.MapParamsForUpsert(entity));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_company_ups", Mapper.MapParamsForUpsert(entity));
         }
     }
 

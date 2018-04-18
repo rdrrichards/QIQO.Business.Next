@@ -5,7 +5,7 @@ namespace QIQO.Accounts.Data
 {
     public interface IAttributeRepository : IRepository<AttributeData>
     {
-        IEnumerable<AttributeData> GetAll(int entity_key, int entity_type_key);
+        IEnumerable<AttributeData> GetAll(int entityKey, int entityTypeKey);
     }
 
 }

@@ -18,43 +18,45 @@ namespace QIQO.Orders.Data
         public override IEnumerable<FeeScheduleData> GetAll()
         {
             Log.LogInformation("Accessing FeeScheduleRepo GetAll function");
-            using (entityContext)
-            {
-                return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all"));
-            }
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all"));
         }
 
         public IEnumerable<FeeScheduleData> GetAll(AccountData account)
         {
             Log.LogInformation("Accessing FeeScheduleRepo GetAll by Account function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_key", account.AccountKey) };
-            using (entityContext)
-            {
-                return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all_by_account", pcol));
-            }
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all_by_account", pcol));
+        }
+
+        //public IEnumerable<FeeScheduleData> GetAll(CompanyData company)
+        //{
+        //    Log.LogInformation("Accessing FeeScheduleRepo GetAll by Company function");
+        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_key", company.CompanyKey) };
+        //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all_by_company", pcol));
+        //}
+
+        public IEnumerable<FeeScheduleData> GetAll(ProductData product)
+        {
+            Log.LogInformation("Accessing FeeScheduleRepo GetAll by Product function");
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@product_key", product.ProductKey) };
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_all_by_product", pcol));
         }
 
         public override FeeScheduleData GetByID(int fee_schedule_key)
         {
             Log.LogInformation("Accessing FeeScheduleRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@fee_schedule_key", fee_schedule_key) };
-            using (entityContext)
-            {
-                return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_get", pcol));
-            }
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_get", pcol));
         }
 
-        public override FeeScheduleData GetByCode(string fee_schedule_code, string entity_code)
+        public override FeeScheduleData GetByCode(string fee_schedule_code, string entityCode)
         {
             Log.LogInformation("Accessing FeeScheduleRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@fee_schedule_code", fee_schedule_code),
-                Mapper.BuildParam("@company_code", entity_code)
+                Mapper.BuildParam("@company_code", entityCode)
             };
-            using (entityContext)
-            {
-                return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_get_c", pcol));
-            }
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_fee_schedule_get_c", pcol));
         }
 
         public override void Insert(FeeScheduleData entity)
@@ -78,38 +80,26 @@ namespace QIQO.Orders.Data
         public override void Delete(FeeScheduleData entity)
         {
             Log.LogInformation("Accessing FeeScheduleRepo Delete function");
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del", Mapper.MapParamsForDelete(entity));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del", Mapper.MapParamsForDelete(entity));
         }
 
-        public override void DeleteByCode(string entity_code)
+        public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing FeeScheduleRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@fee_schedule_code", entity_code) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@fee_schedule_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del_c", pcol);
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del_c", pcol);
         }
 
-        public override void DeleteByID(int entity_key)
+        public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing FeeScheduleRepo Delete function");
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del", Mapper.MapParamsForDelete(entity_key));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_del", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(FeeScheduleData entity)
         {
-            using (entityContext)
-            {
-                entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_ups", Mapper.MapParamsForUpsert(entity));
-            }
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_fee_schedule_ups", Mapper.MapParamsForUpsert(entity));
         }
     }
 

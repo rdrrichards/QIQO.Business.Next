@@ -5,7 +5,7 @@ namespace QIQO.Accounts.Data
 {
     public interface IContactRepository : IRepository<ContactData>
     {
-        IEnumerable<ContactData> GetAll(int entity_key, int entity_type_key);
+        IEnumerable<ContactData> GetAll(int entityKey, int entityTypeKey);
     }
 
 }
