@@ -2,15 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using QIQO.Accounts.Data;
-using QIQO.Accounts.Manager;
-using QIQO.Companies.Data;
-using QIQO.Companies.Manager;
-using QIQO.Invoices.Manager;
-using QIQO.MQ;
-using QIQO.Orders.Manager;
-using QIQO.Products.Manager;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace QIQO.Business.Api
@@ -32,22 +23,7 @@ namespace QIQO.Business.Api
                 c.SwaggerDoc("v1", new Info { Title = "QIQO Business API", Version = "v1" });
             });
 
-            services.AddScoped<IAccountDbContext, AccountDbContext>();
-            services.AddScoped<ICompanyDbContext, CompanyDbContext>();
-
-            services.AddTransient<IAccountsManager, AccountsManager>();
-            services.AddTransient<ICompaniesManager, CompaniesManager>();
-            services.AddTransient<IOrdersManager, OrdersManager>();
-            services.AddTransient<IInvoicesManager, InvoicesManager>();
-            services.AddTransient<IProductsManager, ProductsManager>();
-
-            services.AddTransient<IMQPublisher, MQPublisher>();
-            // services.AddTransient<IMQConsumer, MQConsumer>();
-
-            services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+            IoC.RegisterAll(services);
 
             services.AddMvc();
         }
