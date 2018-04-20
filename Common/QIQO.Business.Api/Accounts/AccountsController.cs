@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QIQO.Accounts.Domain;
 using QIQO.Accounts.Manager;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Accounts
@@ -16,16 +15,17 @@ namespace QIQO.Business.Api.Accounts
             _accountsManager = accountsManager;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "Account1", "Account2" };
+            // return Ok(new string[] { "Account1", "Account2" });
+            return Ok(await _accountsManager.GetAccountsAsync());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return Ok(_accountsManager.GetTest());
+            return  Ok(await _accountsManager.GetAccountAsync(id));
         }
 
         // POST api/values
@@ -46,15 +46,20 @@ namespace QIQO.Business.Api.Accounts
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(string id, [FromBody]AccountUpdateViewModel accountUpdateViewModel)
         {
+            await _accountsManager.UpdateAccountAsync(new Account(accountUpdateViewModel.CompanyKey, accountUpdateViewModel.AccountType, accountUpdateViewModel.AccountCode,
+                    accountUpdateViewModel.AccountName, accountUpdateViewModel.AccountDesc, accountUpdateViewModel.AccountDba, accountUpdateViewModel.AccountStartDate,
+                    accountUpdateViewModel.AccountEndDate));
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            // _accountsManager.PullTest();
+            await _accountsManager.DeleteAccountAsync(id);
+            return Ok();
         }
     }
 }

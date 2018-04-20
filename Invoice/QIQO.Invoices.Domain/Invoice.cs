@@ -7,32 +7,37 @@ namespace QIQO.Invoices.Domain
 {
     [DataContract]
     public class Invoice: IModel
-    {        
-        public int InvoiceKey { get; set; }        
-        public int FromEntityKey { get; set; }        
-        public int AccountKey { get; set; }        
-        public Account Account { get; set; } = new Account();        
-        public int AccountContactKey { get; set; }        
-        public string InvoiceNumber { get; set; }        
-        public PersonBase InvoiceAccountContact { get; set; } = new PersonBase();        
-        public int InvoiceItemCount { get; set; }        
-        public decimal InvoiceValueSum { get; set; }        
-        public DateTime OrderEntryDate { get; set; }        
-        public DateTime InvoiceEntryDate { get; set; }        
-        public DateTime InvoiceStatusDate { get; set; }        
-        public DateTime? OrderShipDate { get; set; }        
-        public DateTime? InvoiceCompleteDate { get; set; }       
-        public int SalesRepKey { get; set; }        
-        public Representative SalesRep { get; set; } = new Representative(QIQOPersonType.SalesRepresentative);        
-        public int AccountRepKey { get; set; }        
-        public Representative AccountRep { get; set; } = new Representative(QIQOPersonType.AccountRepresentative);        
-        public QIQOInvoiceStatus InvoiceStatus { get; set; } = QIQOInvoiceStatus.New;        
-        public InvoiceStatus InvoiceStatusData { get; set; } = new InvoiceStatus();        
-        public List<InvoiceItem> InvoiceItems { get; set; } = new List<InvoiceItem>();        
-        public List<Comment> Comments { get; set; } = new List<Comment>();        
-        public string AddedUserID { get; set; }        
-        public DateTime AddedDateTime { get; set; }        
-        public string UpdateUserID { get; set; }        
-        public DateTime UpdateDateTime { get; set; }
+    {
+        public Invoice(string invoiceNumber, DateTime invoiceEntryDate)
+        {
+            InvoiceNumber = invoiceNumber;
+            InvoiceEntryDate = invoiceEntryDate;
+        }
+        public int InvoiceKey { get; private set; }        
+        public int FromEntityKey { get; private set; }        
+        public int AccountKey { get; private set; }        
+        public Account Account { get; private set; } = new Account();        
+        public int AccountContactKey { get; private set; }        
+        public string InvoiceNumber { get; private set; }        
+        public PersonBase InvoiceAccountContact { get; private set; } = new PersonBase();        
+        public int InvoiceItemCount { get; private set; }        
+        public decimal InvoiceValueSum { get; private set; }        
+        public DateTime OrderEntryDate { get; private set; }        
+        public DateTime InvoiceEntryDate { get; private set; }        
+        public DateTime InvoiceStatusDate { get; private set; }        
+        public DateTime? OrderShipDate { get; private set; }        
+        public DateTime? InvoiceCompleteDate { get; private set; }       
+        public int SalesRepKey { get; private set; }        
+        public Representative SalesRep { get; private set; } = new Representative(QIQOPersonType.SalesRepresentative);        
+        public int AccountRepKey { get; private set; }        
+        public Representative AccountRep { get; private set; } = new Representative(QIQOPersonType.AccountRepresentative);        
+        public QIQOInvoiceStatus InvoiceStatus { get; private set; } = QIQOInvoiceStatus.New;        
+        public InvoiceStatus InvoiceStatusData { get; private set; } = new InvoiceStatus();        
+        public List<InvoiceItem> InvoiceItems { get; private set; } = new List<InvoiceItem>();        
+        public List<Comment> Comments { get; private set; } = new List<Comment>();        
+        public string AddedUserID { get; private set; }        
+        public DateTime AddedDateTime { get; private set; }        
+        public string UpdateUserID { get; private set; }        
+        public DateTime UpdateDateTime { get; private set; }
     }
 }

@@ -7,6 +7,12 @@ namespace QIQO.Companies.Domain
 {
     public class Company : IModel
     {
+        public Company(string companyCode, string companyName, string companyDesc)
+        {
+            CompanyCode = companyCode;
+            CompanyName = companyName;
+            CompanyDesc = companyDesc;
+        }
         public int CompanyKey { get; private set; }
         public string CompanyCode { get; private set; }
         public string CompanyName { get; private set; }

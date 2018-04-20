@@ -6,6 +6,11 @@ namespace QIQO.Orders.Domain
 {
     public class Order: IModel
     {
+        public Order(string orderNumber, DateTime orderEntryDate)
+        {
+            OrderNumber = orderNumber;
+            OrderEntryDate = orderEntryDate;
+        }
         public int OrderKey { get; set; }
         public int AccountKey { get; set; }
         public Account Account { get; set; }

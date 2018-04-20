@@ -1,40 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using QIQO.Products.Domain;
+using QIQO.Products.Manager;
+using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Products
 {
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IProductsManager _productsManager;
+
+        public ProductsController(IProductsManager productsManager)
         {
-            return new string[] { "Product1", "Product2" };
+            _productsManager = productsManager;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            // return Ok(new string[] { "Product1", "Product2" });
+            return Ok(await _productsManager.GetProductsAsync());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "Product";
+            return Ok(await _productsManager.GetProductAsync(id));
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]ProductAddViewModel productAddViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                await _productsManager.SaveProductAsync(new Product(productAddViewModel.ProductCode, productAddViewModel.ProductName, productAddViewModel.ProductDesc,
+                    productAddViewModel.ProductNameShort, productAddViewModel.ProductNameLong, productAddViewModel.ProductImagePath));
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(string id, [FromBody]ProductUpdateViewModel productUpdateViewModel)
         {
+            await _productsManager.UpdateProductAsync(new Product(productUpdateViewModel.ProductCode, productUpdateViewModel.ProductName, productUpdateViewModel.ProductDesc,
+                    productUpdateViewModel.ProductNameShort, productUpdateViewModel.ProductNameLong, productUpdateViewModel.ProductImagePath));
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _productsManager.DeleteProductAsync(id);
+            return Ok();
         }
     }
 }

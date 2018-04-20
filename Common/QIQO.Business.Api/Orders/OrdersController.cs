@@ -1,40 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using QIQO.Orders.Domain;
+using QIQO.Orders.Manager;
+using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Orders
 {
     [Route("api/[controller]")]
     public class OrdersController : Controller
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IOrdersManager _ordersManager;
+
+        public OrdersController(IOrdersManager ordersManager)
         {
-            return new string[] { "Order1", "Order2" };
+            _ordersManager = ordersManager;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            // return Ok(new string[] { "Order1", "Order2" });
+            return Ok(await _ordersManager.GetOrdersAsync());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "Order";
+            return Ok(await _ordersManager.GetOrderAsync(id));
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]OrderAddViewModel orderAddViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                await _ordersManager.SaveOrderAsync(new Order(orderAddViewModel.OrderNumber, orderAddViewModel.OrderEntryDate));
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(string id, [FromBody]OrderUpdateViewModel orderUpdateViewModel)
         {
+            await _ordersManager.UpdateOrderAsync(new Order(orderUpdateViewModel.OrderNumber, orderUpdateViewModel.OrderEntryDate));
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _ordersManager.DeleteOrderAsync(id);
+            return Ok();
         }
     }
 }
