@@ -23,7 +23,11 @@ namespace QIQO.Business.Api
                 c.SwaggerDoc("v1", new Info { Title = "QIQO Business API", Version = "v1" });
             });
 
-            IoC.RegisterAll(services);
+            AccountIoC.RegisterAll(services);
+            CompanyIoC.RegisterAll(services);
+            InvoiceIoC.RegisterAll(services);
+            OrderIoC.RegisterAll(services);
+            ProductIoC.RegisterAll(services);
 
             services.AddMvc();
         }
