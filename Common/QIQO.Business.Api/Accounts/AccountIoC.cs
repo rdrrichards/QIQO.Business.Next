@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using QIQO.Accounts.Manager;
 using QIQO.MQ;
 
-using AccountData = QIQO.Accounts.Data;
+using QIQO.Accounts.Data;
 
 namespace QIQO.Business.Api
 {
@@ -17,7 +17,7 @@ namespace QIQO.Business.Api
         }
         internal static void RegisterDbContexts(IServiceCollection services)
         { 
-            services.AddScoped<AccountData.IAccountDbContext, AccountData.AccountDbContext>();
+            services.AddScoped<IAccountDbContext, AccountDbContext>();
         }
         internal static void RegisterManagers(IServiceCollection services)
         {

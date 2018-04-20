@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QIQO.Orders.Manager;
-using OrderData = QIQO.Orders.Data;
+using QIQO.Invoices.Manager;
+using QIQO.Invoices.Data;
 
 namespace QIQO.Business.Api
 {
-    public static class OrderIoC
+    public static class InvoiceIoC
     {
         internal static void RegisterAll(IServiceCollection services)
         {
@@ -14,16 +14,16 @@ namespace QIQO.Business.Api
         }
         internal static void RegisterDbContexts(IServiceCollection services)
         {
-            services.AddScoped<OrderData.IOrderDbContext, OrderData.OrderDbContext>();
+            services.AddScoped<IInvoiceDbContext, InvoiceDbContext>();
         }
         internal static void RegisterManagers(IServiceCollection services)
         {
-            services.AddTransient<IOrdersManager, OrdersManager>();
+            services.AddTransient<IInvoicesManager, InvoicesManager>();
         }
         internal static void RegisterMQServices(IServiceCollection services)
         {
             //services.AddTransient<IMQPublisher, MQPublisher>();
-
+        
             //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
             //services.AddSingleton<IHostedService, AccountAddConsumerService>();
             //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();

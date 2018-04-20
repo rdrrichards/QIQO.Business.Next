@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QIQO.Products.Manager;
-using ProductData = QIQO.Products.Data;
+using QIQO.Products.Data;
 
 namespace QIQO.Business.Api
 {
@@ -15,7 +15,7 @@ namespace QIQO.Business.Api
         }
         internal static void RegisterDbContexts(IServiceCollection services)
         {
-            services.AddScoped<ProductData.IProductDbContext, ProductData.ProductDbContext>();
+            services.AddScoped<IProductDbContext, ProductDbContext>();
         }
         internal static void RegisterManagers(IServiceCollection services)
         {
