@@ -11,6 +11,8 @@ namespace QIQO.Business.Api
             RegisterDbContexts(services);
             RegisterManagers(services);
             RegisterMQServices(services);
+            RegisterMappers(services);
+            RegisterRepos(services);
         }
         internal static void RegisterDbContexts(IServiceCollection services)
         {
@@ -28,6 +30,26 @@ namespace QIQO.Business.Api
             //services.AddSingleton<IHostedService, AccountAddConsumerService>();
             //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
             //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+        }
+        internal static void RegisterMappers(IServiceCollection services)
+        {
+            services.AddSingleton<IAddressMap, AddressMap>();
+            services.AddSingleton<IAttributeMap, AttributeMap>();
+            services.AddSingleton<ICommentMap, CommentMap>();
+            services.AddSingleton<ICompanyMap, CompanyMap>();
+            services.AddSingleton<IContactMap, ContactMap>();
+            services.AddSingleton<IFeeScheduleMap, FeeScheduleMap>();
+            services.AddSingleton<IPersonMap, PersonMap>();
+        }
+        internal static void RegisterRepos(IServiceCollection services)
+        {
+            services.AddSingleton<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IAttributeRepository, AttributeRepository>();
+            services.AddSingleton<ICommentRepository, CommentRepository>();
+            services.AddSingleton<ICompanyRepository, CompanyRepository>();
+            services.AddSingleton<IContactRepository, ContactRepository>();
+            services.AddSingleton<IFeeScheduleRepository, FeeScheduleRepository>();
+            services.AddSingleton<IPersonRepository, PersonRepository>();
         }
     }
 }

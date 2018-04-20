@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace QIQO.Invoices.Data.Repositories
+namespace QIQO.Invoices.Data
 {
     public class InvoiceItemRepository : RepositoryBase<InvoiceItemData>, IInvoiceItemRepository
     {
