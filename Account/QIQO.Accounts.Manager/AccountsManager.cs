@@ -4,6 +4,7 @@ using QIQO.Accounts.Domain;
 using QIQO.MQ;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Accounts.Manager
 {
@@ -20,12 +21,15 @@ namespace QIQO.Accounts.Manager
         private readonly ILogger<AccountsManager> _log;
         private readonly IMQPublisher _mqPublisher;
         private readonly IAccountRepository _accountRepository;
+        private readonly IAccountEntityService _accountEntityService;
 
-        public AccountsManager(ILogger<AccountsManager> logger, IMQPublisher mqPublisher, IAccountRepository accountRepository)
+        public AccountsManager(ILogger<AccountsManager> logger, IMQPublisher mqPublisher,
+            IAccountRepository accountRepository, IAccountEntityService accountEntityService)
         {
             _log = logger;
             _mqPublisher = mqPublisher;
             _accountRepository = accountRepository;
+            _accountEntityService = accountEntityService;
         }
 
         public Task DeleteAccountAsync(int accountKey)
@@ -36,10 +40,8 @@ namespace QIQO.Accounts.Manager
 
         public Task<List<Account>> GetAccountsAsync()
         {
-            // return Ok(new string[] { "Account1", "Account2" });
-            // return Task.Factory.StartNew(() => new string[] { "Account1", "Account2" });
             return Task.Factory.StartNew(() => {
-                return new List<Account> { new Account(_accountRepository.GetByID(1)) }; // _accountRepository.GetAll();
+                return _accountEntityService.Map(_accountRepository.GetAll());
             });
         }
 

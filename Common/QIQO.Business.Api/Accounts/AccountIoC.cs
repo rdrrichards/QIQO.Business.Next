@@ -15,6 +15,7 @@ namespace QIQO.Business.Api
             RegisterMQServices(services);
             RegisterMappers(services);
             RegisterRepos(services);
+            RegisterEntityServices(services);
         }
         internal static void RegisterDbContexts(IServiceCollection services)
         { 
@@ -35,25 +36,35 @@ namespace QIQO.Business.Api
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
-            services.AddSingleton<IAccountMap, AccountMap>();
-            services.AddSingleton<IAddressMap, AddressMap>();
-            services.AddSingleton<IAttributeMap, AttributeMap>();
-            services.AddSingleton<ICommentMap, CommentMap>();
-            services.AddSingleton<ICompanyMap, CompanyMap>();
-            services.AddSingleton<IContactMap, ContactMap>();
-            services.AddSingleton<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddSingleton<IPersonMap, PersonMap>();
+            services.AddTransient<IAccountMap, AccountMap>();
+            services.AddTransient<IAddressMap, AddressMap>();
+            services.AddTransient<IAttributeMap, AttributeMap>();
+            services.AddTransient<ICommentMap, CommentMap>();
+            services.AddTransient<ICompanyMap, CompanyMap>();
+            services.AddTransient<IContactMap, ContactMap>();
+            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
+            services.AddTransient<IPersonMap, PersonMap>();
         }
         internal static void RegisterRepos(IServiceCollection services)
         {
-            services.AddSingleton<IAccountRepository, AccountRepository>();
-            services.AddSingleton<IAddressRepository, AddressRepository>();
-            services.AddSingleton<IAttributeRepository, AttributeRepository>();
-            services.AddSingleton<ICommentRepository, CommentRepository>();
-            services.AddSingleton<ICompanyRepository, CompanyRepository>();
-            services.AddSingleton<IContactRepository, ContactRepository>();
-            services.AddSingleton<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IAttributeRepository, AttributeRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IContactRepository, ContactRepository>();
+            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
+        }
+        internal static void RegisterEntityServices(IServiceCollection services)
+        {
+            services.AddTransient<IAccountEntityService, AccountEntityService>();
+            //services.AddSingleton<IAddressEntityService, AddressEntityService>();
+            //services.AddSingleton<IAttributeEntityService, AttributeEntityService>();
+            //services.AddSingleton<ICommentEntityService, CommentEntityService>();
+            //services.AddSingleton<ICompanyEntityService, CompanyEntityService>();
+            //services.AddSingleton<IContactEntityService, ContactEntityService>();
+            //services.AddSingleton<IFeeScheduleEntityService, FeeScheduleEntityService>();
         }
     }
 }

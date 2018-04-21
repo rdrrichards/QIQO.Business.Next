@@ -26,32 +26,32 @@ namespace QIQO.Business.Api
         {
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
-            //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            //services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+            //services.AddTransient<IHostedService, AccountAuditConsumerService>();
+            //services.AddTransient<IHostedService, AccountAddConsumerService>();
+            //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
+            //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
-            services.AddSingleton<IAccountMap, AccountMap>();
-            services.AddSingleton<IAddressMap, AddressMap>();
-            services.AddSingleton<ICommentMap, CommentMap>();
-            services.AddSingleton<IOrderHeaderMap, OrderHeaderMap>();
-            services.AddSingleton<IOrderItemMap, OrderItemMap>();
-            services.AddSingleton<IOrderStatusMap, OrderStatusMap>();
-            services.AddSingleton<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddSingleton<IPersonMap, PersonMap>();
+            services.AddTransient<IAccountMap, AccountMap>();
+            services.AddTransient<IAddressMap, AddressMap>();
+            services.AddTransient<ICommentMap, CommentMap>();
+            services.AddTransient<IOrderHeaderMap, OrderHeaderMap>();
+            services.AddTransient<IOrderItemMap, OrderItemMap>();
+            services.AddTransient<IOrderStatusMap, OrderStatusMap>();
+            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
+            services.AddTransient<IPersonMap, PersonMap>();
         }
         internal static void RegisterRepos(IServiceCollection services)
         {
-            services.AddSingleton<IAccountRepository, AccountRepository>();
-            services.AddSingleton<IAddressRepository, AddressRepository>();
-            services.AddSingleton<ICommentRepository, CommentRepository>();
-            services.AddSingleton<IOrderHeaderRepository, OrderHeaderRepository>();
-            services.AddSingleton<IOrderItemRepository, OrderItemRepository>();
-            services.AddSingleton<IOrderStatusRepository, OrderStatusRepository>();
-            services.AddSingleton<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<IOrderHeaderRepository, OrderHeaderRepository>();
+            services.AddTransient<IOrderItemRepository, OrderItemRepository>();
+            services.AddTransient<IOrderStatusRepository, OrderStatusRepository>();
+            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
         }
     }
 }

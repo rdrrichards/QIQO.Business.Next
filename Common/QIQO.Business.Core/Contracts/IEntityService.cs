@@ -13,5 +13,4 @@
         TModel Map(TEntity ent);
         TEntity Map(TModel ent);
     }
-
 }

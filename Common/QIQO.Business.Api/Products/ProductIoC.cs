@@ -27,20 +27,20 @@ namespace QIQO.Business.Api
         {
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
-            //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            //services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+            //services.AddTransient<IHostedService, AccountAuditConsumerService>();
+            //services.AddTransient<IHostedService, AccountAddConsumerService>();
+            //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
+            //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
-            services.AddSingleton<IProductMap, ProductMap>();
-            services.AddSingleton<IProductTypeMap, ProductTypeMap>();
+            services.AddTransient<IProductMap, ProductMap>();
+            services.AddTransient<IProductTypeMap, ProductTypeMap>();
         }
         internal static void RegisterRepos(IServiceCollection services)
         {
-            services.AddSingleton<IProductRepository, ProductRepository>();
-            services.AddSingleton<IProductTypeRepository, ProductTypeRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
         }
     }
 }

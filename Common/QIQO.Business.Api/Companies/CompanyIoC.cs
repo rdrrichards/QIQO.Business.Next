@@ -26,30 +26,30 @@ namespace QIQO.Business.Api
         {
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
-            //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            //services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+            //services.AddTransient<IHostedService, AccountAuditConsumerService>();
+            //services.AddTransient<IHostedService, AccountAddConsumerService>();
+            //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
+            //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
-            services.AddSingleton<IAddressMap, AddressMap>();
-            services.AddSingleton<IAttributeMap, AttributeMap>();
-            services.AddSingleton<ICommentMap, CommentMap>();
-            services.AddSingleton<ICompanyMap, CompanyMap>();
-            services.AddSingleton<IContactMap, ContactMap>();
-            services.AddSingleton<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddSingleton<IPersonMap, PersonMap>();
+            services.AddTransient<IAddressMap, AddressMap>();
+            services.AddTransient<IAttributeMap, AttributeMap>();
+            services.AddTransient<ICommentMap, CommentMap>();
+            services.AddTransient<ICompanyMap, CompanyMap>();
+            services.AddTransient<IContactMap, ContactMap>();
+            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
+            services.AddTransient<IPersonMap, PersonMap>();
         }
         internal static void RegisterRepos(IServiceCollection services)
         {
-            services.AddSingleton<IAddressRepository, AddressRepository>();
-            services.AddSingleton<IAttributeRepository, AttributeRepository>();
-            services.AddSingleton<ICommentRepository, CommentRepository>();
-            services.AddSingleton<ICompanyRepository, CompanyRepository>();
-            services.AddSingleton<IContactRepository, ContactRepository>();
-            services.AddSingleton<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IAttributeRepository, AttributeRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IContactRepository, ContactRepository>();
+            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
         }
     }
 }
