@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+    <ProjectReference Include="..\QIQO.Orders.Data\QIQO.Orders.Data.csproj" />
   </ItemGroup>
 
 </Project>

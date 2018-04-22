@@ -1,17 +1,30 @@
 ﻿using QIQO.Business.Core.Contracts;
+using QIQO.Invoices.Data;
 using System;
 
 namespace QIQO.Invoices.Domain
 {
     public class Comment: IModel
-    {        
-        public int CommentKey { get; set; }        
-        public int EntityKey { get; set; }        
-        public int EntityTypeKey { get; set; }        
-        public QIQOCommentType CommentType { get; set; }        
-        public string CommentValue { get; set; }        
-        public string AddedUserID { get; set; }        
-        public DateTime AddedDateTime { get; set; }        
-        public string UpdateUserID { get; set; }        
-        public DateTime UpdateDateTime { get; set; }    }
+    {
+        public Comment(CommentData commentData)
+        {
+            CommentKey = commentData.CommentKey;
+            CommentType = (QIQOCommentType)commentData.CommentTypeKey;
+            CommentValue = commentData.CommentValue;
+            EntityKey = commentData.EntityKey;
+            EntityTypeKey = commentData.EntityType;
+            AddedUserID = commentData.AuditAddUserId;
+            AddedDateTime = commentData.AuditAddDatetime;
+            UpdateUserID = commentData.AuditUpdateUserId;
+            UpdateDateTime = commentData.AuditUpdateDatetime;
+        }
+        public int CommentKey { get; private set; }        
+        public int EntityKey { get; private set; }        
+        public int EntityTypeKey { get; private set; }        
+        public QIQOCommentType CommentType { get; private set; }        
+        public string CommentValue { get; private set; }        
+        public string AddedUserID { get; private set; }        
+        public DateTime AddedDateTime { get; private set; }        
+        public string UpdateUserID { get; private set; }        
+        public DateTime UpdateDateTime { get; private set; }    }
 }

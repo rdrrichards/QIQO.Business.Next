@@ -1,28 +1,38 @@
 ﻿using QIQO.Business.Core.Contracts;
+using QIQO.Invoices.Data;
 using System;
 using System.Collections.Generic;
 
 namespace QIQO.Invoices.Domain
 {
     public class PersonBase : IModel
-    {        
-        public int PersonKey { get; set; }        
-        public string PersonCode { get; set; }        
-        public string PersonFirstName { get; set; }        
-        public string PersonMI { get; set; }        
-        public string PersonLastName { get; set; }        
-        public string PersonFullNameFL { get; set; }        
-        public string PersonFullNameFML { get; set; }        
-        public string PersonFullNameLF { get; set; }        
-        public string PersonFullNameLFM { get; set; }        
-        public DateTime? PersonDOB { get; set; }        
-        //public List<Address> Addresses { get; set; } = new List<Address>();        
-        //public List<EntityAttribute> PersonAttributes { get; set; } = new List<EntityAttribute>();        
-        public string AddedUserID { get; set; }        
-        public DateTime AddedDateTime { get; set; }        
-        public string UpdateUserID { get; set; }        
-        public DateTime UpdateDateTime { get; set; }
-        //public QIQOPersonType Type  { get; set; }        
-        //public PersonType PersonTypeData { get; set; } = new PersonType();
+    {
+        public PersonBase(PersonData personData)
+        {
+            PersonKey = personData.PersonKey;
+            PersonFirstName = personData.PersonFirstName;
+            PersonMi = personData.PersonMi;
+            PersonLastName = personData.PersonLastName;
+            PersonCode = personData.PersonCode;
+            PersonDob = personData.PersonDob;
+        }
+        public int PersonKey { get; private set; }        
+        public string PersonCode { get; private set; }        
+        public string PersonFirstName { get; private set; }        
+        public string PersonMi { get; private set; }        
+        public string PersonLastName { get; private set; }
+        public string PersonFullNameFL => $"{PersonFirstName} {PersonLastName}";
+        public string PersonFullNameFML => $"{PersonFirstName} {PersonMi} {PersonLastName}";
+        public string PersonFullNameLF => $"{PersonLastName}, {PersonFirstName}";
+        public string PersonFullNameLFM => $"{PersonLastName}, {PersonFirstName} {PersonMi}";
+        public DateTime? PersonDob { get; private set; }        
+        //public List<Address> Addresses { get; private set; } = new List<Address>();        
+        //public List<EntityAttribute> PersonAttributes { get; private set; } = new List<EntityAttribute>();        
+        public string AddedUserID { get; private set; }        
+        public DateTime AddedDateTime { get; private set; }        
+        public string UpdateUserID { get; private set; }        
+        public DateTime UpdateDateTime { get; private set; }
+        //public QIQOPersonType Type  { get; private set; }        
+        //public PersonType PersonTypeData { get; private set; } = new PersonType();
     }
 }

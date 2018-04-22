@@ -1,4 +1,5 @@
 ﻿using QIQO.Business.Core.Contracts;
+using QIQO.Companies.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,17 @@ namespace QIQO.Companies.Domain
 {
     public class Company : IModel
     {
+        public Company(CompanyData companyData)
+        {
+            CompanyKey = companyData.CompanyKey;
+            CompanyCode = companyData.CompanyCode;
+            CompanyName = companyData.CompanyName;
+            CompanyDesc = companyData.CompanyDesc;
+            AddedUserID = companyData.AuditAddUserId;
+            AddedDateTime = companyData.AuditAddDatetime;
+            UpdateUserID = companyData.AuditUpdateUserId;
+            UpdateDateTime = companyData.AuditUpdateDatetime;
+        }
         public Company(string companyCode, string companyName, string companyDesc)
         {
             CompanyCode = companyCode;

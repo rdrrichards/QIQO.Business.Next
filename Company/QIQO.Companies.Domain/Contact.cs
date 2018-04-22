@@ -1,10 +1,26 @@
 ﻿using QIQO.Business.Core.Contracts;
+using QIQO.Companies.Data;
 using System;
 
 namespace QIQO.Companies.Domain
 {
     public class Contact : IModel
     {
+        public Contact(ContactData contactData)
+        {
+            ContactKey = contactData.ContactKey;
+            ContactTypeKey = contactData.ContactTypeKey;
+            ContactType = (QIQOContactType)contactData.ContactTypeKey;
+            ContactActiveFlg = contactData.ContactActiveFlg;
+            ContactDefaultFlg = contactData.ContactDefaultFlg;
+            ContactValue = contactData.ContactValue;
+            EntityKey = contactData.EntityKey;
+            EntityTypeKey = contactData.EntityTypeKey;
+            AddedUserID = contactData.AuditAddUserId;
+            AddedDateTime = contactData.AuditAddDatetime;
+            UpdateUserID = contactData.AuditUpdateUserId;
+            UpdateDateTime = contactData.AuditUpdateDatetime;
+        }
         public int ContactKey { get; private set; }
         public int EntityKey { get; private set; }
         public int EntityTypeKey { get; private set; }

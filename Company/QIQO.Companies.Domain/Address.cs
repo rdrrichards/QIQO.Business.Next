@@ -8,7 +8,26 @@ namespace QIQO.Companies.Domain
     {
         public Address(AddressData addressData)
         {
-
+            AddressKey = addressData.AddressKey;
+            AddressLine1 = addressData.AddressLine1;
+            AddressLine2 = addressData.AddressLine2;
+            AddressLine3 = addressData.AddressLine3;
+            AddressLine4 = addressData.AddressLine4;
+            AddressCity = addressData.AddressCity;
+            AddressState = addressData.AddressStateProv;
+            AddressPostalCode = addressData.AddressPostalCode;
+            AddressActiveFlag = addressData.AddressActiveFlg == 1;
+            AddressCounty = addressData.AddressCounty;
+            AddressCountry = addressData.AddressCountry;
+            AddressDefaultFlag = addressData.AddressDefaultFlg == 1;
+            AddressNotes = addressData.AddressNotes;
+            AddressType = (QIQOAddressType)addressData.AddressTypeKey;
+            EntityKey = addressData.EntityKey;
+            EntityType = (QIQOEntityType)addressData.EntityTypeKey;
+            AddedDateTime = addressData.AuditAddDatetime;
+            AddedUserID = addressData.AuditAddUserId;
+            UpdateDateTime = addressData.AuditUpdateDatetime;
+            UpdateUserID = addressData.AuditUpdateUserId;
         }
         public int AddressKey { get; private set; }
         public QIQOAddressType AddressType { get; private set; } = QIQOAddressType.Billing;

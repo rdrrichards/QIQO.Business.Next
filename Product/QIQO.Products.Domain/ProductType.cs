@@ -1,10 +1,23 @@
 using QIQO.Business.Core.Contracts;
+using QIQO.Products.Data;
 using System;
 
 namespace QIQO.Products.Domain
 {
     public class ProductType : IModel
-    {        
+    {
+        public ProductType(ProductTypeData productTypeData)
+        {
+            ProductTypeKey = productTypeData.ProductTypeKey;
+            ProductTypeCategory = productTypeData.ProductTypeCategory;
+            ProductTypeCode = productTypeData.ProductTypeCode;
+            ProductTypeName = productTypeData.ProductTypeName;
+            ProductTypeDesc = productTypeData.ProductTypeDesc;
+            AddedUserID = productTypeData.AuditAddUserId;
+            AddedDateTime = productTypeData.AuditAddDatetime;
+            UpdateUserID = productTypeData.AuditUpdateUserId;
+            UpdateDateTime = productTypeData.AuditUpdateDatetime;
+        }
         public int ProductTypeKey { get; private set; }        
         public string ProductTypeCategory { get; private set; }        
         public string ProductTypeCode { get; private set; }        
