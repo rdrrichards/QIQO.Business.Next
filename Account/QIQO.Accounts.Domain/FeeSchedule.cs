@@ -1,10 +1,30 @@
-﻿using QIQO.Business.Core.Contracts;
+﻿using QIQO.Accounts.Data;
+using QIQO.Business.Core.Contracts;
 using System;
 
 namespace QIQO.Accounts.Domain
 {
     public class FeeSchedule : IModel
     {
+        public FeeSchedule(FeeScheduleData feeScheduleData)
+        {
+            FeeScheduleKey = feeScheduleData.FeeScheduleKey;
+            CompanyKey = feeScheduleData.CompanyKey;
+            AccountKey = feeScheduleData.AccountKey;
+            ProductKey = feeScheduleData.ProductKey;
+            FeeScheduleStartDate = feeScheduleData.FeeScheduleStartDate;
+            FeeScheduleEndDate = feeScheduleData.FeeScheduleEndDate;
+            FeeScheduleTypeCode = feeScheduleData.FeeScheduleType;
+            FeeScheduleValue = feeScheduleData.FeeScheduleValue;
+            AddedUserID = feeScheduleData.AuditAddUserId;
+            AddedDateTime = feeScheduleData.AuditAddDatetime;
+            UpdateUserID = feeScheduleData.AuditUpdateUserId;
+            UpdateDateTime = feeScheduleData.AuditUpdateDatetime;
+            ProductDesc = feeScheduleData.ProductDesc;
+            ProductCode = feeScheduleData.ProductCode;
+            AccountCode = feeScheduleData.AccountCode;
+            AccountName = feeScheduleData.AccountName;
+        }
         public int FeeScheduleKey { get; private set; }
         public int CompanyKey { get; private set; }
         public int AccountKey { get; private set; }
