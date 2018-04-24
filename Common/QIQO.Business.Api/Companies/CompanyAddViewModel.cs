@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace QIQO.Business.Api.Companies
+﻿namespace QIQO.Business.Api.Companies
 {
     public class CompanyAddViewModel
     {

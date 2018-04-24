@@ -1,6 +1,6 @@
 using QIQO.Business.Core.Contracts;
 
-namespace QIQO.Invoices.Data
+namespace QIQO.Accounts.Data
 {
     public class AddressPostalData : IEntity
     {

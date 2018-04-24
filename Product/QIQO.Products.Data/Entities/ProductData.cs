@@ -1,9 +1,6 @@
-using QIQO.Business.Core.Contracts;
-using System;
-
 namespace QIQO.Products.Data
 {
-    public class ProductData : CommonData, IEntity
+    public class ProductData : CommonData
     {
         public int ProductKey { get; set; }
         public int ProductTypeKey { get; set; }

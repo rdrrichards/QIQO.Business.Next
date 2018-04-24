@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QIQO.Accounts.Manager
+﻿namespace QIQO.Accounts.Manager
 {
     public class Test
     {

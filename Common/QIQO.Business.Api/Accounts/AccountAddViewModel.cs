@@ -1,6 +1,5 @@
 ﻿using QIQO.Accounts.Domain;
 using System;
-using System.Collections.Generic;
 
 namespace QIQO.Business.Api.Accounts
 {

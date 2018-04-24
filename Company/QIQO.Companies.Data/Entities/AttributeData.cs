@@ -1,8 +1,6 @@
-﻿using QIQO.Business.Core.Contracts;
-
-namespace QIQO.Companies.Data
+﻿namespace QIQO.Companies.Data
 {
-    public class AttributeData : CommonData, IEntity
+    public class AttributeData : CommonData
     {
         public int AttributeKey { get; set; }
         public int EntityKey { get; set; }

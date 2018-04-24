@@ -1,8 +1,6 @@
-﻿using QIQO.Business.Core.Contracts;
-
-namespace QIQO.Invoices.Data
+﻿namespace QIQO.Invoices.Data
 {
-    public class AccountTypeData : CommonData, IEntity
+    public class AccountTypeData : CommonData
     {
         public int AccountTypeKey { get; set; }
         public string AccountTypeCode { get; set; }

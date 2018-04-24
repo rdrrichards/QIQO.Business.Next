@@ -1,8 +1,6 @@
-using QIQO.Business.Core.Contracts;
-
 namespace QIQO.Orders.Data
 {
-    public class OrderStatusData : CommonData, IEntity
+    public class OrderStatusData : CommonData
     {
         public int OrderStatusKey { get; set; }
         public string OrderStatusCode { get; set; }

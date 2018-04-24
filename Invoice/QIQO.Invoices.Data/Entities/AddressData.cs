@@ -1,8 +1,6 @@
-using QIQO.Business.Core.Contracts;
-
 namespace QIQO.Invoices.Data
 {
-    public class AddressData : CommonData, IEntity
+    public class AddressData : CommonData
     {
         public int AddressKey { get; set; }
         public int AddressTypeKey { get; set; }

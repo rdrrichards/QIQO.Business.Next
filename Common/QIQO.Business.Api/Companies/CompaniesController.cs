@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QIQO.Companies.Domain;
 using QIQO.Companies.Manager;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Companies

@@ -1,7 +1,6 @@
 ﻿using QIQO.Business.Core.Contracts;
 using QIQO.Invoices.Data;
 using System;
-using System.Collections.Generic;
 
 namespace QIQO.Invoices.Domain
 {

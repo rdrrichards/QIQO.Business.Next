@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QIQO.Business.Core.Contracts
+﻿namespace QIQO.Business.Core.Contracts
 {
     //public interface IAccountDbContext { }
 }

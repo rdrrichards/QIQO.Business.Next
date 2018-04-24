@@ -1,9 +1,8 @@
-using QIQO.Business.Core.Contracts;
 using System;
 
 namespace QIQO.Invoices.Data
 {
-    public class FeeScheduleData : CommonData, IEntity
+    public class FeeScheduleData : CommonData
     {
         public int FeeScheduleKey { get; set; }
         public int CompanyKey { get; set; }

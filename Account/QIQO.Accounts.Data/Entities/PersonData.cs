@@ -1,9 +1,8 @@
-﻿using QIQO.Business.Core.Contracts;
-using System;
+﻿using System;
 
 namespace QIQO.Accounts.Data
 {
-    public class PersonData : CommonData, IEntity
+    public class PersonData : CommonData
     {
 
         public int PersonKey { get; set; }

@@ -1,7 +1,7 @@
-namespace QIQO.Orders.Data
+namespace QIQO.Accounts.Data
 {
     public class CommentTypeData : CommonData
-    {
+    { 
         public int CommentTypeKey { get; set; }
         public string CommentTypeCategory { get; set; }
         public string CommentTypeCode { get; set; }

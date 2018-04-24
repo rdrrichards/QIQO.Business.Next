@@ -1,9 +1,6 @@
-using QIQO.Business.Core.Contracts;
-using System;
-
 namespace QIQO.Invoices.Data
 {
-    public class PersonTypeData : CommonData, IEntity
+    public class PersonTypeData : CommonData
     {
         public int PersonTypeKey { get; set; }
         public string PersonTypeCategory { get; set; }

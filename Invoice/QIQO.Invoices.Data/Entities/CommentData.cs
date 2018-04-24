@@ -1,9 +1,6 @@
-using QIQO.Business.Core.Contracts;
-using System;
-
 namespace QIQO.Invoices.Data
 {
-    public class CommentData : CommonData, IEntity
+    public class CommentData : CommonData
     {
         public int CommentKey { get; set; }
         public int EntityKey { get; set; }

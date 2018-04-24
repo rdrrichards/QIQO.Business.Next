@@ -1,5 +1,4 @@
 using QIQO.Accounts.Manager;
-using System;
 using Xunit;
 
 namespace QIQO.Accounts.Tests

@@ -1,9 +1,8 @@
-using QIQO.Business.Core.Contracts;
 using System;
 
 namespace QIQO.Orders.Data
 {
-    public class OrderHeaderData : CommonData, IEntity
+    public class OrderHeaderData : CommonData
     {
         public int OrderKey { get; set; }
         public int AccountKey { get; set; }

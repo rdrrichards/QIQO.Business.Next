@@ -1,9 +1,6 @@
-using QIQO.Business.Core.Contracts;
-using System;
-
 namespace QIQO.Invoices.Data
 {
-    public class InvoiceStatusData : CommonData, IEntity
+    public class InvoiceStatusData : CommonData
     {
         public int InvoiceStatusKey { get; set; }
         public string InvoiceStatusCode { get; set; }

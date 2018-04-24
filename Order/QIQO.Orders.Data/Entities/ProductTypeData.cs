@@ -1,8 +1,6 @@
-using QIQO.Business.Core.Contracts;
-
 namespace QIQO.Orders.Data
 {
-    public class ProductTypeData : CommonData, IEntity
+    public class ProductTypeData : CommonData
     { 
         public int ProductTypeKey { get; set; }
         public string ProductTypeCategory { get; set; }

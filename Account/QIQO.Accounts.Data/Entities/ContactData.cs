@@ -1,8 +1,6 @@
-﻿using QIQO.Business.Core.Contracts;
-
-namespace QIQO.Accounts.Data
+﻿namespace QIQO.Accounts.Data
 {
-    public class ContactData : CommonData, IEntity
+    public class ContactData : CommonData
     {
         public int ContactKey { get; set; }
         public int EntityKey { get; set; }
