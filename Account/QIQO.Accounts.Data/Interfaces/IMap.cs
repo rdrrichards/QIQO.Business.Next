@@ -3,6 +3,7 @@
 namespace QIQO.Accounts.Data
 {
     public interface IAccountMap : IMapper<AccountData> { }
+    public interface IAccountTypeMap : IMapper<AccountTypeData> { }
     public interface IAddressMap : IMapper<AddressData> { }
     public interface IAttributeMap : IMapper<AttributeData> { }
     public interface ICommentMap : IMapper<CommentData> { }
