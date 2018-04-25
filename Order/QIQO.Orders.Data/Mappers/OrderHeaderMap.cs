@@ -40,39 +40,31 @@ namespace QIQO.Orders.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(OrderHeaderData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_key", entity.OrderKey));
-            sql_params.Add(new SqlParameter("@account_key", entity.AccountKey));
-            sql_params.Add(new SqlParameter("@account_contact_key", entity.AccountContactKey));
-            sql_params.Add(new SqlParameter("@order_num", entity.OrderNum));
-            sql_params.Add(new SqlParameter("@order_entry_date", entity.OrderEntryDate));
-            sql_params.Add(new SqlParameter("@order_status_key", entity.OrderStatusKey));
-            sql_params.Add(new SqlParameter("@order_status_date", entity.OrderStatusDate));
-            sql_params.Add(new SqlParameter("@order_ship_date", entity.OrderShipDate));
-            sql_params.Add(new SqlParameter("@account_rep_key", entity.AccountRepKey));
-            sql_params.Add(new SqlParameter("@order_complete_date", entity.OrderCompleteDate));
-            sql_params.Add(new SqlParameter("@order_value_sum", entity.OrderValueSum));
-            sql_params.Add(new SqlParameter("@order_item_count", entity.OrderItemCount));
-            sql_params.Add(new SqlParameter("@deliver_by_date", entity.DeliverByDate));
-            sql_params.Add(new SqlParameter("@sales_rep_key", entity.SalesRepKey));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(OrderHeaderData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_key", entity.OrderKey),
+                new SqlParameter("@account_key", entity.AccountKey),
+                new SqlParameter("@account_contact_key", entity.AccountContactKey),
+                new SqlParameter("@order_num", entity.OrderNum),
+                new SqlParameter("@order_entry_date", entity.OrderEntryDate),
+                new SqlParameter("@order_status_key", entity.OrderStatusKey),
+                new SqlParameter("@order_status_date", entity.OrderStatusDate),
+                new SqlParameter("@order_ship_date", entity.OrderShipDate),
+                new SqlParameter("@account_rep_key", entity.AccountRepKey),
+                new SqlParameter("@order_complete_date", entity.OrderCompleteDate),
+                new SqlParameter("@order_value_sum", entity.OrderValueSum),
+                new SqlParameter("@order_item_count", entity.OrderItemCount),
+                new SqlParameter("@deliver_by_date", entity.DeliverByDate),
+                new SqlParameter("@sales_rep_key", entity.SalesRepKey),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(OrderHeaderData entity)
-        {
-            return MapParamsForDelete(entity.OrderKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(OrderHeaderData entity) => MapParamsForDelete(entity.OrderKey);
 
-        public List<SqlParameter> MapParamsForDelete(int order_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_key", order_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int order_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_key", order_key),
+                GetOutParam()
+            };
     }
 }

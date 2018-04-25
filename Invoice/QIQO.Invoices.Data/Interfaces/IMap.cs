@@ -17,4 +17,6 @@ namespace QIQO.Invoices.Data
     public interface IInvoiceItemMap : IMapper<InvoiceItemData> { }
     public interface IInvoiceMap : IMapper<InvoiceData> { }
     public interface IInvoiceStatusMap : IMapper<InvoiceStatusData> { }
+    public interface IProductMap : IMapper<ProductData> { }
+    public interface IProductTypeMap : IMapper<ProductTypeData> { }
 }

@@ -31,30 +31,22 @@ namespace QIQO.Orders.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(OrderStatusData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_status_key", entity.OrderStatusKey));
-            sql_params.Add(new SqlParameter("@order_status_code", entity.OrderStatusCode));
-            sql_params.Add(new SqlParameter("@order_status_name", entity.OrderStatusName));
-            sql_params.Add(new SqlParameter("@order_status_type", entity.OrderStatusType));
-            sql_params.Add(new SqlParameter("@order_status_desc", entity.OrderStatusDesc));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(OrderStatusData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_status_key", entity.OrderStatusKey),
+                new SqlParameter("@order_status_code", entity.OrderStatusCode),
+                new SqlParameter("@order_status_name", entity.OrderStatusName),
+                new SqlParameter("@order_status_type", entity.OrderStatusType),
+                new SqlParameter("@order_status_desc", entity.OrderStatusDesc),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(OrderStatusData entity)
-        {
-            return MapParamsForDelete(entity.OrderStatusKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(OrderStatusData entity) => MapParamsForDelete(entity.OrderStatusKey);
 
-        public List<SqlParameter> MapParamsForDelete(int order_status_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_status_key", order_status_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int order_status_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_status_key", order_status_key),
+                GetOutParam()
+            };
     }
 }

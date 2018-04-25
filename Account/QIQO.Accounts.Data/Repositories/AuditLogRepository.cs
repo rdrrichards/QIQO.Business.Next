@@ -28,14 +28,14 @@ namespace QIQO.Accounts.Data
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_audit_log_get", pcol));
         }
 
-        public override AuditLogData GetByCode(string account_code, string entityCode)
+        public override AuditLogData GetByCode(string audit_log_code, string entityCode)
         {
             Log.LogInformation("Accessing AuditLogRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@account_code", account_code),
+                Mapper.BuildParam("@audit_log_code", audit_log_code),
                 Mapper.BuildParam("@company_code", entityCode)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_account_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_audit_log_get_c", pcol));
         }
 
         public override void Insert(AuditLogData entity)
@@ -59,26 +59,26 @@ namespace QIQO.Accounts.Data
         public override void Delete(AuditLogData entity)
         {
             Log.LogInformation("Accessing AuditLogRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing AuditLogRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_code", entityCode) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@audit_log_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del_c", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing AuditLogRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(AuditLogData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_ups", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

@@ -43,41 +43,33 @@ namespace QIQO.Orders.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(OrderItemData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_item_key", entity.OrderItemKey));
-            sql_params.Add(new SqlParameter("@order_key", entity.OrderKey));
-            sql_params.Add(new SqlParameter("@order_item_seq", entity.OrderItemSeq));
-            sql_params.Add(new SqlParameter("@product_key", entity.ProductKey));
-            sql_params.Add(new SqlParameter("@product_name", entity.ProductName));
-            sql_params.Add(new SqlParameter("@product_desc", entity.ProductDesc));
-            sql_params.Add(new SqlParameter("@order_item_quantity", entity.OrderItemQuantity));
-            sql_params.Add(new SqlParameter("@shipto_addr_key", entity.ShiptoAddrKey));
-            sql_params.Add(new SqlParameter("@billto_addr_key", entity.BilltoAddrKey));
-            sql_params.Add(new SqlParameter("@order_item_ship_date", entity.OrderItemShipDate));
-            sql_params.Add(new SqlParameter("@order_item_complete_date", entity.OrderItemCompleteDate));
-            sql_params.Add(new SqlParameter("@order_item_price_per", entity.OrderItemPricePer));
-            sql_params.Add(new SqlParameter("@order_item_line_sum", entity.OrderItemLineSum));
-            sql_params.Add(new SqlParameter("@order_item_acct_rep_key", entity.OrderItemAccountRepKey));
-            sql_params.Add(new SqlParameter("@order_item_sales_rep_key", entity.OrderItemSalesRepKey));
-            sql_params.Add(new SqlParameter("@order_item_status_key", entity.OrderItemStatusKey));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(OrderItemData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_item_key", entity.OrderItemKey),
+                new SqlParameter("@order_key", entity.OrderKey),
+                new SqlParameter("@order_item_seq", entity.OrderItemSeq),
+                new SqlParameter("@product_key", entity.ProductKey),
+                new SqlParameter("@product_name", entity.ProductName),
+                new SqlParameter("@product_desc", entity.ProductDesc),
+                new SqlParameter("@order_item_quantity", entity.OrderItemQuantity),
+                new SqlParameter("@shipto_addr_key", entity.ShiptoAddrKey),
+                new SqlParameter("@billto_addr_key", entity.BilltoAddrKey),
+                new SqlParameter("@order_item_ship_date", entity.OrderItemShipDate),
+                new SqlParameter("@order_item_complete_date", entity.OrderItemCompleteDate),
+                new SqlParameter("@order_item_price_per", entity.OrderItemPricePer),
+                new SqlParameter("@order_item_line_sum", entity.OrderItemLineSum),
+                new SqlParameter("@order_item_acct_rep_key", entity.OrderItemAccountRepKey),
+                new SqlParameter("@order_item_sales_rep_key", entity.OrderItemSalesRepKey),
+                new SqlParameter("@order_item_status_key", entity.OrderItemStatusKey),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(OrderItemData entity)
-        {
-            return MapParamsForDelete(entity.OrderItemKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(OrderItemData entity) => MapParamsForDelete(entity.OrderItemKey);
 
-        public List<SqlParameter> MapParamsForDelete(int order_item_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@order_item_key", order_item_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int order_item_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@order_item_key", order_item_key),
+                GetOutParam()
+            };
     }
 }

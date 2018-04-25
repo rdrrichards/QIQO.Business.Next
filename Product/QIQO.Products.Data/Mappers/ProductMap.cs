@@ -54,5 +54,5 @@ namespace QIQO.Products.Data
                 new SqlParameter("@product_key", product_key),
                 GetOutParam()
             };
-    } 
+    }
 }
