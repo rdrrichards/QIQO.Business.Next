@@ -33,32 +33,24 @@ namespace QIQO.Accounts.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(AttributeData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@attribute_key", entity.AttributeKey));
-            sql_params.Add(BuildParam("@entity_key", entity.EntityKey));
-            sql_params.Add(BuildParam("@entity_type_key", entity.EntityTypeKey));
-            sql_params.Add(BuildParam("@attribute_type_key", entity.AttributeTypeKey));
-            sql_params.Add(BuildParam("@attribute_value", entity.AttributeValue));
-            sql_params.Add(BuildParam("@attribute_data_type_key", entity.AttributeDataTypeKey));
-            sql_params.Add(BuildParam("@attribute_display_format", entity.AttributeDisplayFormat));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(AttributeData entity) => new List<SqlParameter>
+            {
+                BuildParam("@attribute_key", entity.AttributeKey),
+                BuildParam("@entity_key", entity.EntityKey),
+                BuildParam("@entity_type_key", entity.EntityTypeKey),
+                BuildParam("@attribute_type_key", entity.AttributeTypeKey),
+                BuildParam("@attribute_value", entity.AttributeValue),
+                BuildParam("@attribute_data_type_key", entity.AttributeDataTypeKey),
+                BuildParam("@attribute_display_format", entity.AttributeDisplayFormat),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(AttributeData entity)
-        {
-            return MapParamsForDelete(entity.AttributeKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(AttributeData entity) => MapParamsForDelete(entity.AttributeKey);
 
-        public List<SqlParameter> MapParamsForDelete(int attribute_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@attribute_key", attribute_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int attribute_key) => new List<SqlParameter>
+            {
+                BuildParam("@attribute_key", attribute_key),
+                GetOutParam()
+            };
     }
 }

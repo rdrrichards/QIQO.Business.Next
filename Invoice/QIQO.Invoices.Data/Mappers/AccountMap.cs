@@ -35,33 +35,26 @@ namespace QIQO.Invoices.Data
             }
         }
 
-        public List<SqlParameter> MapParamsForUpsert(AccountData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@account_key", entity.AccountKey));
-            sql_params.Add(BuildParam("@company_key", entity.CompanyKey));
-            sql_params.Add(BuildParam("@account_type_key", entity.AccountTypeKey));
-            sql_params.Add(BuildParam("@account_code", entity.AccountCode));
-            sql_params.Add(BuildParam("@account_name", entity.AccountName));
-            sql_params.Add(BuildParam("@account_desc", entity.AccountDesc));
-            sql_params.Add(BuildParam("@account_dba", entity.AccountDba));
-            sql_params.Add(BuildParam("@account_start_date", entity.AccountStartDate));
-            sql_params.Add(BuildParam("@account_end_date", entity.AccountEndDate));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(AccountData entity) => new List<SqlParameter>
+            {
+                BuildParam("@account_key", entity.AccountKey),
+                BuildParam("@company_key", entity.CompanyKey),
+                BuildParam("@account_type_key", entity.AccountTypeKey),
+                BuildParam("@account_code", entity.AccountCode),
+                BuildParam("@account_name", entity.AccountName),
+                BuildParam("@account_desc", entity.AccountDesc),
+                BuildParam("@account_dba", entity.AccountDba),
+                BuildParam("@account_start_date", entity.AccountStartDate),
+                BuildParam("@account_end_date", entity.AccountEndDate),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(AccountData entity)
-        {
-            return MapParamsForDelete(entity.AccountKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(AccountData entity) => MapParamsForDelete(entity.AccountKey);
 
-        public List<SqlParameter> MapParamsForDelete(int account_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@account_key", account_key));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int account_key) => new List<SqlParameter>
+            {
+                BuildParam("@account_key", account_key),
+                GetOutParam()
+            };
     }
 }

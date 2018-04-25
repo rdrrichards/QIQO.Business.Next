@@ -92,5 +92,4 @@ namespace QIQO.Accounts.Data
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_contact_ups", Mapper.MapParamsForUpsert(entity));
         }
     }
-
 }

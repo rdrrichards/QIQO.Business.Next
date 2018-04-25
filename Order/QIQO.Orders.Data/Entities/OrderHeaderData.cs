@@ -18,5 +18,5 @@ namespace QIQO.Orders.Data
         public int OrderItemCount { get; set; }
         public DateTime? DeliverByDate { get; set; }
         public int SalesRepKey { get; set; }
-    } 
+    }
 }

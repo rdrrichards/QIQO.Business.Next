@@ -10,4 +10,5 @@ namespace QIQO.Invoices.Data
         IEnumerable<AccountData> GetAll(PersonData employee);
         IEnumerable<AccountData> FindAll(int company_key, string pattern);
     }
+    public interface IAccountTypeRepository : IRepository<AccountTypeData> { }
 }

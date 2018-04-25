@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace QIQO.Invoices.Data
 {
     public class InvoiceMap : MapperBase, IInvoiceMap
-    { // InvoiceMap class opener
+    {
         public InvoiceData Map(IDataReader record)
         {
             try
@@ -39,42 +39,33 @@ namespace QIQO.Invoices.Data
             {
                 throw new MapException($"InvoiceMap Exception occured: {ex.Message}", ex);
             }
-        } // Map function closer
-
-        public List<SqlParameter> MapParamsForUpsert(InvoiceData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_key", entity.InvoiceKey));
-            sql_params.Add(new SqlParameter("@from_entity_key", entity.FromEntityKey));
-            sql_params.Add(new SqlParameter("@account_key", entity.AccountKey));
-            sql_params.Add(new SqlParameter("@account_contact_key", entity.AccountContactKey));
-            sql_params.Add(new SqlParameter("@invoice_num", entity.InvoiceNum));
-            sql_params.Add(new SqlParameter("@invoice_entry_date", entity.InvoiceEntryDate));
-            sql_params.Add(new SqlParameter("@order_entry_date", entity.OrderEntryDate));
-            sql_params.Add(new SqlParameter("@invoice_status_key", entity.InvoiceStatusKey));
-            sql_params.Add(new SqlParameter("@invoice_status_date", entity.InvoiceStatusDate));
-            sql_params.Add(new SqlParameter("@order_ship_date", entity.OrderShipDate));
-            sql_params.Add(new SqlParameter("@account_rep_key", entity.AccountRepKey));
-            sql_params.Add(new SqlParameter("@sales_rep_key", entity.SalesRepKey));
-            sql_params.Add(new SqlParameter("@invoice_complete_date", entity.InvoiceCompleteDate));
-            sql_params.Add(new SqlParameter("@invoice_value_sum", entity.InvoiceValueSum));
-            sql_params.Add(new SqlParameter("@invoice_item_count", entity.InvoiceItemCount));
-            sql_params.Add(GetOutParam());
-            return sql_params;
         }
+        public List<SqlParameter> MapParamsForUpsert(InvoiceData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_key", entity.InvoiceKey),
+                new SqlParameter("@from_entity_key", entity.FromEntityKey),
+                new SqlParameter("@account_key", entity.AccountKey),
+                new SqlParameter("@account_contact_key", entity.AccountContactKey),
+                new SqlParameter("@invoice_num", entity.InvoiceNum),
+                new SqlParameter("@invoice_entry_date", entity.InvoiceEntryDate),
+                new SqlParameter("@order_entry_date", entity.OrderEntryDate),
+                new SqlParameter("@invoice_status_key", entity.InvoiceStatusKey),
+                new SqlParameter("@invoice_status_date", entity.InvoiceStatusDate),
+                new SqlParameter("@order_ship_date", entity.OrderShipDate),
+                new SqlParameter("@account_rep_key", entity.AccountRepKey),
+                new SqlParameter("@sales_rep_key", entity.SalesRepKey),
+                new SqlParameter("@invoice_complete_date", entity.InvoiceCompleteDate),
+                new SqlParameter("@invoice_value_sum", entity.InvoiceValueSum),
+                new SqlParameter("@invoice_item_count", entity.InvoiceItemCount),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(InvoiceData entity)
-        {
-            return MapParamsForDelete(entity.InvoiceKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(InvoiceData entity) => MapParamsForDelete(entity.InvoiceKey);
 
-        public List<SqlParameter> MapParamsForDelete(int invoice_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_key", invoice_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int invoice_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_key", invoice_key),
+                GetOutParam()
+            };
     }
 }

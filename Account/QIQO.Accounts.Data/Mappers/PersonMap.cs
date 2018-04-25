@@ -33,31 +33,24 @@ namespace QIQO.Accounts.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(PersonData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@person_key", entity.PersonKey));
-            sql_params.Add(BuildParam("@person_code", entity.PersonCode));
-            sql_params.Add(BuildParam("@person_first_name", entity.PersonFirstName));
-            sql_params.Add(BuildParam("@person_mi", entity.PersonMi));
-            sql_params.Add(BuildParam("@person_last_name", entity.PersonLastName));
-            sql_params.Add(BuildParam("@parent_person_key", entity.ParentPersonKey));
-            sql_params.Add(BuildParam("@person_dob", entity.PersonDob));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(PersonData entity) => new List<SqlParameter>
+            {
+                BuildParam("@person_key", entity.PersonKey),
+                BuildParam("@person_code", entity.PersonCode),
+                BuildParam("@person_first_name", entity.PersonFirstName),
+                BuildParam("@person_mi", entity.PersonMi),
+                BuildParam("@person_last_name", entity.PersonLastName),
+                BuildParam("@parent_person_key", entity.ParentPersonKey),
+                BuildParam("@person_dob", entity.PersonDob),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(PersonData entity)
-        {
-            return MapParamsForDelete(entity.PersonKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(PersonData entity) => MapParamsForDelete(entity.PersonKey);
 
-        public List<SqlParameter> MapParamsForDelete(int person_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@person_key", person_key));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int person_key) => new List<SqlParameter>
+            {
+                BuildParam("@person_key", person_key),
+                GetOutParam()
+            };
     }
 }

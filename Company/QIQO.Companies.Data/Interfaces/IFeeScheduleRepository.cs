@@ -8,5 +8,5 @@ namespace QIQO.Companies.Data
         IEnumerable<FeeScheduleData> GetAll(CompanyData company);
         // IEnumerable<FeeScheduleData> GetAll(ProductData product);
     }
-
+    public interface IEntityEntityRepository : IRepository<EntityEntityData> { }
 }

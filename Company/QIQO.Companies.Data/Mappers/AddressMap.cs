@@ -43,41 +43,33 @@ namespace QIQO.Companies.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(AddressData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@address_key", entity.AddressKey));
-            sql_params.Add(BuildParam("@address_type_key", entity.AddressTypeKey));
-            sql_params.Add(BuildParam("@entity_key", entity.EntityKey));
-            sql_params.Add(BuildParam("@entity_type_key", entity.EntityTypeKey));
-            sql_params.Add(BuildParam("@address_line_1", entity.AddressLine1));
-            sql_params.Add(BuildParam("@address_line_2", entity.AddressLine2));
-            sql_params.Add(BuildParam("@address_line_3", entity.AddressLine3));
-            sql_params.Add(BuildParam("@address_line_4", entity.AddressLine4));
-            sql_params.Add(BuildParam("@address_city", entity.AddressCity));
-            sql_params.Add(BuildParam("@address_state_prov", entity.AddressStateProv));
-            sql_params.Add(BuildParam("@address_county", entity.AddressCounty));
-            sql_params.Add(BuildParam("@address_country", entity.AddressCountry));
-            sql_params.Add(BuildParam("@address_postal_code", entity.AddressPostalCode));
-            sql_params.Add(BuildParam("@address_notes", entity.AddressNotes));
-            sql_params.Add(BuildParam("@address_default_flg", entity.AddressDefaultFlg));
-            sql_params.Add(BuildParam("@address_active_flg", entity.AddressActiveFlg));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(AddressData entity) => new List<SqlParameter>
+            {
+                BuildParam("@address_key", entity.AddressKey),
+                BuildParam("@address_type_key", entity.AddressTypeKey),
+                BuildParam("@entity_key", entity.EntityKey),
+                BuildParam("@entity_type_key", entity.EntityTypeKey),
+                BuildParam("@address_line_1", entity.AddressLine1),
+                BuildParam("@address_line_2", entity.AddressLine2),
+                BuildParam("@address_line_3", entity.AddressLine3),
+                BuildParam("@address_line_4", entity.AddressLine4),
+                BuildParam("@address_city", entity.AddressCity),
+                BuildParam("@address_state_prov", entity.AddressStateProv),
+                BuildParam("@address_county", entity.AddressCounty),
+                BuildParam("@address_country", entity.AddressCountry),
+                BuildParam("@address_postal_code", entity.AddressPostalCode),
+                BuildParam("@address_notes", entity.AddressNotes),
+                BuildParam("@address_default_flg", entity.AddressDefaultFlg),
+                BuildParam("@address_active_flg", entity.AddressActiveFlg),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(AddressData entity)
-        {
-            return MapParamsForDelete(entity.AddressKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(AddressData entity) => MapParamsForDelete(entity.AddressKey);
 
-        public List<SqlParameter> MapParamsForDelete(int address_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@address_key", address_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int addressKey) => new List<SqlParameter>
+            {
+                BuildParam("@address_key", addressKey),
+                GetOutParam()
+            };
     }
 }

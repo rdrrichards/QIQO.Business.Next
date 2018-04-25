@@ -30,28 +30,21 @@ namespace QIQO.Accounts.Data
             }
         }
 
-        public List<SqlParameter> MapParamsForUpsert(AccountTypeData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@account_type_key", entity.AccountTypeKey));
-            sql_params.Add(BuildParam("@account_type_code", entity.AccountTypeCode));
-            sql_params.Add(BuildParam("@account_type_name", entity.AccountTypeName));
-            sql_params.Add(BuildParam("@account_type_desc", entity.AccountTypeDesc));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(AccountTypeData entity) => new List<SqlParameter>
+            {
+                BuildParam("@account_type_key", entity.AccountTypeKey),
+                BuildParam("@account_type_code", entity.AccountTypeCode),
+                BuildParam("@account_type_name", entity.AccountTypeName),
+                BuildParam("@account_type_desc", entity.AccountTypeDesc),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(AccountTypeData entity)
-        {
-            return MapParamsForDelete(entity.AccountTypeKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(AccountTypeData entity) => MapParamsForDelete(entity.AccountTypeKey);
 
-        public List<SqlParameter> MapParamsForDelete(int account_type_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@account_type_key", account_type_key));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int accountTypeKey) => new List<SqlParameter>
+            {
+                BuildParam("@account_type_key", accountTypeKey),
+                GetOutParam()
+            };
     }
 }

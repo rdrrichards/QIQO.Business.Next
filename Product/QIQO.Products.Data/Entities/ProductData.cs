@@ -10,5 +10,5 @@ namespace QIQO.Products.Data
         public string ProductNameShort { get; set; }
         public string ProductNameLong { get; set; }
         public string ProductImagePath { get; set; }
-    } 
+    }
 }

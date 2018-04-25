@@ -7,5 +7,5 @@ namespace QIQO.Invoices.Data
     {
         IEnumerable<CommentData> GetAll(int entity_key, int entity_type_key);
     }
-
+    public interface ICommentTypeRepository : IRepository<CommentTypeData> { }
 }

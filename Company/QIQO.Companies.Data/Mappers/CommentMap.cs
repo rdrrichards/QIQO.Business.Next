@@ -31,30 +31,22 @@ namespace QIQO.Companies.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(CommentData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@comment_key", entity.CommentKey));
-            sql_params.Add(BuildParam("@entity_key", entity.EntityKey));
-            sql_params.Add(BuildParam("@entity_type", entity.EntityType));
-            sql_params.Add(BuildParam("@comment_type_key", entity.CommentTypeKey));
-            sql_params.Add(BuildParam("@comment_value", entity.CommentValue));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(CommentData entity) => new List<SqlParameter>
+            {
+                BuildParam("@comment_key", entity.CommentKey),
+                BuildParam("@entity_key", entity.EntityKey),
+                BuildParam("@entity_type", entity.EntityType),
+                BuildParam("@comment_type_key", entity.CommentTypeKey),
+                BuildParam("@comment_value", entity.CommentValue),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(CommentData entity)
-        {
-            return MapParamsForDelete(entity.CommentKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(CommentData entity) => MapParamsForDelete(entity.CommentKey);
 
-        public List<SqlParameter> MapParamsForDelete(int comment_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@comment_key", comment_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int comment_key) => new List<SqlParameter>
+            {
+                BuildParam("@comment_key", comment_key),
+                GetOutParam()
+            };
     }
 }

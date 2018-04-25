@@ -1,0 +1,84 @@
+﻿using Microsoft.Extensions.Logging;
+using QIQO.Business.Core;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+namespace QIQO.Accounts.Data
+{
+    public class CommentTypeRepository : RepositoryBase<CommentTypeData>,
+                                     ICommentTypeRepository
+    {
+        private IAccountDbContext entityContext;
+        public CommentTypeRepository(IAccountDbContext dbc, ICommentTypeMap map, ILogger<CommentTypeData> log) : base(log, map)
+        {
+            entityContext = dbc;
+        }
+
+        public override IEnumerable<CommentTypeData> GetAll()
+        {
+            Log.LogInformation("Accessing CommentTypeRepo GetAll function");
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_type_all"));
+        }
+
+        public override CommentTypeData GetByID(int comment_type_key)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo GetByID function");
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@comment_type_key", comment_type_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_type_get", pcol));
+        }
+
+        public override CommentTypeData GetByCode(string account_code, string entityCode)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo GetByCode function");
+            var pcol = new List<SqlParameter>() {
+                Mapper.BuildParam("@account_code", account_code),
+                Mapper.BuildParam("@company_code", entityCode)
+            };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_account_get_c", pcol));
+        }
+
+        public override void Insert(CommentTypeData entity)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo Insert function");
+            if (entity != null)
+                Upsert(entity);
+            else
+                throw new ArgumentException(nameof(entity));
+        }
+
+        public override void Save(CommentTypeData entity)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo Save function");
+            if (entity != null)
+                Upsert(entity);
+            else
+                throw new ArgumentException(nameof(entity));
+        }
+
+        public override void Delete(CommentTypeData entity)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo Delete function");
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entity));
+        }
+
+        public override void DeleteByCode(string entityCode)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo DeleteByCode function");
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_code", entityCode) };
+            pcol.Add(Mapper.GetOutParam());
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del_c", pcol);
+        }
+
+        public override void DeleteByID(int entityKey)
+        {
+            Log.LogInformation("Accessing CommentTypeRepo Delete function");
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entityKey));
+        }
+
+        private void Upsert(CommentTypeData entity)
+        {
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_ups", Mapper.MapParamsForUpsert(entity));
+        }
+    }
+}

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace QIQO.Invoices.Data
 {
     public class InvoiceItemMap : MapperBase, IInvoiceItemMap
-    { // InvoiceItemMap class opener
+    {
         public InvoiceItemData Map(IDataReader record)
         {
             try
@@ -42,45 +42,37 @@ namespace QIQO.Invoices.Data
             {
                 throw new MapException($"InvoiceItemMap Exception occured: {ex.Message}", ex);
             }
-        } // Map function closer
-
-        public List<SqlParameter> MapParamsForUpsert(InvoiceItemData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_item_key", entity.InvoiceItemKey));
-            sql_params.Add(new SqlParameter("@invoice_key", entity.InvoiceKey));
-            sql_params.Add(new SqlParameter("@invoice_item_seq", entity.InvoiceItemSeq));
-            sql_params.Add(new SqlParameter("@product_key", entity.ProductKey));
-            sql_params.Add(new SqlParameter("@product_name", entity.ProductName));
-            sql_params.Add(new SqlParameter("@product_desc", entity.ProductDesc));
-            sql_params.Add(new SqlParameter("@invoice_item_quantity", entity.InvoiceItemQuantity));
-            sql_params.Add(new SqlParameter("@shipto_addr_key", entity.ShiptoAddrKey));
-            sql_params.Add(new SqlParameter("@billto_addr_key", entity.BilltoAddrKey));
-            sql_params.Add(new SqlParameter("@invoice_item_entry_date", entity.InvoiceItemEntryDate));
-            sql_params.Add(new SqlParameter("@order_item_ship_date", entity.OrderItemShipDate));
-            sql_params.Add(new SqlParameter("@invoice_item_complete_date", entity.InvoiceItemCompleteDate));
-            sql_params.Add(new SqlParameter("@invoice_item_price_per", entity.InvoiceItemPricePer));
-            sql_params.Add(new SqlParameter("@invoice_item_line_sum", entity.InvoiceItemLineSum));
-            sql_params.Add(new SqlParameter("@invoice_item_account_rep_key", entity.InvoiceItemAccountRepKey));
-            sql_params.Add(new SqlParameter("@invoice_item_sales_rep_key", entity.InvoiceItemSalesRepKey));
-            sql_params.Add(new SqlParameter("@invoice_item_status_key", entity.InvoiceItemStatusKey));
-            sql_params.Add(new SqlParameter("@order_item_key", entity.OrderItemKey));
-            sql_params.Add(GetOutParam());
-            return sql_params;
         }
 
-        public List<SqlParameter> MapParamsForDelete(InvoiceItemData entity)
-        {
-            return MapParamsForDelete(entity.InvoiceItemKey);
-        }
+        public List<SqlParameter> MapParamsForUpsert(InvoiceItemData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_item_key", entity.InvoiceItemKey),
+                new SqlParameter("@invoice_key", entity.InvoiceKey),
+                new SqlParameter("@invoice_item_seq", entity.InvoiceItemSeq),
+                new SqlParameter("@product_key", entity.ProductKey),
+                new SqlParameter("@product_name", entity.ProductName),
+                new SqlParameter("@product_desc", entity.ProductDesc),
+                new SqlParameter("@invoice_item_quantity", entity.InvoiceItemQuantity),
+                new SqlParameter("@shipto_addr_key", entity.ShiptoAddrKey),
+                new SqlParameter("@billto_addr_key", entity.BilltoAddrKey),
+                new SqlParameter("@invoice_item_entry_date", entity.InvoiceItemEntryDate),
+                new SqlParameter("@order_item_ship_date", entity.OrderItemShipDate),
+                new SqlParameter("@invoice_item_complete_date", entity.InvoiceItemCompleteDate),
+                new SqlParameter("@invoice_item_price_per", entity.InvoiceItemPricePer),
+                new SqlParameter("@invoice_item_line_sum", entity.InvoiceItemLineSum),
+                new SqlParameter("@invoice_item_account_rep_key", entity.InvoiceItemAccountRepKey),
+                new SqlParameter("@invoice_item_sales_rep_key", entity.InvoiceItemSalesRepKey),
+                new SqlParameter("@invoice_item_status_key", entity.InvoiceItemStatusKey),
+                new SqlParameter("@order_item_key", entity.OrderItemKey),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(int invoice_item_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_item_key", invoice_item_key));
-            sql_params.Add(GetOutParam());
+        public List<SqlParameter> MapParamsForDelete(InvoiceItemData entity) => MapParamsForDelete(entity.InvoiceItemKey);
 
-            return sql_params;
-        }
-    } // InvoiceItemMap class closer
+        public List<SqlParameter> MapParamsForDelete(int invoice_item_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_item_key", invoice_item_key),
+                GetOutParam()
+            };
+    }
 }

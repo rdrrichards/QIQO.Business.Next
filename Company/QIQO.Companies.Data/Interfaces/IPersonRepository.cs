@@ -9,5 +9,5 @@ namespace QIQO.Companies.Data
         PersonData GetByUserName(string user_name);
         IEnumerable<PersonData> GetAllReps(CompanyData comp, int rep_type);
     }
-
+    public interface IPersonTypeRepository : IRepository<PersonTypeData> { }
 }

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace QIQO.Invoices.Data
 {
     public class InvoiceStatusMap : MapperBase, IInvoiceStatusMap
-    { // InvoiceStatusMap class opener
+    {
         public InvoiceStatusData Map(IDataReader record)
         {
             try
@@ -29,32 +29,23 @@ namespace QIQO.Invoices.Data
             {
                 throw new MapException($"InvoiceStatusMap Exception occured: {ex.Message}", ex);
             }
-        } // Map function closer
-
-        public List<SqlParameter> MapParamsForUpsert(InvoiceStatusData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_status_key", entity.InvoiceStatusKey));
-            sql_params.Add(new SqlParameter("@invoice_status_code", entity.InvoiceStatusCode));
-            sql_params.Add(new SqlParameter("@invoice_status_name", entity.InvoiceStatusName));
-            sql_params.Add(new SqlParameter("@invoice_status_type", entity.InvoiceStatusType));
-            sql_params.Add(new SqlParameter("@invoice_status_desc", entity.InvoiceStatusDesc));
-            sql_params.Add(GetOutParam());
-            return sql_params;
         }
+        public List<SqlParameter> MapParamsForUpsert(InvoiceStatusData entity) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_status_key", entity.InvoiceStatusKey),
+                new SqlParameter("@invoice_status_code", entity.InvoiceStatusCode),
+                new SqlParameter("@invoice_status_name", entity.InvoiceStatusName),
+                new SqlParameter("@invoice_status_type", entity.InvoiceStatusType),
+                new SqlParameter("@invoice_status_desc", entity.InvoiceStatusDesc),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(InvoiceStatusData entity)
-        {
-            return MapParamsForDelete(entity.InvoiceStatusKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(InvoiceStatusData entity) => MapParamsForDelete(entity.InvoiceStatusKey);
 
-        public List<SqlParameter> MapParamsForDelete(int invoice_status_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(new SqlParameter("@invoice_status_key", invoice_status_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int invoice_status_key) => new List<SqlParameter>
+            {
+                new SqlParameter("@invoice_status_key", invoice_status_key),
+                GetOutParam()
+            };
     }
 }

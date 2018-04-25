@@ -33,32 +33,24 @@ namespace QIQO.Companies.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(ContactData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@contact_key", entity.ContactKey));
-            sql_params.Add(BuildParam("@entity_key", entity.EntityKey));
-            sql_params.Add(BuildParam("@entity_type_key", entity.EntityTypeKey));
-            sql_params.Add(BuildParam("@contact_type_key", entity.ContactTypeKey));
-            sql_params.Add(BuildParam("@contact_value", entity.ContactValue));
-            sql_params.Add(BuildParam("@contact_default_flg", entity.ContactDefaultFlg));
-            sql_params.Add(BuildParam("@contact_active_flg", entity.ContactActiveFlg));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(ContactData entity) => new List<SqlParameter>
+            {
+                BuildParam("@contact_key", entity.ContactKey),
+                BuildParam("@entity_key", entity.EntityKey),
+                BuildParam("@entity_type_key", entity.EntityTypeKey),
+                BuildParam("@contact_type_key", entity.ContactTypeKey),
+                BuildParam("@contact_value", entity.ContactValue),
+                BuildParam("@contact_default_flg", entity.ContactDefaultFlg),
+                BuildParam("@contact_active_flg", entity.ContactActiveFlg),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(ContactData entity)
-        {
-            return MapParamsForDelete(entity.ContactKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(ContactData entity) => MapParamsForDelete(entity.ContactKey);
 
-        public List<SqlParameter> MapParamsForDelete(int contact_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@contact_key", contact_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int contact_key) => new List<SqlParameter>
+            {
+                BuildParam("@contact_key", contact_key),
+                GetOutParam()
+            };
     }
 }

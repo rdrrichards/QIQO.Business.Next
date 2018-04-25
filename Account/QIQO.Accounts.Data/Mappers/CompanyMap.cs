@@ -30,29 +30,21 @@ namespace QIQO.Accounts.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(CompanyData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@company_key", entity.CompanyKey));
-            sql_params.Add(BuildParam("@company_code", entity.CompanyCode));
-            sql_params.Add(BuildParam("@company_name", entity.CompanyName));
-            sql_params.Add(BuildParam("@company_desc", entity.CompanyDesc));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(CompanyData entity) => new List<SqlParameter>
+            {
+                BuildParam("@company_key", entity.CompanyKey),
+                BuildParam("@company_code", entity.CompanyCode),
+                BuildParam("@company_name", entity.CompanyName),
+                BuildParam("@company_desc", entity.CompanyDesc),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(CompanyData entity)
-        {
-            return MapParamsForDelete(entity.CompanyKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(CompanyData entity) => MapParamsForDelete(entity.CompanyKey);
 
-        public List<SqlParameter> MapParamsForDelete(int company_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@company_key", company_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int company_key) => new List<SqlParameter>
+            {
+                BuildParam("@company_key", company_key),
+                GetOutParam()
+            };
     }
 }

@@ -6,31 +6,23 @@ namespace QIQO.Invoices.Data
 {
     public class MapperBase
     {
-        public SqlParameter GetOutParam()
+        public SqlParameter GetOutParam() => new SqlParameter()
         {
-            return new SqlParameter()
-            {
-                ParameterName = "@key",
-                SqlDbType = SqlDbType.Int,
-                Direction = ParameterDirection.Output
-            };
-        }
+            ParameterName = "@key",
+            SqlDbType = SqlDbType.Int,
+            Direction = ParameterDirection.Output
+        };
 
-        public SqlParameter GetIdentityOutParam()
-        {
+        public SqlParameter GetIdentityOutParam() =>
             // for the output param guid or the current id
-            return new SqlParameter()
+            new SqlParameter()
             {
                 ParameterName = "@Id",
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Output
             };
-        }
 
-        public SqlParameter BuildParam(string parameterName, object value)
-        {
-            return new SqlParameter(parameterName, value);
-        }
+        public SqlParameter BuildParam(string parameterName, object value) => new SqlParameter(parameterName, value);
 
         protected T NullCheck<T>(object checkValue)
         {
@@ -42,5 +34,4 @@ namespace QIQO.Invoices.Data
             return outValue;
         }
     }
-
 }

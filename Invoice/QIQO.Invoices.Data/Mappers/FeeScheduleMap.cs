@@ -38,33 +38,25 @@ namespace QIQO.Invoices.Data
             }
         } // Map function closer
 
-        public List<SqlParameter> MapParamsForUpsert(FeeScheduleData entity)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@fee_schedule_key", entity.FeeScheduleKey));
-            sql_params.Add(BuildParam("@company_key", entity.CompanyKey));
-            sql_params.Add(BuildParam("@account_key", entity.AccountKey));
-            sql_params.Add(BuildParam("@product_key", entity.ProductKey));
-            sql_params.Add(BuildParam("@fee_schedule_start_date", entity.FeeScheduleStartDate));
-            sql_params.Add(BuildParam("@fee_schedule_end_date", entity.FeeScheduleEndDate));
-            sql_params.Add(BuildParam("@fee_schedule_type", entity.FeeScheduleType));
-            sql_params.Add(BuildParam("@fee_schedule_value", entity.FeeScheduleValue));
-            sql_params.Add(GetOutParam());
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForUpsert(FeeScheduleData entity) => new List<SqlParameter>
+            {
+                BuildParam("@fee_schedule_key", entity.FeeScheduleKey),
+                BuildParam("@company_key", entity.CompanyKey),
+                BuildParam("@account_key", entity.AccountKey),
+                BuildParam("@product_key", entity.ProductKey),
+                BuildParam("@fee_schedule_start_date", entity.FeeScheduleStartDate),
+                BuildParam("@fee_schedule_end_date", entity.FeeScheduleEndDate),
+                BuildParam("@fee_schedule_type", entity.FeeScheduleType),
+                BuildParam("@fee_schedule_value", entity.FeeScheduleValue),
+                GetOutParam()
+            };
 
-        public List<SqlParameter> MapParamsForDelete(FeeScheduleData entity)
-        {
-            return MapParamsForDelete(entity.FeeScheduleKey);
-        }
+        public List<SqlParameter> MapParamsForDelete(FeeScheduleData entity) => MapParamsForDelete(entity.FeeScheduleKey);
 
-        public List<SqlParameter> MapParamsForDelete(int fee_schedule_key)
-        {
-            var sql_params = new List<SqlParameter>();
-            sql_params.Add(BuildParam("@fee_schedule_key", fee_schedule_key));
-            sql_params.Add(GetOutParam());
-
-            return sql_params;
-        }
+        public List<SqlParameter> MapParamsForDelete(int fee_schedule_key) => new List<SqlParameter>
+            {
+                BuildParam("@fee_schedule_key", fee_schedule_key),
+                GetOutParam()
+            };
     }
 }

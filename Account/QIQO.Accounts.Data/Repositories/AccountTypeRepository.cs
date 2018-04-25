@@ -17,20 +17,20 @@ namespace QIQO.Accounts.Data
 
         public override IEnumerable<AccountTypeData> GetAll()
         {
-            Log.LogInformation("Accessing AccountRepo GetAll function");
+            Log.LogInformation("Accessing AccountTypeRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_account_type_all"));
         }
 
         public override AccountTypeData GetByID(int account_type_key)
         {
-            Log.LogInformation("Accessing AccountRepo GetByID function");
+            Log.LogInformation("Accessing AccountTypeRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_type_key", account_type_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_account_type_get", pcol));
         }
 
         public override AccountTypeData GetByCode(string account_code, string entityCode)
         {
-            Log.LogInformation("Accessing AccountRepo GetByCode function");
+            Log.LogInformation("Accessing AccountTypeRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@account_code", account_code),
                 Mapper.BuildParam("@company_code", entityCode)
@@ -40,7 +40,7 @@ namespace QIQO.Accounts.Data
 
         public override void Insert(AccountTypeData entity)
         {
-            Log.LogInformation("Accessing AccountRepo Insert function");
+            Log.LogInformation("Accessing AccountTypeRepo Insert function");
             if (entity != null)
                 Upsert(entity);
             else
@@ -49,7 +49,7 @@ namespace QIQO.Accounts.Data
 
         public override void Save(AccountTypeData entity)
         {
-            Log.LogInformation("Accessing AccountRepo Save function");
+            Log.LogInformation("Accessing AccountTypeRepo Save function");
             if (entity != null)
                 Upsert(entity);
             else
@@ -58,13 +58,13 @@ namespace QIQO.Accounts.Data
 
         public override void Delete(AccountTypeData entity)
         {
-            Log.LogInformation("Accessing AccountRepo Delete function");
+            Log.LogInformation("Accessing AccountTypeRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
-            Log.LogInformation("Accessing AccountRepo DeleteByCode function");
+            Log.LogInformation("Accessing AccountTypeRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del_c", pcol);
@@ -72,7 +72,7 @@ namespace QIQO.Accounts.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing AccountRepo Delete function");
+            Log.LogInformation("Accessing AccountTypeRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_account_del", Mapper.MapParamsForDelete(entityKey));
         }
 

@@ -7,5 +7,6 @@ namespace QIQO.Companies.Data
     {
         IEnumerable<AttributeData> GetAll(int entity_key, int entity_type_key);
     }
-
+    public interface IAttributeTypeRepository : IRepository<AttributeTypeData> { }
+    public interface IAuditLogRepository : IRepository<AuditLogData> { }
 }
