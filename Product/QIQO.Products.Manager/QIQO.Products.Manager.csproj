@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
+    <ProjectReference Include="..\..\Common\QIQO.MQ\QIQO.MQ.csproj" />
     <ProjectReference Include="..\QIQO.Products.Data\QIQO.Products.Data.csproj" />
     <ProjectReference Include="..\QIQO.Products.Domain\QIQO.Products.Domain.csproj" />
   </ItemGroup>

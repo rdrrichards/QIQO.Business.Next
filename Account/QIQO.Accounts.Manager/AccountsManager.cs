@@ -61,7 +61,7 @@ namespace QIQO.Accounts.Manager
 
         public Task UpdateAccountAsync(Account account)
         {
-            return Task.Factory.StartNew(() => _accountRepository.Save(null));
+            return Task.Factory.StartNew(() => _accountRepository.Save(_accountEntityService.Map(account)));
         }
     }
 }
