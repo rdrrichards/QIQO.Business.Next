@@ -17,7 +17,7 @@ namespace QIQO.Orders.Manager
     //public interface IAttributeEntityService : IEntityService<EntityAttribute, AttributeData> { }
     public interface IEntityTypeEntityService : IEntityService<EntityType, EntityTypeData> { }
     public interface IEntityRoleEntityService : IEntityService<EntityRole, EntityRoleData> { }
-    //public interface IFeeScheduleEntityService : IEntityService<FeeSchedule, FeeScheduleData> { }
+    public interface IFeeScheduleEntityService : IEntityService<FeeSchedule, FeeScheduleData> { }
     //public interface IAccountPersonEntityService : IEntityService<AccountPerson, PersonData> { }
     // public interface IEmployeeEntityService : IEntityService<Employee, PersonData> { }
 }
