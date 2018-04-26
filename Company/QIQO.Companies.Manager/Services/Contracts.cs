@@ -1,12 +1,10 @@
 ﻿
-using QIQO.Accounts.Data;
-using QIQO.Accounts.Domain;
+using QIQO.Companies.Data;
+using QIQO.Companies.Domain;
 using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Accounts.Manager
 {
-    public interface IAccountEntityService : IEntityService<Account, AccountData> { }
-    public interface IAccountTypeEntityService : IEntityService<AccountType, AccountTypeData> { }
     public interface IAddressEntityService : IEntityService<Address, AddressData> { }
     public interface IAddressTypeEntityService : IEntityService<AddressType, AddressTypeData> { }
     public interface ICommentEntityService : IEntityService<Comment, CommentData> { }
@@ -18,6 +16,5 @@ namespace QIQO.Accounts.Manager
     public interface IEntityTypeEntityService : IEntityService<EntityType, EntityTypeData> { }
     public interface IEntityRoleEntityService : IEntityService<EntityRole, EntityRoleData> { }
     public interface IFeeScheduleEntityService : IEntityService<FeeSchedule, FeeScheduleData> { }
-    public interface IAccountPersonEntityService : IEntityService<AccountPerson, PersonData> { }
     // public interface IEmployeeEntityService : IEntityService<Employee, PersonData> { }
 }

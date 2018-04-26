@@ -1,4 +1,4 @@
-﻿namespace QIQO.Companies.Data
+﻿namespace QIQO.Invoices.Data
 {
     public class EntityTypeData : CommonData
     {

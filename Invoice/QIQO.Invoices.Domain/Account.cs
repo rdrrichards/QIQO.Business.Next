@@ -1,6 +1,7 @@
 ﻿using QIQO.Business.Core.Contracts;
 using QIQO.Invoices.Data;
 using System;
+using System.Collections.Generic;
 
 namespace QIQO.Invoices.Domain
 {
@@ -44,11 +45,12 @@ namespace QIQO.Invoices.Domain
         public string UpdateUserID { get; private set; }        
         public DateTime UpdateDateTime { get; private set; }
         //public QIQOEntityType EntityType { get; private set; }        
-        //public List<Address> Addresses { get; private set; } = new List<Address>();        
+        public List<Address> Addresses { get; private set; } = new List<Address>();        
         //public List<EntityAttribute> AccountAttributes { get; private set; } = new List<EntityAttribute>();        
         //public List<FeeSchedule> FeeSchedules { get; private set; } = new List<FeeSchedule>();        
         //public List<AccountPerson> Employees { get; private set; } = new List<AccountPerson>();        
         //public List<Contact> Contacts { get; private set; } = new List<Contact>();        
-        //public List<Comment> Comments { get; private set; } = new List<Comment>();
+        public List<Comment> Comments { get; private set; } = new List<Comment>();
     }
+   
 }

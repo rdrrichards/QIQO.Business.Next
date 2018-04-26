@@ -16,17 +16,4 @@ namespace QIQO.Orders.Data
         public DateTime EndDate { get; set; }
         public string Comment { get; set; }
     }
-    public class EntityTypeData : CommonData
-    {
-        public int EntityTypeKey { get; set; }
-        public string EntityTypeCode { get; set; }
-        public string EntityTypeName { get; set; }
-    }
-    public class EntityRoleData : CommonData
-    {
-        public int EntityRoleKey { get; set; }
-        public string EntityRoleCode { get; set; }
-        public string EntityRoleName { get; set; }
-        public string EntityRoleDesc { get; set; }
-    }
 }

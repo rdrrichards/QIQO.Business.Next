@@ -1,4 +1,4 @@
-﻿namespace QIQO.Companies.Data
+﻿namespace QIQO.Orders.Data
 {
     public class EntityTypeData : CommonData
     {
