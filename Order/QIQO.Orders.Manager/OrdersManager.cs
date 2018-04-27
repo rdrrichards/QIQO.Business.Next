@@ -1,4 +1,7 @@
-﻿using QIQO.Orders.Domain;
+﻿using Microsoft.Extensions.Logging;
+using QIQO.MQ;
+using QIQO.Orders.Data;
+using QIQO.Orders.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +18,19 @@ namespace QIQO.Orders.Manager
     }
     public class OrdersManager : IOrdersManager
     {
+        private readonly IOrderHeaderRepository _orderRepository;
+        private readonly IOrderEntityService _orderEntityService;
+        private readonly ILogger<OrdersManager> _log;
+        private readonly IMQPublisher _mqPublisher;
+
+        public OrdersManager(ILogger<OrdersManager> logger, IMQPublisher mqPublisher,
+            IOrderHeaderRepository orderRepository, IOrderEntityService orderEntityService)
+        {
+            _log = logger;
+            _mqPublisher = mqPublisher;
+            _orderRepository = orderRepository;
+            _orderEntityService = orderEntityService;
+        }
         public Task DeleteOrderAsync(int companyKey)
         {
             throw new NotImplementedException();

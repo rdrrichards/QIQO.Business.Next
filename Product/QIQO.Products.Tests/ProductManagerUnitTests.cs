@@ -1,13 +1,76 @@
+using Microsoft.Extensions.Logging;
+using Moq;
+using QIQO.MQ;
+using QIQO.Products.Data;
+using QIQO.Products.Domain;
+using QIQO.Products.Manager;
 using Xunit;
 
 namespace QIQO.Products.Tests
 {
     public class ProductManagerUnitTests
     {
-        [Fact]
-        public void Test1()
-        {
+        private readonly Mock<ILogger<ProductsManager>> _mockLog;
+        private readonly Mock<IMQPublisher> _mqPublisher;
+        private readonly Mock<IProductRepository> _companyRepository;
+        private readonly Mock<IProductEntityService> _companyEntityService;
 
+        public ProductManagerUnitTests()
+        {
+            _mockLog = new Mock<ILogger<ProductsManager>>();
+            _mqPublisher = new Mock<IMQPublisher>();
+            _companyRepository = new Mock<IProductRepository>();
+            _companyEntityService = new Mock<IProductEntityService>();
+
+            _companyRepository.Setup(m => m.GetByCode(It.IsAny<string>(), It.IsAny<string>())).Returns(new ProductData());
+
+            _companyEntityService.Setup(m => m.Map(It.IsAny<ProductData>())).Returns(new Product(new ProductData()));
+            _companyEntityService.Setup(m => m.Map(It.IsAny<Product>())).Returns(new ProductData());
+        }
+        [Fact]
+        public async void ProductsManager_GetProductsAsync_IsEmpty()
+        {
+            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
+
+            var retVal = await sut.GetProductsAsync();
+
+            Assert.True(retVal.Count == 0);
+        }
+        [Fact]
+        public async void ProductsManager_GetProductAsync_NotNull()
+        {
+            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
+
+            var retVal = await sut.GetProductAsync("TEST");
+
+            Assert.NotNull(retVal);
+        }
+        [Fact]
+        public async void ProductsManager_DeleteProductAsync_DoesntFail()
+        {
+            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
+
+            await sut.DeleteProductAsync(0);
+
+            // Assert.NotNull(retVal);
+        }
+        [Fact]
+        public async void ProductsManager_SaveProductAsync_DoesntFail()
+        {
+            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
+
+            await sut.SaveProductAsync(new Product(new ProductData()));
+
+            // Assert.NotNull(retVal);
+        }
+        [Fact]
+        public async void ProductsManager_UpdateProductAsync_DoesntFail()
+        {
+            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
+
+            await sut.UpdateProductAsync(new Product(new ProductData()));
+
+            // Assert.NotNull(retVal);
         }
     }
 }

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\QIQO.MQ\QIQO.MQ.csproj" />
     <ProjectReference Include="..\QIQO.Invoices.Manager\QIQO.Invoices.Manager.csproj" />
   </ItemGroup>
 

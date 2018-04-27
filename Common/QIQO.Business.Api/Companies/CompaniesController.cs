@@ -18,7 +18,7 @@ namespace QIQO.Business.Api.Companies
         public async Task<IActionResult> Get()
         {
             // return Ok(new string[] { "Company1", "Company2" });
-            return Ok(await _companiesManager.GetCompanysAsync());
+            return Ok(await _companiesManager.GetCompaniesAsync());
         }
 
         // GET api/values/5

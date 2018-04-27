@@ -11,7 +11,7 @@ namespace QIQO.Orders.Manager
     public interface IAddressTypeEntityService : IEntityService<AddressType, AddressTypeData> { }
     public interface ICommentEntityService : IEntityService<Comment, CommentData> { }
     public interface ICommentTypeEntityService : IEntityService<CommentType, CommentTypeData> { }
-    //public interface ICompanyEntityService : IEntityService<Company, CompanyData> { }
+    public interface IOrderEntityService : IEntityService<Order, OrderHeaderData> { }
     //public interface IContactEntityService : IEntityService<Contact, ContactData> { }
     //public interface IContactTypeEntityService : IEntityService<ContactType, ContactTypeData> { }
     //public interface IAttributeEntityService : IEntityService<EntityAttribute, AttributeData> { }
