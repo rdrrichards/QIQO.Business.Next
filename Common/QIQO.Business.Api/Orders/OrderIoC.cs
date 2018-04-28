@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QIQO.Orders.Manager;
 using QIQO.Orders.Data;
+using Microsoft.Extensions.Hosting;
 
 namespace QIQO.Business.Api
 {
@@ -27,9 +28,9 @@ namespace QIQO.Business.Api
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
             //services.AddTransient<IHostedService, AccountAuditConsumerService>();
-            //services.AddTransient<IHostedService, AccountAddConsumerService>();
-            //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
-            //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
+            services.AddTransient<IHostedService, OrderAccountAddConsumerService>();
+            services.AddTransient<IHostedService, OrderAccountUpdateConsumerService>();
+            services.AddTransient<IHostedService, OrderAccountDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
