@@ -22,10 +22,10 @@ namespace QIQO.Products.Tests
             _companyRepository = new Mock<IProductRepository>();
             _companyEntityService = new Mock<IProductEntityService>();
 
-            _companyRepository.Setup(m => m.GetByCode(It.IsAny<string>(), It.IsAny<string>())).Returns(new ProductData());
+            _companyRepository.Setup(m => m.GetByCode(It.IsAny<string>(), It.IsAny<string>())).Returns(new ProductData { ProductCode = "TEST" });
 
-            _companyEntityService.Setup(m => m.Map(It.IsAny<ProductData>())).Returns(new Product(new ProductData()));
-            _companyEntityService.Setup(m => m.Map(It.IsAny<Product>())).Returns(new ProductData());
+            _companyEntityService.Setup(m => m.Map(It.IsAny<ProductData>())).Returns(new Product(new ProductData { ProductCode = "TEST" }));
+            _companyEntityService.Setup(m => m.Map(It.IsAny<Product>())).Returns(new ProductData { ProductCode = "TEST" });
         }
         [Fact]
         public async void ProductsManager_GetProductsAsync_IsEmpty()
@@ -59,7 +59,7 @@ namespace QIQO.Products.Tests
         {
             var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
 
-            await sut.SaveProductAsync(new Product(new ProductData()));
+            await sut.SaveProductAsync(new Product(new ProductData { ProductCode = "TEST" }));
 
             // Assert.NotNull(retVal);
         }
@@ -68,7 +68,7 @@ namespace QIQO.Products.Tests
         {
             var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
 
-            await sut.UpdateProductAsync(new Product(new ProductData()));
+            await sut.UpdateProductAsync(new Product(new ProductData { ProductCode = "TEST" }));
 
             // Assert.NotNull(retVal);
         }

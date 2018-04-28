@@ -5,6 +5,7 @@ using QIQO.MQ;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Invoices.Manager
 {
@@ -32,27 +33,33 @@ namespace QIQO.Invoices.Manager
         }
         public Task DeleteInvoiceAsync(int invoiceKey)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _invoiceRepository.DeleteByID(invoiceKey));
         }
 
         public Task<Invoice> GetInvoiceAsync(string invoiceCode)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return new Invoice(_invoiceRepository.GetByCode(invoiceCode, string.Empty)); // _accountRepository.GetAll();
+            });
         }
 
         public Task<List<Invoice>> GetInvoicesAsync()
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return _invoiceEntityService.Map(_invoiceRepository.GetAll());
+            });
         }
 
         public Task SaveInvoiceAsync(Invoice invoice)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                _mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
+            });
         }
 
         public Task UpdateInvoiceAsync(Invoice invoice)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _invoiceRepository.Save(_invoiceEntityService.Map(invoice)));
         }
     }
 }

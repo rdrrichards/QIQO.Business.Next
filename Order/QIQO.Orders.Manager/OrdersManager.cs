@@ -5,16 +5,17 @@ using QIQO.Orders.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Orders.Manager
 {
     public interface IOrdersManager
     {
-        Task SaveOrderAsync(Order company);
+        Task SaveOrderAsync(Order order);
         Task<List<Order>> GetOrdersAsync();
-        Task<Order> GetOrderAsync(string companyCode);
-        Task DeleteOrderAsync(int companyKey);
-        Task UpdateOrderAsync(Order company);
+        Task<Order> GetOrderAsync(string orderCode);
+        Task DeleteOrderAsync(int orderKey);
+        Task UpdateOrderAsync(Order order);
     }
     public class OrdersManager : IOrdersManager
     {
@@ -31,29 +32,34 @@ namespace QIQO.Orders.Manager
             _orderRepository = orderRepository;
             _orderEntityService = orderEntityService;
         }
-        public Task DeleteOrderAsync(int companyKey)
+        public Task DeleteOrderAsync(int orderKey)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _orderRepository.DeleteByID(orderKey));
         }
 
-        public Task<Order> GetOrderAsync(string companyCode)
+        public Task<Order> GetOrderAsync(string orderCode)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return new Order(_orderRepository.GetByCode(orderCode, string.Empty)); // _accountRepository.GetAll();
+            });
         }
 
         public Task<List<Order>> GetOrdersAsync()
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return _orderEntityService.Map(_orderRepository.GetAll());
+            });
         }
 
-        public Task SaveOrderAsync(Order company)
+        public Task SaveOrderAsync(Order order)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                _mqPublisher.Send(order, "order", "order.add", "order.add");
+            });
         }
-
-        public Task UpdateOrderAsync(Order company)
+        public Task UpdateOrderAsync(Order order)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _orderRepository.Save(_orderEntityService.Map(order)));
         }
     }
 }

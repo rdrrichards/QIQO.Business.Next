@@ -6,6 +6,7 @@ using QIQO.MQ;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Companies.Manager
 {
@@ -34,27 +35,33 @@ namespace QIQO.Companies.Manager
         }
         public Task DeleteCompanyAsync(int companyKey)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _companyRepository.DeleteByID(companyKey));
         }
 
         public Task<Company> GetCompanyAsync(string companyCode)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return new Company(_companyRepository.GetByCode(companyCode, string.Empty)); // _accountRepository.GetAll();
+            });
         }
 
         public Task<List<Company>> GetCompaniesAsync()
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                return _companyEntityService.Map(_companyRepository.GetAll());
+            });
         }
 
         public Task SaveCompanyAsync(Company company)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => {
+                _mqPublisher.Send(company, "company", "company.add", "company.add");
+            });
         }
 
         public Task UpdateCompanyAsync(Company company)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => _companyRepository.Save(_companyEntityService.Map(company)));
         }
     }
 }
