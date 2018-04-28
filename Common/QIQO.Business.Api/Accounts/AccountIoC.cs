@@ -29,10 +29,18 @@ namespace QIQO.Business.Api
         {
             services.AddTransient<IMQPublisher, MQPublisher>();
 
-            services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+            //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
+            //services.AddSingleton<IHostedService, AccountAddConsumerService>();
+            //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
+            //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
+
+            services.AddSingleton<IHostedService, AccountCompanyAddConsumerService>();
+            services.AddSingleton<IHostedService, AccountCompanyUpdateConsumerService>();
+            services.AddSingleton<IHostedService, AccountCompanyDeleteConsumerService>();
+
+            services.AddSingleton<IHostedService, AccountProductAddConsumerService>();
+            services.AddSingleton<IHostedService, AccountProductUpdateConsumerService>();
+            services.AddSingleton<IHostedService, AccountProductDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
