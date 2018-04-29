@@ -9,7 +9,7 @@ namespace QIQO.Business.Api
     public class AccountProductUpdateConsumerService : ConsumerServiceBase
     {
         public AccountProductUpdateConsumerService(ILogger<AccountProductUpdateConsumerService> logger, IConfiguration configuration)
-            : base(configuration, logger, QueueConstants.Product, QueueConstants.Update)
+            : base(configuration, logger, QueueConstants.Account, QueueConstants.Product, QueueConstants.Update)
         {
             _log.LogDebug($"{QueueConstants.Account}{QueueConstants.Product}{QueueConstants.Update}ConsumerService initiated");
         }

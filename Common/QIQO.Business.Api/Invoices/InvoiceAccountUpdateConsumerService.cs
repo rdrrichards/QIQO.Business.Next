@@ -9,7 +9,7 @@ namespace QIQO.Business.Api
     public class InvoiceAccountUpdateConsumerService : ConsumerServiceBase
     {
         public InvoiceAccountUpdateConsumerService(ILogger<InvoiceAccountUpdateConsumerService> logger, IConfiguration configuration)
-            : base(configuration, logger, QueueConstants.Account, QueueConstants.Update)
+            : base(configuration, logger, QueueConstants.Invoice, QueueConstants.Account, QueueConstants.Update)
         {
             _log.LogDebug($"{QueueConstants.Invoice}{QueueConstants.Account}{QueueConstants.Update}ConsumerService initiated");
         }
@@ -18,7 +18,7 @@ namespace QIQO.Business.Api
             _log.LogDebug($"{QueueConstants.Invoice}{QueueConstants.Account}{QueueConstants.Update}ConsumerService ExecuteAsync Called");
             await Listen(stoppingToken, (message) =>
             {
-                _log.LogDebug($"{QueueConstants.Invoice}{QueueConstants.Update} Message Received '{message}'");
+                _log.LogDebug($"{QueueConstants.Invoice}{QueueConstants.Account}{QueueConstants.Update} Message Received '{message}'");
             });
         }
     }

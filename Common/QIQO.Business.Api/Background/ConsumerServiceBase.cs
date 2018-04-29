@@ -27,7 +27,7 @@ namespace QIQO.Business.Api.Background
         protected readonly string queueName;
         protected readonly string routingKey;
 
-        public ConsumerServiceBase(IConfiguration configuration, ILogger<ConsumerServiceBase> logger, string section, string action)
+        public ConsumerServiceBase(IConfiguration configuration, ILogger<ConsumerServiceBase> logger, string exchange, string section, string action)
         {
             _log = logger;
             _section = section;
@@ -35,7 +35,7 @@ namespace QIQO.Business.Api.Background
             hostName = configuration[$"{confBase}:Server"];
             userName = configuration[$"{confBase}:User"];
             password = configuration[$"{confBase}:Password"];
-            exchangeName = configuration[$"{confBase}:{_section}:Exchange"];
+            exchangeName = exchange; // configuration[$"{confBase}:{_section}:Exchange"];
             queueName = configuration[$"{confBase}:{_section}:{_action}QueueName"];
             routingKey = configuration[$"{confBase}:{_section}:{_action}QueueName"];
         }

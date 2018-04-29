@@ -9,7 +9,7 @@ namespace QIQO.Business.Api
     public class InvoiceProductDeleteConsumerService : ConsumerServiceBase
     {
         public InvoiceProductDeleteConsumerService(ILogger<InvoiceProductDeleteConsumerService> logger, IConfiguration configuration)
-            : base(configuration, logger, QueueConstants.Product, QueueConstants.Delete)
+            : base(configuration, logger, QueueConstants.Invoice, QueueConstants.Product, QueueConstants.Delete)
         {
             _log.LogDebug($"{QueueConstants.Invoice}{QueueConstants.Product}{QueueConstants.Delete}ConsumerService initiated");
         }

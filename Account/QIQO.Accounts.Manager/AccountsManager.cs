@@ -55,7 +55,9 @@ namespace QIQO.Accounts.Manager
         public Task SaveAccountAsync(Account account)
         {
             return Task.Factory.StartNew(() => {
-                _mqPublisher.Send(account, "account", "account.add", "account.add");
+                _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
+                _mqPublisher.Send(account, "Order", "account.add", "account.add");
+                // _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
             });
         }
 
