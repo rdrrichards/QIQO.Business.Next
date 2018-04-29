@@ -31,6 +31,12 @@ namespace QIQO.Business.Api
             services.AddTransient<IHostedService, OrderAccountAddConsumerService>();
             services.AddTransient<IHostedService, OrderAccountUpdateConsumerService>();
             services.AddTransient<IHostedService, OrderAccountDeleteConsumerService>();
+            services.AddTransient<IHostedService, OrderCompanyAddConsumerService>();
+            services.AddTransient<IHostedService, OrderCompanyUpdateConsumerService>();
+            services.AddTransient<IHostedService, OrderCompanyDeleteConsumerService>();
+            services.AddTransient<IHostedService, OrderProductAddConsumerService>();
+            services.AddTransient<IHostedService, OrderProductUpdateConsumerService>();
+            services.AddTransient<IHostedService, OrderProductDeleteConsumerService>();
         }
         internal static void RegisterMappers(IServiceCollection services)
         {
