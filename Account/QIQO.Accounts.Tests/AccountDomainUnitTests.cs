@@ -27,7 +27,7 @@ namespace QIQO.Accounts.Tests
             var sut = new Account(data);
             Assert.True(sut.AccountKey == 1);
             Assert.True(sut.CompanyKey == 1);
-            Assert.True(sut.AccountType == QIQOAccountType.TestAccount);
+            Assert.True(sut.AccountType == QIQOAccountType.Individual);
             Assert.True(sut.AccountCode == "TEST");
             Assert.True(sut.AccountName == "TEST");
             Assert.True(sut.AccountDesc == "TEST");

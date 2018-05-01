@@ -2,7 +2,7 @@
 {
     public enum QIQOAccountType
     {
-        TestAccount = 1,
+        Individual = 1,
         Business = 2
     }
 }
