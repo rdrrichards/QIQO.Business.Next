@@ -8,7 +8,7 @@ namespace QIQO.Invoices.Data
 {
     public class InvoiceStatusRepository : RepositoryBase<InvoiceStatusData>, IInvoiceStatusRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
 
         public InvoiceStatusRepository(IInvoiceDbContext dbc, IInvoiceStatusMap map, ILogger<InvoiceStatusData> log) : base(log, map)
         {

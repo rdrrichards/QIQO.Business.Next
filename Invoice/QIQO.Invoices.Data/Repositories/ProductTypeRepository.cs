@@ -8,7 +8,7 @@ namespace QIQO.Invoices.Data
 {
     public class ProductTypeRepository : RepositoryBase<ProductTypeData>, IProductTypeRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
 
         public ProductTypeRepository(IInvoiceDbContext dbc, IProductTypeMap map, ILogger<ProductTypeData> log) : base(log, map)
         {

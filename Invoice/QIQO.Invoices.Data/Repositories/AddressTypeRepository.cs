@@ -9,7 +9,7 @@ namespace QIQO.Invoices.Data
     public class AddressTypeRepository : RepositoryBase<AddressTypeData>,
                                      IAddressTypeRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
         public AddressTypeRepository(IInvoiceDbContext dbc, IAddressTypeMap map, ILogger<AddressTypeData> log) : base(log, map)
         {
             entityContext = dbc;

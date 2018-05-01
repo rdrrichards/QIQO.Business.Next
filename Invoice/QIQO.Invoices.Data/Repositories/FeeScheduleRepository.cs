@@ -8,7 +8,7 @@ namespace QIQO.Invoices.Data
 {
     public class FeeScheduleRepository : RepositoryBase<FeeScheduleData>, IFeeScheduleRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
 
         public FeeScheduleRepository(IInvoiceDbContext dbc, IFeeScheduleMap map, ILogger<FeeScheduleData> log) : base(log, map)
         {

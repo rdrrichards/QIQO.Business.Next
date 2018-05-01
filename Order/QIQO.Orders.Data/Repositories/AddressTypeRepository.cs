@@ -9,7 +9,7 @@ namespace QIQO.Orders.Data
     public class AddressTypeRepository : RepositoryBase<AddressTypeData>,
                                      IAddressTypeRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
         public AddressTypeRepository(IOrderDbContext dbc, IAddressTypeMap map, ILogger<AddressTypeData> log) : base(log, map)
         {
             entityContext = dbc;

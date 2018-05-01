@@ -8,7 +8,7 @@ namespace QIQO.Companies.Data
 {
     public class PersonRepository : RepositoryBase<PersonData>, IPersonRepository
     {
-        private ICompanyDbContext entityContext;
+        private readonly ICompanyDbContext entityContext;
 
         public PersonRepository(ICompanyDbContext dbc, IPersonMap map, ILogger<PersonData> log) : base(log, map)
         {

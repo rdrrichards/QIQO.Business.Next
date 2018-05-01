@@ -9,7 +9,7 @@ namespace QIQO.Invoices.Data
     public class AccountRepository : RepositoryBase<AccountData>,
                                      IAccountRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
 
         public AccountRepository(IInvoiceDbContext dbc, IAccountMap map, ILogger<AccountData> log) : base(log, map)
         {

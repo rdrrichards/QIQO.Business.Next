@@ -8,7 +8,7 @@ namespace QIQO.Companies.Data
 {
     public class CommentRepository : RepositoryBase<CommentData>, ICommentRepository
     {
-        private ICompanyDbContext entityContext;
+        private readonly ICompanyDbContext entityContext;
 
         public CommentRepository(ICompanyDbContext dbc, ICommentMap map, ILogger<CommentData> log) : base(log, map)
         {

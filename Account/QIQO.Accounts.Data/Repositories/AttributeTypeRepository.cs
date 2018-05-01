@@ -9,7 +9,7 @@ namespace QIQO.Accounts.Data
     public class AttributeTypeRepository : RepositoryBase<AttributeTypeData>,
                                      IAttributeTypeRepository
     {
-        private IAccountDbContext entityContext;
+        private readonly IAccountDbContext entityContext;
         public AttributeTypeRepository(IAccountDbContext dbc, IAttributeTypeMap map, ILogger<AttributeTypeData> log) : base(log, map)
         {
             entityContext = dbc;

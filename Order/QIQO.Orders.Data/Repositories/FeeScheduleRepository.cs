@@ -8,7 +8,7 @@ namespace QIQO.Orders.Data
 {
     public class FeeScheduleRepository : RepositoryBase<FeeScheduleData>, IFeeScheduleRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
 
         public FeeScheduleRepository(IOrderDbContext dbc, IFeeScheduleMap map, ILogger<FeeScheduleData> log) : base(log, map)
         {

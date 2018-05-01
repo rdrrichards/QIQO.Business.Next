@@ -9,7 +9,7 @@ namespace QIQO.Companies.Data
     public class AuditLogRepository : RepositoryBase<AuditLogData>,
                                      IAuditLogRepository
     {
-        private ICompanyDbContext entityContext;
+        private readonly ICompanyDbContext entityContext;
         public AuditLogRepository(ICompanyDbContext dbc, IAuditLogMap map, ILogger<AuditLogData> log) : base(log, map)
         {
             entityContext = dbc;

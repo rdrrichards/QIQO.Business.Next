@@ -8,7 +8,7 @@ namespace QIQO.Orders.Data
 {
     public class ProductTypeRepository : RepositoryBase<ProductTypeData>, IProductTypeRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
 
         public ProductTypeRepository(IOrderDbContext dbc, IProductTypeMap map, ILogger<ProductTypeData> log) : base(log, map)
         {

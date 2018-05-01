@@ -8,7 +8,7 @@ namespace QIQO.Companies.Data
 {
     public class CompanyRepository : RepositoryBase<CompanyData>, ICompanyRepository
     {
-        private ICompanyDbContext entityContext;
+        private readonly ICompanyDbContext entityContext;
 
         public CompanyRepository(ICompanyDbContext dbc, ICompanyMap map, ILogger<CompanyData> log) : base(log, map)
         {

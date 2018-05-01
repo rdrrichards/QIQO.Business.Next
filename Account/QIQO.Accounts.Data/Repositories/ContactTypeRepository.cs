@@ -9,7 +9,7 @@ namespace QIQO.Accounts.Data
     public class ContactTypeRepository : RepositoryBase<ContactTypeData>,
                                      IContactTypeRepository
     {
-        private IAccountDbContext entityContext;
+        private readonly IAccountDbContext entityContext;
         public ContactTypeRepository(IAccountDbContext dbc, IContactTypeMap map, ILogger<ContactTypeData> log) : base(log, map)
         {
             entityContext = dbc;

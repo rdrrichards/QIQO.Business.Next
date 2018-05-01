@@ -9,7 +9,7 @@ namespace QIQO.Orders.Data
     public class AddressPostalRepository : RepositoryBase<AddressPostalData>,
                                      IAddressPostalRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
         public AddressPostalRepository(IOrderDbContext dbc, IAddressPostalMap map, ILogger<AddressPostalData> log) : base(log, map)
         {
             entityContext = dbc;

@@ -9,7 +9,7 @@ namespace QIQO.Orders.Data
     public class CommentTypeRepository : RepositoryBase<CommentTypeData>,
                                      ICommentTypeRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
         public CommentTypeRepository(IOrderDbContext dbc, ICommentTypeMap map, ILogger<CommentTypeData> log) : base(log, map)
         {
             entityContext = dbc;

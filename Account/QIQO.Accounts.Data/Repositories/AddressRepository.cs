@@ -8,7 +8,7 @@ namespace QIQO.Accounts.Data
 {
     public class AddressRepository : RepositoryBase<AddressData>, IAddressRepository
     {
-        private IAccountDbContext entityContext;
+        private readonly IAccountDbContext entityContext;
 
         public AddressRepository(IAccountDbContext dbc, IAddressMap map, ILogger<AddressData> log) : base(log, map)
         {

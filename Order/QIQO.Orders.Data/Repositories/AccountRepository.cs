@@ -9,7 +9,7 @@ namespace QIQO.Orders.Data
     public class AccountRepository : RepositoryBase<AccountData>,
                                      IAccountRepository
     {
-        private IOrderDbContext entityContext;
+        private readonly IOrderDbContext entityContext;
 
         public AccountRepository(IOrderDbContext dbc, IAccountMap map, ILogger<AccountData> log) : base(log, map)
         {

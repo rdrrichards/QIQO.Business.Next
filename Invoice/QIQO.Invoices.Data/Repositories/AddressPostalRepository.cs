@@ -9,7 +9,7 @@ namespace QIQO.Invoices.Data
     public class AddressPostalRepository : RepositoryBase<AddressPostalData>,
                                      IAddressPostalRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
         public AddressPostalRepository(IInvoiceDbContext dbc, IAddressPostalMap map, ILogger<AddressPostalData> log) : base(log, map)
         {
             entityContext = dbc;

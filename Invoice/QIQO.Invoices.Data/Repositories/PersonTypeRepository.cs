@@ -9,7 +9,7 @@ namespace QIQO.Invoices.Data
     public class PersonTypeRepository : RepositoryBase<PersonTypeData>,
                                      IPersonTypeRepository
     {
-        private IInvoiceDbContext entityContext;
+        private readonly IInvoiceDbContext entityContext;
         public PersonTypeRepository(IInvoiceDbContext dbc, IPersonTypeMap map, ILogger<PersonTypeData> log) : base(log, map)
         {
             entityContext = dbc;
