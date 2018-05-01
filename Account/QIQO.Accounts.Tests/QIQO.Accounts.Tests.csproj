@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />
+    <ProjectReference Include="..\QIQO.Accounts.Domain\QIQO.Accounts.Domain.csproj" />
     <ProjectReference Include="..\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj" />
   </ItemGroup>
 

@@ -22,6 +22,7 @@ namespace QIQO.Accounts.Domain
         }
         public Account(AccountData accountData)
         {
+            AccountKey = accountData.AccountKey;
             CompanyKey = accountData.CompanyKey;
             AccountType = (QIQOAccountType)accountData.AccountTypeKey;
             AccountCode = accountData.AccountCode;
@@ -30,6 +31,10 @@ namespace QIQO.Accounts.Domain
             AccountDba = accountData.AccountDba;
             AccountStartDate = accountData.AccountStartDate;
             AccountEndDate = accountData.AccountEndDate;
+            AddedDateTime = accountData.AuditAddDatetime;
+            AddedUserID = accountData.AuditAddUserId;
+            UpdateDateTime = accountData.AuditUpdateDatetime;
+            UpdateUserID = accountData.AuditUpdateUserId;
         }
 
         public int AccountKey { get; private set; }
