@@ -25,5 +25,45 @@ namespace QIQO.Accounts.Tests
 
             sut.Delete(new AccountData { AccountCode = "TEST", AccountKey = 1 } );
         }
+        [Fact]
+        public void AccountDeleteByCodeTest()
+        {
+            var _accountMapper = new Mock<IAccountMap>();
+            var _accountDataLog = new Mock<ILogger<AccountData>>();
+
+            var sut = new AccountRepository(_accountDbContext.Object, _accountMapper.Object, _accountDataLog.Object);
+
+            sut.DeleteByCode("TEST");
+        }
+        [Fact]
+        public void AccountDeleteByIDTest()
+        {
+            var _accountMapper = new Mock<IAccountMap>();
+            var _accountDataLog = new Mock<ILogger<AccountData>>();
+
+            var sut = new AccountRepository(_accountDbContext.Object, _accountMapper.Object, _accountDataLog.Object);
+
+            sut.DeleteByID(0);
+        }
+        [Fact]
+        public void AccountInsertTest()
+        {
+            var _accountMapper = new Mock<IAccountMap>();
+            var _accountDataLog = new Mock<ILogger<AccountData>>();
+
+            var sut = new AccountRepository(_accountDbContext.Object, _accountMapper.Object, _accountDataLog.Object);
+
+            sut.Insert(new AccountData { AccountCode = "TEST", AccountKey = 1 });
+        }
+        [Fact]
+        public void AccountSaveTest()
+        {
+            var _accountMapper = new Mock<IAccountMap>();
+            var _accountDataLog = new Mock<ILogger<AccountData>>();
+
+            var sut = new AccountRepository(_accountDbContext.Object, _accountMapper.Object, _accountDataLog.Object);
+
+            sut.Save(new AccountData { AccountCode = "TEST", AccountKey = 1 });
+        }
     }
 }
