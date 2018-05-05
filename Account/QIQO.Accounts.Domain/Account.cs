@@ -20,6 +20,16 @@ namespace QIQO.Accounts.Domain
             AccountStartDate = startDate;
             AccountEndDate = endDate ?? DateTime.Now.AddYears(99);
         }
+        public Account(QIQOAccountType accountType, string accountName,
+            string accountDesc, string accountDba, DateTime startDate, DateTime? endDate)
+        {
+            AccountType = accountType;
+            AccountName = accountName;
+            AccountDesc = accountDesc;
+            AccountDba = accountDba;
+            AccountStartDate = startDate;
+            AccountEndDate = endDate ?? DateTime.Now.AddYears(99);
+        }
         public Account(AccountData accountData)
         {
             AccountKey = accountData.AccountKey;

@@ -33,6 +33,10 @@ namespace QIQO.Orders.Domain
             OrderNumber = orderNumber;
             OrderEntryDate = orderEntryDate;
         }
+        public Order(DateTime orderEntryDate)
+        {
+            OrderEntryDate = orderEntryDate;
+        }
         public int OrderKey { get; private set; }
         public int AccountKey { get; private set; }
         public Account Account { get; private set; }

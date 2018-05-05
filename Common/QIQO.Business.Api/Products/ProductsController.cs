@@ -48,7 +48,7 @@ namespace QIQO.Business.Api.Products
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]ProductUpdateViewModel productUpdateViewModel)
         {
-            await _productsManager.UpdateProductAsync(new Product(productUpdateViewModel.ProductCode, productUpdateViewModel.ProductName, productUpdateViewModel.ProductDesc,
+            await _productsManager.UpdateProductAsync(new Product(productUpdateViewModel.ProductName, productUpdateViewModel.ProductDesc,
                     productUpdateViewModel.ProductNameShort, productUpdateViewModel.ProductNameLong, productUpdateViewModel.ProductImagePath));
             return Ok();
         }

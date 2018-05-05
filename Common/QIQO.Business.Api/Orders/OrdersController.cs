@@ -47,7 +47,7 @@ namespace QIQO.Business.Api.Orders
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]OrderUpdateViewModel orderUpdateViewModel)
         {
-            await _ordersManager.UpdateOrderAsync(new Order(orderUpdateViewModel.OrderNumber, orderUpdateViewModel.OrderEntryDate));
+            await _ordersManager.UpdateOrderAsync(new Order(orderUpdateViewModel.OrderEntryDate));
             return Ok();
         }
 

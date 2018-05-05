@@ -31,6 +31,14 @@ namespace QIQO.Products.Domain
             ProductNameLong = productNameLong;
             ProductImagePath = productImagePath;
         }
+        public Product(string productName, string productDesc, string productNameShort, string productNameLong, string productImagePath)
+        {
+            ProductName = productName;
+            ProductDesc = productDesc;
+            ProductNameShort = productNameShort;
+            ProductNameLong = productNameLong;
+            ProductImagePath = productImagePath;
+        }
         public int ProductKey { get; private set; }        
         public QIQOProductType ProductType { get; private set; } = QIQOProductType.Sweet9;        
         // public ProductType ProductTypeData { get; private set; } = new ProductType();        
