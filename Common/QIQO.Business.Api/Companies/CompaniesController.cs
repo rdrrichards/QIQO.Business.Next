@@ -48,8 +48,7 @@ namespace QIQO.Business.Api.Companies
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]CompanyUpdateViewModel companyUpdateViewModel)
         {
-            await _companiesManager.UpdateCompanyAsync(new Company(companyUpdateViewModel.CompanyCode,
-                    companyUpdateViewModel.CompanyName, companyUpdateViewModel.CompanyDesc));
+            await _companiesManager.UpdateCompanyAsync(new Company(companyUpdateViewModel.CompanyName, companyUpdateViewModel.CompanyDesc));
             return Ok();
         }
 

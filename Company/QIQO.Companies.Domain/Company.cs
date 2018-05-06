@@ -24,6 +24,11 @@ namespace QIQO.Companies.Domain
             CompanyName = companyName;
             CompanyDesc = companyDesc;
         }
+        public Company(string companyName, string companyDesc)
+        {
+            CompanyName = companyName;
+            CompanyDesc = companyDesc;
+        }
         public int CompanyKey { get; private set; }
         public string CompanyCode { get; private set; }
         public string CompanyName { get; private set; }
