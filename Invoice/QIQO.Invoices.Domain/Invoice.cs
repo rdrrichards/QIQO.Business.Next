@@ -36,6 +36,11 @@ namespace QIQO.Invoices.Domain
             InvoiceNumber = invoiceNumber;
             InvoiceEntryDate = invoiceEntryDate;
         }
+        public Invoice(int invoiceKey, DateTime invoiceEntryDate)
+        {
+            InvoiceKey = invoiceKey;
+            InvoiceEntryDate = invoiceEntryDate;
+        }
         public int InvoiceKey { get; private set; }        
         public int FromEntityKey { get; private set; }        
         public int AccountKey { get; private set; }        

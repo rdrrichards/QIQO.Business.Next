@@ -2,12 +2,12 @@
 
 namespace QIQO.Business.Api.Products
 {
-    public class ProductAddViewModel
+    public class ProductUpdateViewModel
     {
         [Required]
-        public int ProductType { get; set; }
+        public int ProductKey { get; set; }
         [Required]
-        public string ProductCode { get; set; }
+        public int ProductType { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]

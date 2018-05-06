@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace QIQO.Business.Api.Orders
 {
-    public class OrderAddViewModel
+    public class OrderUpdateViewModel
     {
         [Required]
-        public string OrderNumber { get; set; }
+        public int OrderKey { get; set; }
         public DateTime OrderEntryDate { get; set; }
-        public List<OrderItemAddViewModel> OrderItems { get; set; }
+        public List<OrderItemUpdateViewModel> OrderItems { get; set; }
     }
 }
