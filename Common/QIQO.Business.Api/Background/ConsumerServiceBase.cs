@@ -43,34 +43,47 @@ namespace QIQO.Business.Api.Background
 
         protected Task Listen(CancellationToken stoppingToken, Action<object> listenAction)
         {
+
             return Task.Factory.StartNew(() =>
             {
                 _log.LogDebug($"{_section}{_action}ConsumerService -> ExecuteAsync started");
                 stoppingToken.Register(() => _log.LogDebug($"{_section}{_action}ConsumerService background task is stopping"));
 
                 _factory = new ConnectionFactory { HostName = hostName, UserName = userName, Password = password };
-                using (_connection = _factory.CreateConnection())
+
+                try
                 {
-                    using (var channel = _connection.CreateModel())
+                    using (_connection = _factory.CreateConnection())
                     {
-                        channel.ExchangeDeclare(exchangeName, topic);
-                        channel.QueueDeclare(queueName, true, false, false, null);
-                        channel.QueueBind(queueName, exchangeName, routingKey);
-
-                        channel.BasicQos(0, 10, false);
-                        var subscription = new Subscription(channel, queueName, false);
-
-                        while (!stoppingToken.IsCancellationRequested)
+                        using (var channel = _connection.CreateModel())
                         {
-                            var deliveryArguments = subscription.Next();
-                            var message = deliveryArguments.Body.DeSerializeText();
+                            channel.ExchangeDeclare(exchangeName, topic);
+                            channel.QueueDeclare(queueName, true, false, false, null);
+                            channel.QueueBind(queueName, exchangeName, routingKey);
 
-                            listenAction.Invoke(message);
-                            subscription.Ack(deliveryArguments);
+                            channel.BasicQos(0, 10, false);
+                            var subscription = new Subscription(channel, queueName, false);
+
+                            while (!stoppingToken.IsCancellationRequested)
+                            {
+                                var deliveryArguments = subscription.Next();
+                                var message = deliveryArguments.Body.DeSerializeText();
+
+                                listenAction.Invoke(message);
+                                subscription.Ack(deliveryArguments);
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    _log.LogError("Error while attempting to connect to the queue service; see below. Ensure that the service is running.");
+                    _log.LogError(e.ToString());
+                    //return Task.FromException(e);
+                }
+
             });
+
         }
     }
 }
