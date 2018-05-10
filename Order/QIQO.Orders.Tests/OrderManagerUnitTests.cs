@@ -63,14 +63,5 @@ namespace QIQO.Orders.Tests
 
             // Assert.NotNull(retVal);
         }
-        [Fact]
-        public async void OrdersManager_UpdateOrderAsync_DoesntFail()
-        {
-            var sut = new OrdersManager(_mockLog.Object, _mqPublisher.Object, _orderRepository.Object, _orderEntityService.Object);
-
-            await sut.UpdateOrderAsync(new Order(new OrderHeaderData()));
-
-            // Assert.NotNull(retVal);
-        }
     }
 }

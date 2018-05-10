@@ -63,14 +63,5 @@ namespace QIQO.Invoices.Tests
 
             // Assert.NotNull(retVal);
         }
-        [Fact]
-        public async void InvoicesManager_UpdateInvoiceAsync_DoesntFail()
-        {
-            var sut = new InvoicesManager(_mockLog.Object, _mqPublisher.Object, _invoiceRepository.Object, _invoiceEntityService.Object);
-
-            await sut.UpdateInvoiceAsync(new Invoice(new InvoiceData()));
-
-            // Assert.NotNull(retVal);
-        }
     }
 }

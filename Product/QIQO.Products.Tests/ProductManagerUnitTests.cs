@@ -63,14 +63,5 @@ namespace QIQO.Products.Tests
 
             // Assert.NotNull(retVal);
         }
-        [Fact]
-        public async void ProductsManager_UpdateProductAsync_DoesntFail()
-        {
-            var sut = new ProductsManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
-
-            await sut.UpdateProductAsync(new Product(new ProductData { ProductCode = "TEST" }));
-
-            // Assert.NotNull(retVal);
-        }
     }
 }

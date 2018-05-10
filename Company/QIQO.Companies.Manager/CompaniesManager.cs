@@ -16,7 +16,6 @@ namespace QIQO.Companies.Manager
         Task<List<Company>> GetCompaniesAsync();
         Task<Company> GetCompanyAsync(string companyCode);
         Task DeleteCompanyAsync(int companyKey);
-        Task UpdateCompanyAsync(Company company);
     }
     public class CompaniesManager : ICompaniesManager
     {
@@ -55,13 +54,9 @@ namespace QIQO.Companies.Manager
         public Task SaveCompanyAsync(Company company)
         {
             return Task.Factory.StartNew(() => {
+                _companyRepository.Save(_companyEntityService.Map(company));
                 _mqPublisher.Send(company, "company", "company.add", "company.add");
             });
-        }
-
-        public Task UpdateCompanyAsync(Company company)
-        {
-            return Task.Factory.StartNew(() => _companyRepository.Save(_companyEntityService.Map(company)));
         }
     }
 }

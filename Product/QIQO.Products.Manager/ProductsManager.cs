@@ -14,7 +14,6 @@ namespace QIQO.Products.Manager
         Task<List<Product>> GetProductsAsync();
         Task<Product> GetProductAsync(string productCode);
         Task DeleteProductAsync(int productKey);
-        Task UpdateProductAsync(Product product);
     }
     public class ProductsManager : IProductsManager
     {
@@ -53,13 +52,9 @@ namespace QIQO.Products.Manager
         public Task SaveProductAsync(Product product)
         {
             return Task.Factory.StartNew(() => {
+                _productRepository.Save(_productEntityService.Map(product));
                 _mqPublisher.Send(product, "product", "product.add", "product.add");
             });
-        }
-
-        public Task UpdateProductAsync(Product product)
-        {
-            return Task.Factory.StartNew(() => _productRepository.Save(_productEntityService.Map(product)));
         }
     }
 }

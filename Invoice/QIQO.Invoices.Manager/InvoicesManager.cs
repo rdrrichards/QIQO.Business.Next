@@ -14,7 +14,6 @@ namespace QIQO.Invoices.Manager
         Task<List<Invoice>> GetInvoicesAsync();
         Task<Invoice> GetInvoiceAsync(string invoiceCode);
         Task DeleteInvoiceAsync(int invoiceKey);
-        Task UpdateInvoiceAsync(Invoice invoice);
     }
     public class InvoicesManager : IInvoicesManager
     {
@@ -53,13 +52,9 @@ namespace QIQO.Invoices.Manager
         public Task SaveInvoiceAsync(Invoice invoice)
         {
             return Task.Factory.StartNew(() => {
+                _invoiceRepository.Save(_invoiceEntityService.Map(invoice));
                 _mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
             });
-        }
-
-        public Task UpdateInvoiceAsync(Invoice invoice)
-        {
-            return Task.Factory.StartNew(() => _invoiceRepository.Save(_invoiceEntityService.Map(invoice)));
         }
     }
 }

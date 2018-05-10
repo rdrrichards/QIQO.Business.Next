@@ -47,7 +47,7 @@ namespace QIQO.Business.Api.Invoices
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]InvoiceUpdateViewModel invoiceUpdateViewModel)
         {
-            await _invoicesManager.UpdateInvoiceAsync(new Invoice(invoiceUpdateViewModel.InvoiceKey, invoiceUpdateViewModel.InvoiceEntryDate));
+            await _invoicesManager.SaveInvoiceAsync(new Invoice(invoiceUpdateViewModel.InvoiceKey, invoiceUpdateViewModel.InvoiceEntryDate));
             return Ok();
         }
 

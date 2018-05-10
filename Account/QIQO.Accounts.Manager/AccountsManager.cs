@@ -14,7 +14,6 @@ namespace QIQO.Accounts.Manager
         Task<List<Account>> GetAccountsAsync();
         Task<Account> GetAccountAsync(string accountCode);
         Task DeleteAccountAsync(int accountKey);
-        Task UpdateAccountAsync(Account account);
     }
     public class AccountsManager : IAccountsManager
     {
@@ -55,15 +54,11 @@ namespace QIQO.Accounts.Manager
         public Task SaveAccountAsync(Account account)
         {
             return Task.Factory.StartNew(() => {
+                _accountRepository.Save(_accountEntityService.Map(account));
                 _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
                 _mqPublisher.Send(account, "Order", "account.add", "account.add");
                 // _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
             });
-        }
-
-        public Task UpdateAccountAsync(Account account)
-        {
-            return Task.Factory.StartNew(() => _accountRepository.Save(_accountEntityService.Map(account)));
         }
     }
 }

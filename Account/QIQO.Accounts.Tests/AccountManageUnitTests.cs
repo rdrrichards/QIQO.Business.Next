@@ -63,14 +63,5 @@ namespace QIQO.Accounts.Tests
 
             // Assert.NotNull(retVal);
         }
-        [Fact]
-        public async void AccountsManager_UpdateAccountAsync_DoesntFail()
-        {
-            var sut = new AccountsManager(_mockLog.Object, _mqPublisher.Object, _accountRepository.Object, _accountEntityService.Object);
-
-            await sut.UpdateAccountAsync(new Account(new AccountData()));
-
-            // Assert.NotNull(retVal);
-        }
     }
 }

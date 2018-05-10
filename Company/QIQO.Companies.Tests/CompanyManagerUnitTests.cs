@@ -64,14 +64,5 @@ namespace QIQO.Companies.Tests
 
             // Assert.NotNull(retVal);
         }
-        [Fact]
-        public async void CompaniesManager_UpdateCompanyAsync_DoesntFail()
-        {
-            var sut = new CompaniesManager(_mockLog.Object, _mqPublisher.Object, _companyRepository.Object, _companyEntityService.Object);
-
-            await sut.UpdateCompanyAsync(new Company(new CompanyData()));
-
-            // Assert.NotNull(retVal);
-        }
     }
 }

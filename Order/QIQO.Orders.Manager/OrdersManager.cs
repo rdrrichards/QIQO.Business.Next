@@ -15,7 +15,6 @@ namespace QIQO.Orders.Manager
         Task<List<Order>> GetOrdersAsync();
         Task<Order> GetOrderAsync(string orderCode);
         Task DeleteOrderAsync(int orderKey);
-        Task UpdateOrderAsync(Order order);
     }
     public class OrdersManager : IOrdersManager
     {
@@ -54,12 +53,9 @@ namespace QIQO.Orders.Manager
         public Task SaveOrderAsync(Order order)
         {
             return Task.Factory.StartNew(() => {
+                _orderRepository.Save(_orderEntityService.Map(order));
                 _mqPublisher.Send(order, "order", "order.add", "order.add");
             });
-        }
-        public Task UpdateOrderAsync(Order order)
-        {
-            return Task.Factory.StartNew(() => _orderRepository.Save(_orderEntityService.Map(order)));
         }
     }
 }

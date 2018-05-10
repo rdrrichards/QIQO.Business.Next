@@ -48,7 +48,7 @@ namespace QIQO.Business.Api.Accounts
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]AccountUpdateViewModel accountUpdateViewModel)
         {
-            await _accountsManager.UpdateAccountAsync(new Account(accountUpdateViewModel.AccountType, 
+            await _accountsManager.SaveAccountAsync(new Account(accountUpdateViewModel.AccountType, 
                     accountUpdateViewModel.AccountName, accountUpdateViewModel.AccountDesc, accountUpdateViewModel.AccountDba, accountUpdateViewModel.AccountStartDate,
                     accountUpdateViewModel.AccountEndDate));
             return Ok();
