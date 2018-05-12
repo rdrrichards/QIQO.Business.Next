@@ -1,21 +1,16 @@
-﻿using QIQO.Orders.Domain;
-using System;
+﻿using QIQO.Companies.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace QIQO.Business.Api.Orders
+namespace QIQO.Business.Api.Companies
 {
-    public class OrderAddressUpdateViewModel : OrderAddressBaseViewModel
+    public class CompanyAddressBaseViewModel
     {
         [Required]
-        public string UpdateUserID { get; set; }
-        public DateTime UpdateDateTime { get; set; }
-    }
-    public class OrderAddressBaseViewModel
-    {
+        public QIQOAddressType AddressType { get; set; } = QIQOAddressType.Billing;
         [Required]
-        public int AddressKey { get; set; }
+        public int EntityKey { get; set; }
         [Required]
-        public QIQOAddressType AddressType { get; set; }
+        public QIQOEntityType EntityType => QIQOEntityType.Company;
         [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

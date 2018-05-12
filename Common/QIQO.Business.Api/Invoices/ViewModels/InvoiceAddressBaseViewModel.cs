@@ -1,16 +1,9 @@
-﻿using QIQO.Orders.Domain;
-using System;
+﻿using QIQO.Invoices.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace QIQO.Business.Api.Orders
+namespace QIQO.Business.Api.Invoices
 {
-    public class OrderAddressUpdateViewModel : OrderAddressBaseViewModel
-    {
-        [Required]
-        public string UpdateUserID { get; set; }
-        public DateTime UpdateDateTime { get; set; }
-    }
-    public class OrderAddressBaseViewModel
+    public class InvoiceAddressBaseViewModel
     {
         [Required]
         public int AddressKey { get; set; }
