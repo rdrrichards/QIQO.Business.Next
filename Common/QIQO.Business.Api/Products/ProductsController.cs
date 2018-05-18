@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Products
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProductsController : Controller
     {
         private readonly IProductsManager _productsManager;

@@ -5,15 +5,26 @@ using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Accounts
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// Account management controller
+    /// </summary>
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AccountsController : Controller
     {
         private readonly IAccountsManager _accountsManager;
-
+        /// <summary>
+        /// Controller entry point
+        /// </summary>
+        /// <param name="accountsManager"></param>
         public AccountsController(IAccountsManager accountsManager)
         {
             _accountsManager = accountsManager;
         }
+        /// <summary>
+        /// This gets a list of accounts
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -22,6 +33,11 @@ namespace QIQO.Business.Api.Accounts
         }
 
         // GET api/values/5
+        /// <summary>
+        /// This will retreive one account with the account id passed in
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -29,6 +45,11 @@ namespace QIQO.Business.Api.Accounts
         }
 
         // POST api/values
+        /// <summary>
+        /// Adds a new account
+        /// </summary>
+        /// <param name="accountAddViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AccountAddViewModel accountAddViewModel)
         {
@@ -45,6 +66,12 @@ namespace QIQO.Business.Api.Accounts
         }
 
         // PUT api/values/5
+        /// <summary>
+        /// Updates an existing account
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="accountUpdateViewModel"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]AccountUpdateViewModel accountUpdateViewModel)
         {
@@ -55,6 +82,11 @@ namespace QIQO.Business.Api.Accounts
         }
 
         // DELETE api/values/5
+        /// <summary>
+        /// Deletes an existing account
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

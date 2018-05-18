@@ -4,7 +4,8 @@ using Microsoft.Extensions.Logging;
 
 namespace QIQO.Business.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class HeartbeatController : Controller
     {
         private readonly ILogger<HeartbeatController> _log;
