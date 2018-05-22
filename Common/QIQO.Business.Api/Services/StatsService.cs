@@ -8,6 +8,7 @@ namespace QIQO.Business.Api
 {
     public interface IStatsService {
         void AddMeasure(string item, Measure measure);
+        ConcurrentDictionary<string, Measure> Measures { get; }
     }
     public class StatsService : IStatsService
     {

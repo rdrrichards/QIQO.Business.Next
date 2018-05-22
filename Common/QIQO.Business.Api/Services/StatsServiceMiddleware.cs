@@ -20,8 +20,11 @@ namespace QIQO.Business.Api
         public Task InvokeAsync(HttpContext context)
         {
             var item = context.Request.Path;
-            var measure = new Measure(item, new Occurence(DateTime.Now, context.Request.Body));
-            _statsService.AddMeasure(item, measure);
+            if (!item.Value.Contains("Stat"))
+            {
+                var measure = new Measure(item, new Occurence(DateTime.Now, context.Request.Method));
+                _statsService.AddMeasure(item, measure);
+            }
             return _next(context);
         }
     }
