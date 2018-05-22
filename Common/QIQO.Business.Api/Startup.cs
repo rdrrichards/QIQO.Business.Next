@@ -35,6 +35,8 @@ namespace QIQO.Business.Api
             OrderIoC.RegisterAll(services);
             ProductIoC.RegisterAll(services);
 
+            services.AddSingleton<IStatsService, StatsService>();
+
             services.AddMvc();
             services.AddApiVersioning();
         }
