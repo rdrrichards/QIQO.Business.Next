@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace QIQO.Business.Api
 {
-    public interface IStatsService { }
+    public interface IStatsService {
+        void AddMeasure(string item, Measure measure);
+    }
     public class StatsService : IStatsService
     {
-        private readonly ConcurrentDictionary<string, Measure> _measures = new ConcurrentDictionary<string, Measure>();
-        // public ConcurrentDictionary<string, Measure> Measures { get; private set; } = new ConcurrentDictionary<string, Measure>();
+        public ConcurrentDictionary<string, Measure> Measures { get; } = new ConcurrentDictionary<string, Measure>();
+
         public void AddMeasure(string item, Measure measure)
         {
-            _measures.AddOrUpdate(item, measure, (key, oldVal) => { oldVal.Occurences.AddRange(measure.Occurences); return measure; });
+            Measures.AddOrUpdate(item, measure, (key, oldVal) => {
+                oldVal.Occurences.Add(measure.Occurences[0]);
+                return oldVal;
+                });
         }
     }
 
@@ -46,6 +51,12 @@ namespace QIQO.Business.Api
     }
     public class Occurence
     {
-
+        public Occurence(DateTime dateTime, object value)
+        {
+            OccurenceDateTime = dateTime;
+            OccurenceValue = value;
+        }
+        public DateTime OccurenceDateTime { get; }
+        public object OccurenceValue { get; }
     }
 }

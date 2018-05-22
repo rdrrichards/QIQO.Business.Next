@@ -53,7 +53,7 @@ namespace QIQO.Business.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "QIQO Business API V1");
             });
-
+            app.UseStatsService();
             app.UseMvc();
         }
     }
