@@ -25,5 +25,17 @@ namespace QIQO.Business.Api.Controllers
             var stats = _statsService.Measures.Select(m => new { m.Key, m.Value.Occurences.Count }).ToArray();
             return Ok(stats);
         }
+        // GET api/values
+        [HttpGet("bymethod")]
+        public IActionResult GetByMethod()
+        {
+            _log.LogInformation($"Stats by method get called @ {DateTime.Now}");
+            var occurences = _statsService.Measures.SelectMany(o => o.Value.Occurences);
+            var stats = occurences.GroupBy(o => o.OccurenceValue.ToString())
+                .Select(m => new { MeasureName = m.Key, MeasureCount = m.Count() })
+                .OrderBy(t => t.MeasureName)
+                .ToArray();
+            return Ok(stats);
+        }
     }
 }
