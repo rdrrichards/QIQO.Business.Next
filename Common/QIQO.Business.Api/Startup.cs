@@ -29,14 +29,13 @@ namespace QIQO.Business.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-            AccountIoC.RegisterAll(services);
-            CompanyIoC.RegisterAll(services);
-            InvoiceIoC.RegisterAll(services);
-            OrderIoC.RegisterAll(services);
-            ProductIoC.RegisterAll(services);
+            services.AddAccountAll();
+            services.AddCompanyAll();
+            services.AddInvoiceAll();
+            services.AddOrderAll();
+            services.AddProductAll();
 
-            services.AddSingleton<IStatsService, StatsService>();
-
+            services.AddStatsService();
             services.AddMvc();
             services.AddApiVersioning();
         }

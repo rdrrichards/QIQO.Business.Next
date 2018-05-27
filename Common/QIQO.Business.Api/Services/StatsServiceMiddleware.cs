@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace QIQO.Business.Api
             this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<StatsServiceMiddleware>();
+        }
+        public static IServiceCollection AddStatsService(
+            this IServiceCollection services)
+        {
+            return services.AddSingleton<IStatsService, StatsService>();
         }
     }
 }

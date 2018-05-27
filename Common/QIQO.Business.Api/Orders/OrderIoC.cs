@@ -7,58 +7,58 @@ namespace QIQO.Business.Api
 {
     public static class OrderIoC
     {
-        internal static void RegisterAll(IServiceCollection services)
+        public static IServiceCollection AddOrderAll(this IServiceCollection services)
         {
-            RegisterDbContexts(services);
-            RegisterManagers(services);
-            RegisterMQServices(services);
-            RegisterMappers(services);
-            RegisterRepos(services);
+            return services.AddOrderDbContexts()
+                .AddOrderManagers()
+                .AddOrderMQServices()
+                .AddOrderMappers()
+                .AddOrderRepos();
         }
-        internal static void RegisterDbContexts(IServiceCollection services)
+        public static IServiceCollection AddOrderDbContexts(this IServiceCollection services)
         {
-            services.AddScoped<IOrderDbContext, OrderDbContext>();
+            return services.AddScoped<IOrderDbContext, OrderDbContext>();
         }
-        internal static void RegisterManagers(IServiceCollection services)
+        public static IServiceCollection AddOrderManagers(this IServiceCollection services)
         {
-            services.AddTransient<IOrdersManager, OrdersManager>();
+            return services.AddTransient<IOrdersManager, OrdersManager>();
         }
-        internal static void RegisterMQServices(IServiceCollection services)
+        public static IServiceCollection AddOrderMQServices(this IServiceCollection services)
         {
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
             //services.AddTransient<IHostedService, AccountAuditConsumerService>();
-            services.AddTransient<IHostedService, OrderAccountAddConsumerService>();
-            services.AddTransient<IHostedService, OrderAccountUpdateConsumerService>();
-            services.AddTransient<IHostedService, OrderAccountDeleteConsumerService>();
-            services.AddTransient<IHostedService, OrderCompanyAddConsumerService>();
-            services.AddTransient<IHostedService, OrderCompanyUpdateConsumerService>();
-            services.AddTransient<IHostedService, OrderCompanyDeleteConsumerService>();
-            services.AddTransient<IHostedService, OrderProductAddConsumerService>();
-            services.AddTransient<IHostedService, OrderProductUpdateConsumerService>();
-            services.AddTransient<IHostedService, OrderProductDeleteConsumerService>();
+            return services.AddTransient<IHostedService, OrderAccountAddConsumerService>()
+                .AddTransient<IHostedService, OrderAccountUpdateConsumerService>()
+                .AddTransient<IHostedService, OrderAccountDeleteConsumerService>()
+                .AddTransient<IHostedService, OrderCompanyAddConsumerService>()
+                .AddTransient<IHostedService, OrderCompanyUpdateConsumerService>()
+                .AddTransient<IHostedService, OrderCompanyDeleteConsumerService>()
+                .AddTransient<IHostedService, OrderProductAddConsumerService>()
+                .AddTransient<IHostedService, OrderProductUpdateConsumerService>()
+                .AddTransient<IHostedService, OrderProductDeleteConsumerService>();
         }
-        internal static void RegisterMappers(IServiceCollection services)
+        public static IServiceCollection AddOrderMappers(this IServiceCollection services)
         {
-            services.AddTransient<IAccountMap, AccountMap>();
-            services.AddTransient<IAddressMap, AddressMap>();
-            services.AddTransient<ICommentMap, CommentMap>();
-            services.AddTransient<IOrderHeaderMap, OrderHeaderMap>();
-            services.AddTransient<IOrderItemMap, OrderItemMap>();
-            services.AddTransient<IOrderStatusMap, OrderStatusMap>();
-            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddTransient<IPersonMap, PersonMap>();
+            return services.AddTransient<IAccountMap, AccountMap>()
+                .AddTransient<IAddressMap, AddressMap>()
+                .AddTransient<ICommentMap, CommentMap>()
+                .AddTransient<IOrderHeaderMap, OrderHeaderMap>()
+                .AddTransient<IOrderItemMap, OrderItemMap>()
+                .AddTransient<IOrderStatusMap, OrderStatusMap>()
+                .AddTransient<IFeeScheduleMap, FeeScheduleMap>()
+                .AddTransient<IPersonMap, PersonMap>();
         }
-        internal static void RegisterRepos(IServiceCollection services)
+        public static IServiceCollection AddOrderRepos(this IServiceCollection services)
         {
-            services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
-            services.AddTransient<IOrderHeaderRepository, OrderHeaderRepository>();
-            services.AddTransient<IOrderItemRepository, OrderItemRepository>();
-            services.AddTransient<IOrderStatusRepository, OrderStatusRepository>();
-            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
+            return services.AddTransient<IAccountRepository, AccountRepository>()
+                .AddTransient<IAddressRepository, AddressRepository>()
+                .AddTransient<ICommentRepository, CommentRepository>()
+                .AddTransient<IOrderHeaderRepository, OrderHeaderRepository>()
+                .AddTransient<IOrderItemRepository, OrderItemRepository>()
+                .AddTransient<IOrderStatusRepository, OrderStatusRepository>()
+                .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
+                .AddTransient<IPersonRepository, PersonRepository>();
         }
     }
 }

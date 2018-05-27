@@ -6,67 +6,60 @@ using QIQO.Accounts.Data;
 
 namespace QIQO.Business.Api
 {
-    public static class AccountIoC
+    public static class AccountIoCExtensions
     {
-        internal static void RegisterAll(IServiceCollection services)
+        public static IServiceCollection AddAccountAll(this IServiceCollection services)
         {
-            RegisterDbContexts(services);
-            RegisterManagers(services);
-            RegisterMQServices(services);
-            RegisterMappers(services);
-            RegisterRepos(services);
-            RegisterEntityServices(services);
+            return services.AddAccountDbContexts()
+                .AddAccountManagers()
+                .AddAccountMQServices()
+                .AddAccountMappers()
+                .AddAccountRepos()
+                .AddAccountEntityServices();
         }
-        internal static void RegisterDbContexts(IServiceCollection services)
-        { 
-            services.AddScoped<IAccountDbContext, AccountDbContext>();
-        }
-        internal static void RegisterManagers(IServiceCollection services)
+        public static IServiceCollection AddAccountDbContexts(this IServiceCollection services)
         {
-            services.AddTransient<IAccountsManager, AccountsManager>();
+            return services.AddScoped<IAccountDbContext, AccountDbContext>();
         }
-        internal static void RegisterMQServices(IServiceCollection services)
+        public static IServiceCollection AddAccountManagers(this IServiceCollection services)
         {
-            services.AddTransient<IMQPublisher, MQPublisher>();
-
-            //services.AddSingleton<IHostedService, AccountAuditConsumerService>();
-            //services.AddSingleton<IHostedService, AccountAddConsumerService>();
-            //services.AddSingleton<IHostedService, AccountUpdateConsumerService>();
-            //services.AddSingleton<IHostedService, AccountDeleteConsumerService>();
-
-            services.AddSingleton<IHostedService, AccountCompanyAddConsumerService>();
-            services.AddSingleton<IHostedService, AccountCompanyUpdateConsumerService>();
-            services.AddSingleton<IHostedService, AccountCompanyDeleteConsumerService>();
-
-            services.AddSingleton<IHostedService, AccountProductAddConsumerService>();
-            services.AddSingleton<IHostedService, AccountProductUpdateConsumerService>();
-            services.AddSingleton<IHostedService, AccountProductDeleteConsumerService>();
+            return services.AddTransient<IAccountsManager, AccountsManager>();
         }
-        internal static void RegisterMappers(IServiceCollection services)
+        public static IServiceCollection AddAccountMQServices(this IServiceCollection services)
         {
-            services.AddTransient<IAccountMap, AccountMap>();
-            services.AddTransient<IAddressMap, AddressMap>();
-            services.AddTransient<IAttributeMap, AttributeMap>();
-            services.AddTransient<ICommentMap, CommentMap>();
-            services.AddTransient<ICompanyMap, CompanyMap>();
-            services.AddTransient<IContactMap, ContactMap>();
-            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddTransient<IPersonMap, PersonMap>();
+            return services.AddTransient<IMQPublisher, MQPublisher>()
+                .AddSingleton<IHostedService, AccountCompanyAddConsumerService>()
+                .AddSingleton<IHostedService, AccountCompanyUpdateConsumerService>()
+                .AddSingleton<IHostedService, AccountCompanyDeleteConsumerService>()
+                .AddSingleton<IHostedService, AccountProductAddConsumerService>()
+                .AddSingleton<IHostedService, AccountProductUpdateConsumerService>()
+                .AddSingleton<IHostedService, AccountProductDeleteConsumerService>();
         }
-        internal static void RegisterRepos(IServiceCollection services)
+        public static IServiceCollection AddAccountMappers(this IServiceCollection services)
         {
-            services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            services.AddTransient<IAttributeRepository, AttributeRepository>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
-            services.AddTransient<ICompanyRepository, CompanyRepository>();
-            services.AddTransient<IContactRepository, ContactRepository>();
-            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
+            return services.AddTransient<IAccountMap, AccountMap>()
+                .AddTransient<IAddressMap, AddressMap>()
+                .AddTransient<IAttributeMap, AttributeMap>()
+                .AddTransient<ICommentMap, CommentMap>()
+                .AddTransient<ICompanyMap, CompanyMap>()
+                .AddTransient<IContactMap, ContactMap>()
+                .AddTransient<IFeeScheduleMap, FeeScheduleMap>()
+                .AddTransient<IPersonMap, PersonMap>();
         }
-        internal static void RegisterEntityServices(IServiceCollection services)
+        public static IServiceCollection AddAccountRepos(this IServiceCollection services)
         {
-            services.AddTransient<IAccountEntityService, AccountEntityService>();
+            return services.AddTransient<IAccountRepository, AccountRepository>()
+                .AddTransient<IAddressRepository, AddressRepository>()
+                .AddTransient<IAttributeRepository, AttributeRepository>()
+                .AddTransient<ICommentRepository, CommentRepository>()
+                .AddTransient<ICompanyRepository, CompanyRepository>()
+                .AddTransient<IContactRepository, ContactRepository>()
+                .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
+                .AddTransient<IPersonRepository, PersonRepository>();
+        }
+        public static IServiceCollection AddAccountEntityServices(this IServiceCollection services)
+        {
+            return services.AddTransient<IAccountEntityService, AccountEntityService>();
             //services.AddSingleton<IAddressEntityService, AddressEntityService>();
             //services.AddSingleton<IAttributeEntityService, AttributeEntityService>();
             //services.AddSingleton<ICommentEntityService, CommentEntityService>();

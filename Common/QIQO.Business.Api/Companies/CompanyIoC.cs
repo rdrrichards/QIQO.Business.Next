@@ -6,24 +6,25 @@ namespace QIQO.Business.Api
 {
     public static class CompanyIoC
     {
-        internal static void RegisterAll(IServiceCollection services)
+        public static IServiceCollection AddCompanyAll(this IServiceCollection services)
         {
-            RegisterDbContexts(services);
-            RegisterManagers(services);
-            RegisterMQServices(services);
-            RegisterMappers(services);
-            RegisterRepos(services);
+            return services.AddCompanyDbContexts()
+                .AddCompanyManagers()
+                .AddCompanyMQServices()
+                .AddCompanyMappers()
+                .AddCompanyRepos();
         }
-        internal static void RegisterDbContexts(IServiceCollection services)
+        public static IServiceCollection AddCompanyDbContexts(this IServiceCollection services)
         {
-            services.AddScoped<ICompanyDbContext, CompanyDbContext>();
+            return services.AddScoped<ICompanyDbContext, CompanyDbContext>();
         }
-        internal static void RegisterManagers(IServiceCollection services)
+        public static IServiceCollection AddCompanyManagers(this IServiceCollection services)
         {
-            services.AddTransient<ICompaniesManager, CompaniesManager>();
+            return services.AddTransient<ICompaniesManager, CompaniesManager>();
         }
-        internal static void RegisterMQServices(IServiceCollection services)
+        public static IServiceCollection AddCompanyMQServices(this IServiceCollection services)
         {
+            return services;
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
             //services.AddTransient<IHostedService, AccountAuditConsumerService>();
@@ -31,25 +32,25 @@ namespace QIQO.Business.Api
             //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
             //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
         }
-        internal static void RegisterMappers(IServiceCollection services)
+        public static IServiceCollection AddCompanyMappers(this IServiceCollection services)
         {
-            services.AddTransient<IAddressMap, AddressMap>();
-            services.AddTransient<IAttributeMap, AttributeMap>();
-            services.AddTransient<ICommentMap, CommentMap>();
-            services.AddTransient<ICompanyMap, CompanyMap>();
-            services.AddTransient<IContactMap, ContactMap>();
-            services.AddTransient<IFeeScheduleMap, FeeScheduleMap>();
-            services.AddTransient<IPersonMap, PersonMap>();
+            return services.AddTransient<IAddressMap, AddressMap>()
+                .AddTransient<IAttributeMap, AttributeMap>()
+                .AddTransient<ICommentMap, CommentMap>()
+                .AddTransient<ICompanyMap, CompanyMap>()
+                .AddTransient<IContactMap, ContactMap>()
+                .AddTransient<IFeeScheduleMap, FeeScheduleMap>()
+                .AddTransient<IPersonMap, PersonMap>();
         }
-        internal static void RegisterRepos(IServiceCollection services)
+        public static IServiceCollection AddCompanyRepos(this IServiceCollection services)
         {
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            services.AddTransient<IAttributeRepository, AttributeRepository>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
-            services.AddTransient<ICompanyRepository, CompanyRepository>();
-            services.AddTransient<IContactRepository, ContactRepository>();
-            services.AddTransient<IFeeScheduleRepository, FeeScheduleRepository>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
+            return services.AddTransient<IAddressRepository, AddressRepository>()
+                .AddTransient<IAttributeRepository, AttributeRepository>()
+                .AddTransient<ICommentRepository, CommentRepository>()
+                .AddTransient<ICompanyRepository, CompanyRepository>()
+                .AddTransient<IContactRepository, ContactRepository>()
+                .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
+                .AddTransient<IPersonRepository, PersonRepository>();
         }
     }
 }

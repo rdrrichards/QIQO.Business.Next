@@ -7,24 +7,25 @@ namespace QIQO.Business.Api
 
     public static class ProductIoC
     {
-        internal static void RegisterAll(IServiceCollection services)
+        public static IServiceCollection AddProductAll(this IServiceCollection services)
         {
-            RegisterDbContexts(services);
-            RegisterManagers(services);
-            RegisterMQServices(services);
-            RegisterMappers(services);
-            RegisterRepos(services);
+            return  services.AddProductDbContexts()
+                .AddProductManagers()
+                .AddProductMQServices()
+                .AddProductMappers()
+                .AddProductRepos();
         }
-        internal static void RegisterDbContexts(IServiceCollection services)
+        public static IServiceCollection AddProductDbContexts(this IServiceCollection services)
         {
-            services.AddScoped<IProductDbContext, ProductDbContext>();
+            return services.AddScoped<IProductDbContext, ProductDbContext>();
         }
-        internal static void RegisterManagers(IServiceCollection services)
+        public static IServiceCollection AddProductManagers(this IServiceCollection services)
         {
-            services.AddTransient<IProductsManager, ProductsManager>();
+            return services.AddTransient<IProductsManager, ProductsManager>();
         }
-        internal static void RegisterMQServices(IServiceCollection services)
+        public static IServiceCollection AddProductMQServices(this IServiceCollection services)
         {
+            return services;
             //services.AddTransient<IMQPublisher, MQPublisher>();
 
             //services.AddTransient<IHostedService, AccountAuditConsumerService>();
@@ -32,15 +33,15 @@ namespace QIQO.Business.Api
             //services.AddTransient<IHostedService, AccountUpdateConsumerService>();
             //services.AddTransient<IHostedService, AccountDeleteConsumerService>();
         }
-        internal static void RegisterMappers(IServiceCollection services)
+        public static IServiceCollection AddProductMappers(this IServiceCollection services)
         {
-            services.AddTransient<IProductMap, ProductMap>();
-            services.AddTransient<IProductTypeMap, ProductTypeMap>();
+            return services.AddTransient<IProductMap, ProductMap>()
+            .AddTransient<IProductTypeMap, ProductTypeMap>();
         }
-        internal static void RegisterRepos(IServiceCollection services)
+        public static IServiceCollection AddProductRepos(this IServiceCollection services)
         {
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
+            return services.AddTransient<IProductRepository, ProductRepository>()
+            .AddTransient<IProductTypeRepository, ProductTypeRepository>();
         }
     }
 }
