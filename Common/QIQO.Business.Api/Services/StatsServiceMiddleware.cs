@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QIQO.Business.Api
@@ -12,15 +11,19 @@ namespace QIQO.Business.Api
     {
         private readonly RequestDelegate _next;
         private readonly IStatsService _statsService;
+        private readonly ILogger<StatsServiceMiddleware> _logger;
 
-        public StatsServiceMiddleware(RequestDelegate next, IStatsService statsService)
+        public StatsServiceMiddleware(RequestDelegate next, IStatsService statsService, ILogger<StatsServiceMiddleware> logger)
         {
             _next = next;
             _statsService = statsService;
+            _logger = logger;
         }
         public Task InvokeAsync(HttpContext context)
         {
             var item = context.Request.Path;
+            var ip = context.Request.HttpContext.Connection.RemoteIpAddress;
+            _logger.LogInformation($"RemoteIpAddress: {ip}");
             if (!item.Value.Contains("Stat"))
             {
                 var measure = new Measure(item, new Occurence(DateTime.Now, context.Request.Method));
