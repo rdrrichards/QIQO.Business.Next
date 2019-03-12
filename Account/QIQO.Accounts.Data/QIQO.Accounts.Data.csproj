@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>
