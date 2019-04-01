@@ -11,5 +11,7 @@
     <ProjectReference Include="..\QIQO.Products.Data\QIQO.Products.Data.csproj" />
     <ProjectReference Include="..\QIQO.Products.Domain\QIQO.Products.Domain.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 </Project>
