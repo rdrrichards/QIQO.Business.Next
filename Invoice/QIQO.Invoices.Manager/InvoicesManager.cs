@@ -2,7 +2,6 @@
 using QIQO.Invoices.Data;
 using QIQO.Invoices.Domain;
 using QIQO.MQ;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QIQO.Business.Core.Contracts;
@@ -14,6 +13,7 @@ namespace QIQO.Invoices.Manager
         Task<List<Invoice>> GetInvoicesAsync();
         Task<Invoice> GetInvoiceAsync(string invoiceCode);
         Task DeleteInvoiceAsync(int invoiceKey);
+        Task<List<Invoice>> GetOpenInvoicesAsync(int companyKey);
     }
     public class InvoicesManager : IInvoicesManager
     {
@@ -54,6 +54,13 @@ namespace QIQO.Invoices.Manager
             return Task.Factory.StartNew(() => {
                 _invoiceRepository.Save(_invoiceEntityService.Map(invoice));
                 _mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
+            });
+        }
+
+        public Task<List<Invoice>> GetOpenInvoicesAsync(int companyKey)
+        {
+            return Task.Factory.StartNew(() => {
+                return _invoiceEntityService.Map(_invoiceRepository.GetAllOpen(companyKey));
             });
         }
     }

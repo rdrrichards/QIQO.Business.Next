@@ -15,6 +15,7 @@ namespace QIQO.Orders.Manager
         Task<List<Order>> GetOrdersAsync();
         Task<Order> GetOrderAsync(string orderCode);
         Task DeleteOrderAsync(int orderKey);
+        Task<List<Order>> GetOpenOrdersAsync(int companyKey);
     }
     public class OrdersManager : IOrdersManager
     {
@@ -57,5 +58,13 @@ namespace QIQO.Orders.Manager
                 _mqPublisher.Send(order, "order", "order.add", "order.add");
             });
         }
+
+        public Task<List<Order>> GetOpenOrdersAsync(int companyKey)
+        {
+            return Task.Factory.StartNew(() => {
+                return _orderEntityService.Map(_orderRepository.GetAllOpen(companyKey));
+            });
+        }
+
     }
 }

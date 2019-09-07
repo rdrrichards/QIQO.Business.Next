@@ -21,10 +21,10 @@ namespace QIQO.Invoices.Data
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_all"));
         }
 
-        //public IEnumerable<InvoiceData> GetAll(CompanyData company)
+        //public IEnumerable<InvoiceData> GetAll(int companyKey)
         //{
         //    Log.LogInformation("Accessing InvoiceRepo GetAll by CompanyData function");
-        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", company.CompanyKey) };
+        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", companyKey) };
         //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_all_by_company", pcol));
         //}
 
@@ -44,12 +44,12 @@ namespace QIQO.Invoices.Data
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_find", pcol));
         }
 
-        //public IEnumerable<InvoiceData> GetAllOpen(CompanyData company)
-        //{
-        //    Log.LogInformation("Accessing InvoiceRepo GetAllOpen by CompanyData function");
-        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", company.CompanyKey) };
-        //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_open_by_company", pcol));
-        //}
+        public IEnumerable<InvoiceData> GetAllOpen(int companyKey)
+        {
+            Log.LogInformation("Accessing InvoiceRepo GetAllOpen by CompanyData function");
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", companyKey) };
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_open_by_company", pcol));
+        }
 
         public IEnumerable<InvoiceData> GetAllOpen(AccountData account)
         {

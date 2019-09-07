@@ -5,7 +5,7 @@ namespace QIQO.Orders.Data
 {
     public interface IOrderHeaderRepository : IRepository<OrderHeaderData>
     {
-        //IEnumerable<OrderHeaderData> GetAllOpen(CompanyData company);
+        IEnumerable<OrderHeaderData> GetAllOpen(int company);
         //IEnumerable<OrderHeaderData> GetAll(CompanyData company);
         IEnumerable<OrderHeaderData> GetAllOpen(AccountData account);
         IEnumerable<OrderHeaderData> GetAll(AccountData account);
