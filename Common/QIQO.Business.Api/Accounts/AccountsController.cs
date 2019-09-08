@@ -32,6 +32,17 @@ namespace QIQO.Business.Api.Accounts
             return Ok(await _accountsManager.GetAccountsAsync());
         }
 
+        /// <summary>
+        /// This finds a list of accounts by company
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("search")]
+        public async Task<IActionResult> Find(int companyKey, string term)
+        {
+            // return Ok(new string[] { "Account1", "Account2" });
+            return Ok(await _accountsManager.FindAccountsAsync(companyKey, term));
+        }
+
         // GET api/values/5
         /// <summary>
         /// This will retreive one account with the account id passed in

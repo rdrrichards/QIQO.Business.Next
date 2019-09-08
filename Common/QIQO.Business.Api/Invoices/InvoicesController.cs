@@ -22,6 +22,17 @@ namespace QIQO.Business.Api.Invoices
             return Ok(await _invoicesManager.GetInvoicesAsync());
         }
 
+        /// <summary>
+        /// This finds a list of invoices by company
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("search")]
+        public async Task<IActionResult> Find(int companyKey, string term)
+        {
+            // return Ok(new string[] { "Account1", "Account2" });
+            return Ok(await _invoicesManager.FindInvoicesAsync(companyKey, term));
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)

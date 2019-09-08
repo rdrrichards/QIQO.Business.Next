@@ -13,6 +13,7 @@ namespace QIQO.Orders.Manager
     {
         Task SaveOrderAsync(Order order);
         Task<List<Order>> GetOrdersAsync();
+        Task<List<Order>> FindOrdersAsync(int companyKey, string term);
         Task<Order> GetOrderAsync(string orderCode);
         Task DeleteOrderAsync(int orderKey);
         Task<List<Order>> GetOpenOrdersAsync(int companyKey);
@@ -48,6 +49,13 @@ namespace QIQO.Orders.Manager
         {
             return Task.Factory.StartNew(() => {
                 return _orderEntityService.Map(_orderRepository.GetAll());
+            });
+        }
+
+        public Task<List<Order>> FindOrdersAsync(int companyKey, string term)
+        {
+            return Task.Factory.StartNew(() => {
+                return _orderEntityService.Map(_orderRepository.FindAll(companyKey, term));
             });
         }
 
