@@ -1,6 +1,6 @@
-﻿namespace QIQO.Orders.Domain
+﻿namespace QIQO.Companies.Domain
 {
-    public enum QIQOAddressType
+    public enum QIQOCompanyAddressType
     {
         Mailing = 1,
         Shipping = 2,

@@ -8,7 +8,7 @@ namespace QIQO.Business.Api.Companies
     {
         [Required]
         public int EntityKey { get; set; }
-        public QIQOEntityType EntityType => QIQOEntityType.Company;
+        public QIQOCompanyEntityType EntityType => QIQOCompanyEntityType.Company;
         // public EntityType EntityTypeData { get; set; }
         // public QIQOAttributeType AttributeType { get; set; } = QIQOAttributeType.AccountContact_CNCT_MAIN;
         // public AttributeType AttributeTypeData { get; set; }
@@ -17,7 +17,7 @@ namespace QIQO.Business.Api.Companies
         [Required]
         public int AttributeDataTypeKey { get; set; }
         [Required]
-        public QIQOAttributeDataType AttributeDataType { get; set; } = QIQOAttributeDataType.String;
+        public QIQOCompanyAttributeDataType AttributeDataType { get; set; } = QIQOCompanyAttributeDataType.String;
         public string AttributeDisplayFormat { get; set; }
         [Required]
         public string AddedUserID { get; set; }

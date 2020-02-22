@@ -1,6 +1,6 @@
 ﻿namespace QIQO.Accounts.Domain
 {
-    public enum QIQOAttributeDataType
+    public enum QIQOAccountAttributeDataType
     {
         Number = 1,
         String = 2,

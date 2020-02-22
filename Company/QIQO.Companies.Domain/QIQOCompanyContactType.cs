@@ -1,6 +1,6 @@
 ﻿namespace QIQO.Companies.Domain
 {
-    public enum QIQOContactType
+    public enum QIQOCompanyContactType
     {
         AccountContact = 1, //ACNT
         CellPhone = 2, //PHNCELL

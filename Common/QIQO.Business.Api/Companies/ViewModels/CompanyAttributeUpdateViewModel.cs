@@ -15,7 +15,7 @@ namespace QIQO.Business.Api.Companies
         [Required]
         public int AttributeDataTypeKey { get; set; }
         [Required]
-        public QIQOAttributeDataType AttributeDataType { get; set; } = QIQOAttributeDataType.String;
+        public QIQOCompanyAttributeDataType AttributeDataType { get; set; } = QIQOCompanyAttributeDataType.String;
         public string AttributeDisplayFormat { get; set; }
         [Required]
         public string UpdateUserID { get; set; }

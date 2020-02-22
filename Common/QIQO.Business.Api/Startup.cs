@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Reflection;
@@ -23,7 +23,7 @@ namespace QIQO.Business.Api
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "QIQO Business API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "QIQO Business API", Version = "v1" });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -36,12 +36,12 @@ namespace QIQO.Business.Api
             services.AddProductAll();
 
             services.AddStatsService();
-            services.AddMvc();
+            services.AddControllers();
             services.AddApiVersioning();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -53,8 +53,13 @@ namespace QIQO.Business.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "QIQO Business API V1");
             });
             app.UseStatsService();
+            app.UseRouting();
             // app.UseForwardedHeaders();
-            app.UseMvc();
+            // app.UseMvc();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
+
         }
     }
 }

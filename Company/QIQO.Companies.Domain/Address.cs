@@ -21,18 +21,18 @@ namespace QIQO.Companies.Domain
             AddressCountry = addressData.AddressCountry;
             AddressDefaultFlag = addressData.AddressDefaultFlg == 1;
             AddressNotes = addressData.AddressNotes;
-            AddressType = (QIQOAddressType)addressData.AddressTypeKey;
+            AddressType = (QIQOCompanyAddressType)addressData.AddressTypeKey;
             EntityKey = addressData.EntityKey;
-            EntityType = (QIQOEntityType)addressData.EntityTypeKey;
+            EntityType = (QIQOCompanyEntityType)addressData.EntityTypeKey;
             AddedDateTime = addressData.AuditAddDatetime;
             AddedUserID = addressData.AuditAddUserId;
             UpdateDateTime = addressData.AuditUpdateDatetime;
             UpdateUserID = addressData.AuditUpdateUserId;
         }
         public int AddressKey { get; private set; }
-        public QIQOAddressType AddressType { get; private set; } = QIQOAddressType.Billing;
+        public QIQOCompanyAddressType AddressType { get; private set; } = QIQOCompanyAddressType.Billing;
         public int EntityKey { get; private set; }
-        public QIQOEntityType EntityType { get; private set; } = QIQOEntityType.Account;
+        public QIQOCompanyEntityType EntityType { get; private set; } = QIQOCompanyEntityType.Account;
         public string AddressLine1 { get; private set; }
         public string AddressLine2 { get; private set; }
         public string AddressLine3 { get; private set; }

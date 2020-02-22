@@ -21,7 +21,7 @@ namespace QIQO.Invoices.Domain
             AddressCountry = addressData.AddressCountry;
             AddressDefaultFlag = addressData.AddressDefaultFlg == 1;
             AddressNotes = addressData.AddressNotes;
-            AddressType = (QIQOAddressType)addressData.AddressTypeKey;
+            AddressType = (QIQOInvoiceAddressType)addressData.AddressTypeKey;
             EntityKey = addressData.EntityKey;
             // EntityType = (QIQOEntityType)addressData.EntityTypeKey;
             AddedDateTime = addressData.AuditAddDatetime;
@@ -30,7 +30,7 @@ namespace QIQO.Invoices.Domain
             UpdateUserID = addressData.AuditUpdateUserId;
         }
         public int AddressKey { get; private set; }        
-        public QIQOAddressType AddressType { get; private set; } = QIQOAddressType.Billing;        
+        public QIQOInvoiceAddressType AddressType { get; private set; } = QIQOInvoiceAddressType.Billing;        
         public AddressType AddressTypeData { get; private set; } //= new AddressType();        
         public int EntityKey { get; private set; }        
         // public QIQOEntityType EntityType { get; private set; } = QIQOEntityType.Account;        

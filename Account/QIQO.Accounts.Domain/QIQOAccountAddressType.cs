@@ -1,6 +1,6 @@
 ﻿namespace QIQO.Accounts.Domain
 {
-    public enum QIQOAddressType
+    public enum QIQOAccountAddressType
     {
         Mailing = 1,
         Shipping = 2,

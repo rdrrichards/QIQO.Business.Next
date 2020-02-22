@@ -10,8 +10,8 @@ namespace QIQO.Accounts.Domain
         {
             AttributeKey = entityAttributeData.AttributeKey;
             EntityKey = entityAttributeData.EntityKey;
-            EntityType = (QIQOEntityType)entityAttributeData.EntityTypeKey;
-            AttributeDataType = (QIQOAttributeDataType)entityAttributeData.AttributeDataTypeKey;
+            EntityType = (QIQOAccountEntityType)entityAttributeData.EntityTypeKey;
+            AttributeDataType = (QIQOAccountAttributeDataType)entityAttributeData.AttributeDataTypeKey;
             AttributeDataTypeKey = entityAttributeData.AttributeTypeKey;
             AttributeValue = entityAttributeData.AttributeValue;
             AttributeDisplayFormat = entityAttributeData.AttributeDisplayFormat;
@@ -22,13 +22,13 @@ namespace QIQO.Accounts.Domain
         }
         public int AttributeKey { get; private set; }
         public int EntityKey { get; private set; }
-        public QIQOEntityType EntityType { get; private set; } = QIQOEntityType.Account;
+        public QIQOAccountEntityType EntityType { get; private set; } = QIQOAccountEntityType.Account;
         // public EntityType EntityTypeData { get; private set; }
         // public QIQOAttributeType AttributeType { get; private set; } = QIQOAttributeType.AccountContact_CNCT_MAIN;
         // public AttributeType AttributeTypeData { get; private set; }
         public string AttributeValue { get; private set; }
         public int AttributeDataTypeKey { get; private set; }
-        public QIQOAttributeDataType AttributeDataType { get; private set; } = QIQOAttributeDataType.String;
+        public QIQOAccountAttributeDataType AttributeDataType { get; private set; } = QIQOAccountAttributeDataType.String;
         public string AttributeDisplayFormat { get; private set; }
         public string AddedUserID { get; private set; }
         public DateTime AddedDateTime { get; private set; }

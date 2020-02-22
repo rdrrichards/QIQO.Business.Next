@@ -6,11 +6,11 @@ namespace QIQO.Business.Api.Accounts
     public class AccountAddressBaseViewModel
     {
         [Required]
-        public QIQOAddressType AddressType { get; set; } = QIQOAddressType.Billing;
+        public QIQOAccountAddressType AddressType { get; set; } = QIQOAccountAddressType.Billing;
         [Required]
         public int EntityKey { get; set; }
         [Required]
-        public QIQOEntityType EntityType => QIQOEntityType.Account;
+        public QIQOAccountEntityType EntityType => QIQOAccountEntityType.Account;
         [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

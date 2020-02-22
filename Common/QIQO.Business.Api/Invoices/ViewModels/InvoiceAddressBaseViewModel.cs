@@ -8,7 +8,7 @@ namespace QIQO.Business.Api.Invoices
         [Required]
         public int AddressKey { get; set; }
         [Required]
-        public QIQOAddressType AddressType { get; set; }
+        public QIQOInvoiceAddressType AddressType { get; set; }
         [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

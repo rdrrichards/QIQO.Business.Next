@@ -151,9 +151,9 @@ namespace QIQO.Accounts.Tests
             var sut = new Address(data);
 
             Assert.True(sut.AddressKey == 1);
-            Assert.True(sut.AddressType == QIQOAddressType.Mailing);
+            Assert.True(sut.AddressType == QIQOAccountAddressType.Mailing);
             Assert.True(sut.EntityKey == 1);
-            Assert.True(sut.EntityType == QIQOEntityType.Account);
+            Assert.True(sut.EntityType == QIQOAccountEntityType.Account);
             Assert.True(sut.AddressLine1 == "TEST");
             Assert.True(sut.AddressLine2 == "TEST");
             Assert.True(sut.AddressLine3 == "TEST");
@@ -232,7 +232,7 @@ namespace QIQO.Accounts.Tests
 
             Assert.True(sut.AttributeKey == 1);
             Assert.True(sut.EntityKey == 1);
-            Assert.True(sut.EntityType == QIQOEntityType.Company);
+            Assert.True(sut.EntityType == QIQOAccountEntityType.Company);
             // Assert.True(sut.AttributeTypeKey == 1);
             Assert.True(sut.AttributeValue == "TEST");
             Assert.True(sut.AttributeDataTypeKey == 1);

@@ -12,8 +12,8 @@ namespace QIQO.Business.Api.Background
 {
     public class ConsumerServiceBase : BackgroundServiceBase
     {
-        private const string topic = "topic";
-        private const string confBase = "QueueConfig";
+        private const string _topic = "topic";
+        private const string _confBase = "QueueConfig";
         private readonly string _section;
         private readonly string _action;
         private ConnectionFactory _factory;
@@ -32,12 +32,12 @@ namespace QIQO.Business.Api.Background
             _log = logger;
             _section = section;
             _action = action;
-            hostName = configuration[$"{confBase}:Server"];
-            userName = configuration[$"{confBase}:User"];
-            password = configuration[$"{confBase}:Password"];
+            hostName = configuration[$"{_confBase}:Server"];
+            userName = configuration[$"{_confBase}:User"];
+            password = configuration[$"{_confBase}:Password"];
             exchangeName = exchange; // configuration[$"{confBase}:{_section}:Exchange"];
-            queueName = configuration[$"{confBase}:{_section}:{_action}QueueName"];
-            routingKey = configuration[$"{confBase}:{_section}:{_action}QueueName"];
+            queueName = configuration[$"{_confBase}:{_section}:{_action}QueueName"];
+            routingKey = configuration[$"{_confBase}:{_section}:{_action}QueueName"];
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken) => null;
 
@@ -55,23 +55,21 @@ namespace QIQO.Business.Api.Background
                 {
                     using (_connection = _factory.CreateConnection())
                     {
-                        using (var channel = _connection.CreateModel())
+                        using var channel = _connection.CreateModel();
+                        channel.ExchangeDeclare(exchangeName, _topic);
+                        channel.QueueDeclare(queueName, true, false, false, null);
+                        channel.QueueBind(queueName, exchangeName, routingKey);
+
+                        channel.BasicQos(0, 10, false);
+                        var subscription = new Subscription(channel, queueName, false);
+
+                        while (!stoppingToken.IsCancellationRequested)
                         {
-                            channel.ExchangeDeclare(exchangeName, topic);
-                            channel.QueueDeclare(queueName, true, false, false, null);
-                            channel.QueueBind(queueName, exchangeName, routingKey);
+                            var deliveryArguments = subscription.Next();
+                            var message = deliveryArguments.Body.DeSerializeText();
 
-                            channel.BasicQos(0, 10, false);
-                            var subscription = new Subscription(channel, queueName, false);
-
-                            while (!stoppingToken.IsCancellationRequested)
-                            {
-                                var deliveryArguments = subscription.Next();
-                                var message = deliveryArguments.Body.DeSerializeText();
-
-                                listenAction.Invoke(message);
-                                subscription.Ack(deliveryArguments);
-                            }
+                            listenAction.Invoke(message);
+                            subscription.Ack(deliveryArguments);
                         }
                     }
                 }

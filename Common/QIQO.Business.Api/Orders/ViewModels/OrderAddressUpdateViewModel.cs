@@ -15,7 +15,7 @@ namespace QIQO.Business.Api.Orders
         [Required]
         public int AddressKey { get; set; }
         [Required]
-        public QIQOAddressType AddressType { get; set; }
+        public QIQOOrderAddressType AddressType { get; set; }
         [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace QIQO.Companies.Domain
+﻿namespace QIQO.Accounts.Domain
 {
-    public enum QIQOEntityType
+    public enum QIQOAccountEntityType
     {
         Company = 1,
         Person = 2,

@@ -1,6 +1,6 @@
-﻿namespace QIQO.Orders.Domain
+﻿namespace QIQO.Invoices.Domain
 {
-    public enum QIQOContactType
+    public enum QIQOInvoiceContactType
     {
         AccountContact = 1, //ACNT
         CellPhone = 2, //PHNCELL

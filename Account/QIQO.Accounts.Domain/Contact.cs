@@ -10,7 +10,7 @@ namespace QIQO.Accounts.Domain
         {
             ContactKey = contactData.ContactKey;
             ContactTypeKey = contactData.ContactTypeKey;
-            ContactType = (QIQOContactType)contactData.ContactTypeKey;
+            ContactType = (QIQOAccountContactType)contactData.ContactTypeKey;
             ContactActiveFlg = contactData.ContactActiveFlg;
             ContactDefaultFlg = contactData.ContactDefaultFlg;
             ContactValue = contactData.ContactValue;
@@ -25,7 +25,7 @@ namespace QIQO.Accounts.Domain
         public int EntityKey { get; private set; }
         public int EntityTypeKey { get; private set; }
         public int ContactTypeKey { get; private set; }
-        public QIQOContactType ContactType { get; private set; } = QIQOContactType.CellPhone;
+        public QIQOAccountContactType ContactType { get; private set; } = QIQOAccountContactType.CellPhone;
         public string ContactValue { get; private set; }
         public int ContactDefaultFlg { get; private set; }
         public int ContactActiveFlg { get; private set; }

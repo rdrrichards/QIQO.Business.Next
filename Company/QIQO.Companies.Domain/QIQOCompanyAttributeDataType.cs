@@ -1,6 +1,6 @@
 ﻿namespace QIQO.Companies.Domain
 {
-    public enum QIQOAttributeDataType
+    public enum QIQOCompanyAttributeDataType
     {
         Number = 1,
         String = 2,

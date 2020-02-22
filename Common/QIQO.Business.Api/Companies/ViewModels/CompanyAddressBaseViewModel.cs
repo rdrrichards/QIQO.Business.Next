@@ -6,11 +6,11 @@ namespace QIQO.Business.Api.Companies
     public class CompanyAddressBaseViewModel
     {
         [Required]
-        public QIQOAddressType AddressType { get; set; } = QIQOAddressType.Billing;
+        public QIQOCompanyAddressType AddressType { get; set; } = QIQOCompanyAddressType.Billing;
         [Required]
         public int EntityKey { get; set; }
         [Required]
-        public QIQOEntityType EntityType => QIQOEntityType.Company;
+        public QIQOCompanyEntityType EntityType => QIQOCompanyEntityType.Company;
         [Required]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
