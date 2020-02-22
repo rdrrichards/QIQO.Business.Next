@@ -13,7 +13,8 @@ namespace QIQO.Business.Api
                 .AddOrderManagers()
                 .AddOrderMQServices()
                 .AddOrderMappers()
-                .AddOrderRepos();
+                .AddOrderRepos()
+                .AddOrderEntityService();
         }
         public static IServiceCollection AddOrderDbContexts(this IServiceCollection services)
         {
@@ -59,6 +60,11 @@ namespace QIQO.Business.Api
                 .AddTransient<IOrderStatusRepository, OrderStatusRepository>()
                 .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
                 .AddTransient<IPersonRepository, PersonRepository>();
+        }
+        public static IServiceCollection AddOrderEntityService(this IServiceCollection services)
+        {
+            return services.AddTransient<IOrderEntityService, OrderEntityService>()
+                .AddTransient<IOrderItemEntityService, OrderItemEntityService>();
         }
     }
 }

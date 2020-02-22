@@ -21,12 +21,12 @@ namespace QIQO.Orders.Data
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_header_all"));
         }
 
-        //public IEnumerable<OrderHeaderData> GetAllOpen(CompanyData company)
-        //{
-        //    Log.LogInformation("Accessing OrderHeaderRepo GetAllOpen by CompanyData function");
-        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", company.CompanyKey) };
-        //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_header_open_by_company", pcol));
-        //}
+        public IEnumerable<OrderHeaderData> GetAllOpen(int companyKey)
+        {
+            Log.LogInformation("Accessing OrderHeaderRepo GetAllOpen by CompanyData function");
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", companyKey) };
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_header_open_by_company", pcol));
+        }
         public IEnumerable<OrderHeaderData> FindAll(int company_key, string pattern)
         {
             Log.LogInformation("Accessing OrderHeaderRepo GetAll function");

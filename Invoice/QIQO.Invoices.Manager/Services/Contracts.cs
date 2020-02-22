@@ -12,6 +12,7 @@ namespace QIQO.Invoices.Manager
     public interface ICommentEntityService : IEntityService<Comment, CommentData> { }
     public interface ICommentTypeEntityService : IEntityService<CommentType, CommentTypeData> { }
     public interface IInvoiceEntityService : IEntityService<Invoice, InvoiceData> { }
+    public interface IInvoiceItemEntityService : IEntityService<InvoiceItem, InvoiceItemData> { }
     //public interface IContactEntityService : IEntityService<Contact, ContactData> { }
     //public interface IContactTypeEntityService : IEntityService<ContactType, ContactTypeData> { }
     //public interface IAttributeEntityService : IEntityService<EntityAttribute, AttributeData> { }

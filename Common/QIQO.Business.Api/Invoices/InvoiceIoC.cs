@@ -13,7 +13,8 @@ namespace QIQO.Business.Api
                 .AddInvoiceManagers()
                 .AddInvoiceMQServices()
                 .AddInvoiceMappers()
-                .AddInvoiceRepos();
+                .AddInvoiceRepos()
+                .AddInvoiceEntityServices();
         }
         public static IServiceCollection AddInvoiceDbContexts(this IServiceCollection services)
         {
@@ -59,6 +60,10 @@ namespace QIQO.Business.Api
                 .AddTransient<IInvoiceStatusRepository, InvoiceStatusRepository>()
                 .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
                 .AddTransient<IPersonRepository, PersonRepository>();
+        }
+        public static IServiceCollection AddInvoiceEntityServices(this IServiceCollection services)
+        {
+            return services.AddTransient<IInvoiceEntityService, InvoiceEntityService>();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace QIQO.Accounts.Manager
     {
         Task SaveAccountAsync(Account account);
         Task<List<Account>> GetAccountsAsync();
+        Task<List<Account>> FindAccountsAsync(int companyKey, string term);
         Task<Account> GetAccountAsync(string accountCode);
         Task DeleteAccountAsync(int accountKey);
     }
@@ -41,6 +42,13 @@ namespace QIQO.Accounts.Manager
         {
             return Task.Factory.StartNew(() => {
                 return _accountEntityService.Map(_accountRepository.GetAll());
+            });
+        }
+
+        public Task<List<Account>> FindAccountsAsync(int companyKey, string term)
+        {
+            return Task.Factory.StartNew(() => {
+                return _accountEntityService.Map(_accountRepository.FindAll(companyKey, term));
             });
         }
 

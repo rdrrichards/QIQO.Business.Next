@@ -2,11 +2,9 @@
 using QIQO.Invoices.Data;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace QIQO.Invoices.Domain
 {
-    [DataContract]
     public class Invoice: IModel
     {
         public Invoice(InvoiceData invoiceData)
