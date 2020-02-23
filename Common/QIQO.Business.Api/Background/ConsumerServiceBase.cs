@@ -7,6 +7,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.MessagePatterns;
 using QIQO.MQ;
 using System;
+using RabbitMQ.Client.Events;
 
 namespace QIQO.Business.Api.Background
 {
@@ -55,21 +56,33 @@ namespace QIQO.Business.Api.Background
                 {
                     using (_connection = _factory.CreateConnection())
                     {
-                        using var channel = _connection.CreateModel();
-                        channel.ExchangeDeclare(exchangeName, _topic);
-                        channel.QueueDeclare(queueName, true, false, false, null);
-                        channel.QueueBind(queueName, exchangeName, routingKey);
-
-                        channel.BasicQos(0, 10, false);
-                        var subscription = new Subscription(channel, queueName, false);
-
-                        while (!stoppingToken.IsCancellationRequested)
+                        using (var channel = _connection.CreateModel())
                         {
-                            var deliveryArguments = subscription.Next();
-                            var message = deliveryArguments.Body.DeSerializeText();
+                            channel.ExchangeDeclare(exchangeName, _topic);
+                            channel.QueueDeclare(queueName, true, false, false, null);
+                            channel.QueueBind(queueName, exchangeName, routingKey);
 
-                            listenAction.Invoke(message);
-                            subscription.Ack(deliveryArguments);
+                            channel.BasicQos(0, 10, false);
+                            // var subscription = new Subscription(channel, queueName, false);
+                            var consumer = new EventingBasicConsumer(channel);
+                            consumer.Received += (model, ea) =>
+                            {
+                                var message = ea.Body.DeSerializeText();
+                                listenAction.Invoke(message);
+                                // subscription.Ack(ea);
+                            };
+                            channel.BasicConsume(queue: queueName,
+                                                 autoAck: true,
+                                                 consumer: consumer);
+
+                            //while (!stoppingToken.IsCancellationRequested)
+                            //{
+                            //    var deliveryArguments = subscription.Next();
+                            //    var message = deliveryArguments.Body.DeSerializeText();
+
+                            //    listenAction.Invoke(message);
+                            //    subscription.Ack(deliveryArguments);
+                            //}
                         }
                     }
                 }
