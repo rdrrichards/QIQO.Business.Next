@@ -4,10 +4,11 @@ using QIQO.Business.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
-using RabbitMQ.Client.MessagePatterns;
+// using RabbitMQ.Client.MessagePatterns;
 using QIQO.MQ;
 using System;
 using RabbitMQ.Client.Events;
+using System.Text;
 
 namespace QIQO.Business.Api.Background
 {
@@ -56,34 +57,33 @@ namespace QIQO.Business.Api.Background
                 {
                     using (_connection = _factory.CreateConnection())
                     {
-                        using (var channel = _connection.CreateModel())
-                        {
-                            channel.ExchangeDeclare(exchangeName, _topic);
-                            channel.QueueDeclare(queueName, true, false, false, null);
-                            channel.QueueBind(queueName, exchangeName, routingKey);
+                        using var channel = _connection.CreateModel();
+                        channel.ExchangeDeclare(exchangeName, _topic);
+                        channel.QueueDeclare(queueName, true, false, false, null);
+                        channel.QueueBind(queueName, exchangeName, routingKey);
 
-                            channel.BasicQos(0, 10, false);
-                            // var subscription = new Subscription(channel, queueName, false);
-                            var consumer = new EventingBasicConsumer(channel);
-                            consumer.Received += (model, ea) =>
-                            {
-                                var message = ea.Body.DeSerializeText();
-                                listenAction.Invoke(message);
+                        channel.BasicQos(0, 10, false);
+                        // var subscription = new Subscription(channel, queueName, false);
+                        var consumer = new EventingBasicConsumer(channel);
+                        consumer.Received += (model, ea) =>
+                        {
+                            var body = ea.Body.Span;
+                            var message = Encoding.UTF8.GetString(body);
+                            listenAction.Invoke(message);
                                 // subscription.Ack(ea);
                             };
-                            channel.BasicConsume(queue: queueName,
-                                                 autoAck: true,
-                                                 consumer: consumer);
+                        channel.BasicConsume(queue: queueName,
+                                             autoAck: true,
+                                             consumer: consumer);
 
-                            //while (!stoppingToken.IsCancellationRequested)
-                            //{
-                            //    var deliveryArguments = subscription.Next();
-                            //    var message = deliveryArguments.Body.DeSerializeText();
+                        //while (!stoppingToken.IsCancellationRequested)
+                        //{
+                        //    var deliveryArguments = subscription.Next();
+                        //    var message = deliveryArguments.Body.DeSerializeText();
 
-                            //    listenAction.Invoke(message);
-                            //    subscription.Ack(deliveryArguments);
-                            //}
-                        }
+                        //    listenAction.Invoke(message);
+                        //    subscription.Ack(deliveryArguments);
+                        //}
                     }
                 }
                 catch (Exception e)
