@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2027
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{8267C7FE-9BE2-43A6-B340-130A131DBA1C}"
 EndProject
@@ -60,6 +60,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Tests", "Product\QIQO.Products.Tests\QIQO.Products.Tests.csproj", "{4A440300-A1E8-47C3-AB37-81D4ED8B2B84}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.MQ", "Common\QIQO.MQ\QIQO.MQ.csproj", "{B15EB576-81D0-430B-B247-758653C13A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Accounts.Api", "Account\QIQO.Accounts.Api\QIQO.Accounts.Api.csproj", "{F3853E9D-F103-4562-ABF8-13A42898B81B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,10 @@ Global
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B15EB576-81D0-430B-B247-758653C13A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3853E9D-F103-4562-ABF8-13A42898B81B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3853E9D-F103-4562-ABF8-13A42898B81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3853E9D-F103-4562-ABF8-13A42898B81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3853E9D-F103-4562-ABF8-13A42898B81B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +193,7 @@ Global
 		{36528029-4042-4976-B9DB-8F17CBFE314E} = {0219908B-DFAD-4690-8F74-AE1A6F95BEB7}
 		{4A440300-A1E8-47C3-AB37-81D4ED8B2B84} = {7C82921A-220D-4778-810C-3AA90A39EA2A}
 		{B15EB576-81D0-430B-B247-758653C13A2E} = {7C98BCCF-E95A-442B-BEE7-1D319E1AAACC}
+		{F3853E9D-F103-4562-ABF8-13A42898B81B} = {8267C7FE-9BE2-43A6-B340-130A131DBA1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D30E9C8-D743-4661-A00F-DE0CBBA8E57D}
