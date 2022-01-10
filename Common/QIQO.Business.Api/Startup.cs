@@ -29,7 +29,7 @@ namespace QIQO.Business.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddInvoiceAll();
+            // services.AddInvoiceAll();
             services.AddOrderAll();
             services.AddProductAll();
 
