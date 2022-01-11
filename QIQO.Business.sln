@@ -65,7 +65,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Accounts.Api", "Accoun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Companies.Api", "Company\QIQO.Companies.Api\QIQO.Companies.Api.csproj", "{108557BD-2407-48EF-8BD5-DBA990036C25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Invoices.Api", "Invoice\QIQO.Invoices.Api\QIQO.Invoices.Api.csproj", "{069224AA-392B-44C1-B8E8-4A87F057650B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Api", "Invoice\QIQO.Invoices.Api\QIQO.Invoices.Api.csproj", "{069224AA-392B-44C1-B8E8-4A87F057650B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Orders.Api", "Order\QIQO.Orders.Api\QIQO.Orders.Api.csproj", "{227B380A-D171-4AF4-9309-04020BB87C96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -177,6 +179,10 @@ Global
 		{069224AA-392B-44C1-B8E8-4A87F057650B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{069224AA-392B-44C1-B8E8-4A87F057650B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{069224AA-392B-44C1-B8E8-4A87F057650B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{227B380A-D171-4AF4-9309-04020BB87C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{227B380A-D171-4AF4-9309-04020BB87C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227B380A-D171-4AF4-9309-04020BB87C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{227B380A-D171-4AF4-9309-04020BB87C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -208,6 +214,7 @@ Global
 		{F3853E9D-F103-4562-ABF8-13A42898B81B} = {8267C7FE-9BE2-43A6-B340-130A131DBA1C}
 		{108557BD-2407-48EF-8BD5-DBA990036C25} = {F8E21F7F-575A-4B18-8ADC-03A602C88DB5}
 		{069224AA-392B-44C1-B8E8-4A87F057650B} = {D3B239AB-2E51-46D7-8CDB-75F890BB6B59}
+		{227B380A-D171-4AF4-9309-04020BB87C96} = {0219908B-DFAD-4690-8F74-AE1A6F95BEB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D30E9C8-D743-4661-A00F-DE0CBBA8E57D}
