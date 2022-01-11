@@ -30,7 +30,7 @@ namespace QIQO.Business.Api
             });
 
             // services.AddInvoiceAll();
-            services.AddOrderAll();
+            // services.AddOrderAll();
             services.AddProductAll();
 
             services.AddStatsService();
