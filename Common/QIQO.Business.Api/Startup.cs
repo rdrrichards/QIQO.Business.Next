@@ -31,7 +31,7 @@ namespace QIQO.Business.Api
 
             // services.AddInvoiceAll();
             // services.AddOrderAll();
-            services.AddProductAll();
+            // services.AddProductAll();
 
             services.AddStatsService();
             services.AddControllers();
