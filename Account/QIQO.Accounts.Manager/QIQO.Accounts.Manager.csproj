@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
     <ProjectReference Include="..\..\Common\QIQO.MQ\QIQO.MQ.csproj" />
     <ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />

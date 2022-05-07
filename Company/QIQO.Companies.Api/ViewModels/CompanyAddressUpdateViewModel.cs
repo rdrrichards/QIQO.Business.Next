@@ -1,6 +1,4 @@
-﻿using QIQO.Companies.Domain;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QIQO.Business.Api.Companies
 {

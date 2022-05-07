@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using QIQO.Orders.Manager;
+﻿using QIQO.Orders.Manager;
 using QIQO.Orders.Data;
-using Microsoft.Extensions.Hosting;
 
 namespace QIQO.Business.Api
 {

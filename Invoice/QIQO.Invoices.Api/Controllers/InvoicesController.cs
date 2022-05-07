@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QIQO.Invoices.Domain;
 using QIQO.Invoices.Manager;
-using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Invoices
 {

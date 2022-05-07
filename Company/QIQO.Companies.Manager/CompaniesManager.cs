@@ -3,7 +3,6 @@ using QIQO.Accounts.Manager;
 using QIQO.Companies.Data;
 using QIQO.Companies.Domain;
 using QIQO.MQ;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QIQO.Business.Core.Contracts;

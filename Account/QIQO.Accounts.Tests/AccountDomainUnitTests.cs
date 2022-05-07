@@ -63,8 +63,8 @@ namespace QIQO.Accounts.Tests
             Assert.True(sut.UpdateUserID == null);
             Assert.True(sut.AccountStartDate == new System.DateTime(2018, 1, 1));
             Assert.True(sut.AccountEndDate == new System.DateTime(2019, 1, 1));
-            Assert.True(sut.AddedDateTime != null);
-            Assert.True(sut.UpdateDateTime != null);
+            //Assert.True(sut.AddedDateTime != null);
+            //Assert.True(sut.UpdateDateTime != null);
 
             Assert.True(sut.Comments.Count == 0);
             Assert.True(sut.Contacts.Count == 0);
@@ -90,8 +90,8 @@ namespace QIQO.Accounts.Tests
             Assert.True(sut.UpdateUserID == null);
             Assert.True(sut.AccountStartDate == new System.DateTime(2018, 1, 1));
             Assert.True(sut.AccountEndDate.Year == System.DateTime.Now.AddYears(99).Year);
-            Assert.True(sut.AddedDateTime != null);
-            Assert.True(sut.UpdateDateTime != null);
+            //Assert.True(sut.AddedDateTime != null);
+            //Assert.True(sut.UpdateDateTime != null);
 
             Assert.True(sut.Comments.Count == 0);
             Assert.True(sut.Contacts.Count == 0);

@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 // using RabbitMQ.Client.MessagePatterns;
-using QIQO.MQ;
 using System;
 using RabbitMQ.Client.Events;
 using System.Text;

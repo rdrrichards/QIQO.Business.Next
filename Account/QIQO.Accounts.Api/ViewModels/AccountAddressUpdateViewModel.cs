@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QIQO.Business.Api.Accounts
 {
     public class AccountAddressUpdateViewModel : AccountAddressBaseViewModel
     {
         [Required]
-        public string UpdateUserID { get; set; }
+        public string UpdateUserID { get; set; } = string.Empty;
         public DateTime UpdateDateTime { get; set; }
     }
 }

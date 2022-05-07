@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using QIQO.Invoices.Manager;
+﻿using QIQO.Invoices.Manager;
 using QIQO.Invoices.Data;
-using Microsoft.Extensions.Hosting;
 
 namespace QIQO.Business.Api
 {

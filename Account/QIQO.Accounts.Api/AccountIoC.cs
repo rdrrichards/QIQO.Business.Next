@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using QIQO.Accounts.Manager;
-using QIQO.MQ;
+﻿using QIQO.Accounts.Manager;
 using QIQO.Accounts.Data;
 
 namespace QIQO.Business.Api

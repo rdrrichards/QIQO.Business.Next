@@ -1,6 +1,4 @@
 ﻿using QIQO.Accounts.Domain;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace QIQO.Business.Api.Accounts
@@ -12,15 +10,15 @@ namespace QIQO.Business.Api.Accounts
         [Required]
         public QIQOAccountType AccountType { get; set; } = QIQOAccountType.Business;
         [Required]
-        public string AccountCode { get; set; }
+        public string AccountCode { get; set; } = string.Empty;
         [Required]
-        public string AccountName { get; set; }
+        public string AccountName { get; set; } = string.Empty;
         [Required]
-        public string AccountDesc { get; set; }
-        public string AccountDba { get; set; }
+        public string AccountDesc { get; set; } = string.Empty;
+        public string AccountDba { get; set; } = string.Empty;
         [Required]
         public DateTime AccountStartDate { get; set; }
         public DateTime? AccountEndDate { get; set; }
-        public List<AccountAddressAddViewModel> AccountAddresses { get; set; }
+        public List<AccountAddressAddViewModel>? AccountAddresses { get; set; }
     }
 }

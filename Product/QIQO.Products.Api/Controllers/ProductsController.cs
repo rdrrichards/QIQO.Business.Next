@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QIQO.Products.Domain;
 using QIQO.Products.Manager;
-using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Products
 {

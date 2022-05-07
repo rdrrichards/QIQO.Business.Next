@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using QIQO.Products.Manager;
+﻿using QIQO.Products.Manager;
 using QIQO.Products.Data;
 
 namespace QIQO.Business.Api

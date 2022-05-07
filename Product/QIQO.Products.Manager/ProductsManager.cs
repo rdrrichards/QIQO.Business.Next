@@ -2,7 +2,6 @@
 using QIQO.MQ;
 using QIQO.Products.Data;
 using QIQO.Products.Domain;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QIQO.Business.Core.Contracts;

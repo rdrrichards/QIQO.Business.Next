@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QIQO.Business.Api.Orders
 {
@@ -9,6 +7,6 @@ namespace QIQO.Business.Api.Orders
         [Required]
         public int OrderKey { get; set; }
         public DateTime OrderEntryDate { get; set; }
-        public List<OrderItemUpdateViewModel> OrderItems { get; set; }
+        public List<OrderItemUpdateViewModel>? OrderItems { get; set; }
     }
 }

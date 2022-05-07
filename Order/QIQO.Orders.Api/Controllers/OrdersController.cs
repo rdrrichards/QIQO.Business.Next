@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QIQO.Orders.Domain;
 using QIQO.Orders.Manager;
-using System.Threading.Tasks;
 
 namespace QIQO.Business.Api.Orders
 {

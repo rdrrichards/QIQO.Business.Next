@@ -9,11 +9,11 @@ namespace QIQO.Business.Api.Products
         [Required]
         public int ProductType { get; set; }
         [Required]
-        public string ProductName { get; set; }
+        public string ProductName { get; set; } = string.Empty;
         [Required]
-        public string ProductDesc { get; set; }
-        public string ProductNameShort { get; set; }
-        public string ProductNameLong { get; set; }
-        public string ProductImagePath { get; set; }
+        public string ProductDesc { get; set; } = string.Empty;
+        public string ProductNameShort { get; set; } = string.Empty;
+        public string ProductNameLong { get; set; } = string.Empty;
+        public string ProductImagePath { get; set; } = string.Empty;
     }
 }
