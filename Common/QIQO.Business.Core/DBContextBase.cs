@@ -38,7 +38,7 @@ namespace QIQO.Business.Core
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -62,7 +62,7 @@ namespace QIQO.Business.Core
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -91,7 +91,7 @@ namespace QIQO.Business.Core
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -127,7 +127,7 @@ namespace QIQO.Business.Core
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -143,7 +143,7 @@ namespace QIQO.Business.Core
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
         }
 

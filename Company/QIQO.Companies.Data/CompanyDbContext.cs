@@ -45,7 +45,7 @@ namespace QIQO.Companies.Data
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {

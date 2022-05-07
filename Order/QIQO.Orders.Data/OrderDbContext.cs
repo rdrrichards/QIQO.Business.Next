@@ -45,7 +45,7 @@ namespace QIQO.Orders.Data
             catch (Exception ex)
             {
                 Log.LogError(ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {
