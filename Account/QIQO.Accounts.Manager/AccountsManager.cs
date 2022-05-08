@@ -19,15 +19,13 @@ namespace QIQO.Accounts.Manager
     public class AccountsManager : IAccountsManager
     {
         private readonly ILogger<AccountsManager> _log;
-        private readonly IMQPublisher _mqPublisher;
         private readonly IAccountRepository _accountRepository;
         private readonly IAccountEntityService _accountEntityService;
 
-        public AccountsManager(ILogger<AccountsManager> logger, IMQPublisher mqPublisher,
+        public AccountsManager(ILogger<AccountsManager> logger, 
             IAccountRepository accountRepository, IAccountEntityService accountEntityService)
         {
             _log = logger;
-            _mqPublisher = mqPublisher;
             _accountRepository = accountRepository;
             _accountEntityService = accountEntityService;
         }
@@ -63,8 +61,8 @@ namespace QIQO.Accounts.Manager
         {
             return Task.Factory.StartNew(() => {
                 _accountRepository.Save(_accountEntityService.Map(account));
-                _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
-                _mqPublisher.Send(account, "Order", "account.add", "account.add");
+                //_mqPublisher.Send(account, "Invoice", "account.add", "account.add");
+                //_mqPublisher.Send(account, "Order", "account.add", "account.add");
                 // _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
             });
         }

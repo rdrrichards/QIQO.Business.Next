@@ -9,7 +9,7 @@ namespace QIQO.Business.Api
         {
             return services.AddAccountDbContexts()
                 .AddAccountManagers()
-                .AddAccountMQServices()
+                //.AddAccountMQServices()
                 .AddAccountMappers()
                 .AddAccountRepos()
                 .AddAccountEntityServices();
