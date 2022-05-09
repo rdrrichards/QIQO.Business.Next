@@ -33,33 +33,33 @@ namespace QIQO.Invoices.Manager
         }
         public Task DeleteInvoiceAsync(int invoiceKey)
         {
-            return Task.Factory.StartNew(() => _invoiceRepository.DeleteByID(invoiceKey));
+            return Task.Run(() => _invoiceRepository.DeleteByID(invoiceKey));
         }
 
         public Task<Invoice> GetInvoiceAsync(string invoiceCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return new Invoice(_invoiceRepository.GetByCode(invoiceCode, string.Empty)); // _accountRepository.GetAll();
             });
         }
 
         public Task<List<Invoice>> GetInvoicesAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _invoiceEntityService.Map(_invoiceRepository.GetAll());
             });
         }
 
         public Task<List<Invoice>> FindInvoicesAsync(int companyKey, string term)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _invoiceEntityService.Map(_invoiceRepository.FindAll(companyKey, term));
             });
         }
 
         public Task SaveInvoiceAsync(Invoice invoice)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 _invoiceRepository.Save(_invoiceEntityService.Map(invoice));
                 _mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
             });
@@ -67,7 +67,7 @@ namespace QIQO.Invoices.Manager
 
         public Task<List<Invoice>> GetOpenInvoicesAsync(int companyKey)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _invoiceEntityService.Map(_invoiceRepository.GetAllOpen(companyKey));
             });
         }

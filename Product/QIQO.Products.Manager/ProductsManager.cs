@@ -31,26 +31,26 @@ namespace QIQO.Products.Manager
         }
         public Task DeleteProductAsync(int productKey)
         {
-            return Task.Factory.StartNew(() => _productRepository.DeleteByID(productKey));
+            return Task.Run(() => _productRepository.DeleteByID(productKey));
         }
 
         public Task<Product> GetProductAsync(string productCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _productEntityService.Map(_productRepository.GetByCode(productCode, string.Empty));
             });
         }
 
         public Task<List<Product>> GetProductsAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _productEntityService.Map(_productRepository.GetAll());
             });
         }
 
         public Task SaveProductAsync(Product product)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 _productRepository.Save(_productEntityService.Map(product));
                 _mqPublisher.Send(product, "product", "product.add", "product.add");
             });

@@ -33,33 +33,33 @@ namespace QIQO.Accounts.Manager
         public Task DeleteAccountAsync(int accountKey)
         {
             // delete account here
-            return Task.Factory.StartNew(() => _accountRepository.DeleteByID(accountKey));
+            return Task.Run(() => _accountRepository.DeleteByID(accountKey));
         }
 
         public Task<List<Account>> GetAccountsAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _accountEntityService.Map(_accountRepository.GetAll());
             });
         }
 
         public Task<List<Account>> FindAccountsAsync(int companyKey, string term)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _accountEntityService.Map(_accountRepository.FindAll(companyKey, term));
             });
         }
 
         public Task<Account> GetAccountAsync(string accountCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return new Account(_accountRepository.GetByCode(accountCode, string.Empty)); // _accountRepository.GetAll();
             });
         }
 
         public Task SaveAccountAsync(Account account)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 _accountRepository.Save(_accountEntityService.Map(account));
                 //_mqPublisher.Send(account, "Invoice", "account.add", "account.add");
                 //_mqPublisher.Send(account, "Order", "account.add", "account.add");

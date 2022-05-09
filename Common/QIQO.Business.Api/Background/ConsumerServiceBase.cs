@@ -45,7 +45,7 @@ namespace QIQO.Business.Api.Background
         protected Task Listen(CancellationToken stoppingToken, Action<object> listenAction)
         {
 
-            return Task.Factory.StartNew(() =>
+            return Task.Run(() =>
             {
                 _log.LogDebug($"{_section}{_action}ConsumerService -> ExecuteAsync started");
                 stoppingToken.Register(() => _log.LogDebug($"{_section}{_action}ConsumerService background task is stopping"));

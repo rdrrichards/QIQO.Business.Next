@@ -34,33 +34,33 @@ namespace QIQO.Orders.Manager
         }
         public Task DeleteOrderAsync(int orderKey)
         {
-            return Task.Factory.StartNew(() => _orderRepository.DeleteByID(orderKey));
+            return Task.Run(() => _orderRepository.DeleteByID(orderKey));
         }
 
         public Task<Order> GetOrderAsync(string orderCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return new Order(_orderRepository.GetByCode(orderCode, string.Empty)); // _accountRepository.GetAll();
             });
         }
 
         public Task<List<Order>> GetOrdersAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _orderEntityService.Map(_orderRepository.GetAll());
             });
         }
 
         public Task<List<Order>> FindOrdersAsync(int companyKey, string term)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _orderEntityService.Map(_orderRepository.FindAll(companyKey, term));
             });
         }
 
         public Task SaveOrderAsync(Order order)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 _orderRepository.Save(_orderEntityService.Map(order));
                 _mqPublisher.Send(order, "order", "order.add", "order.add");
             });
@@ -68,7 +68,7 @@ namespace QIQO.Orders.Manager
 
         public Task<List<Order>> GetOpenOrdersAsync(int companyKey)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _orderEntityService.Map(_orderRepository.GetAllOpen(companyKey));
             });
         }

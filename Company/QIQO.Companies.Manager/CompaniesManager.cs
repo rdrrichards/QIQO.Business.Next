@@ -33,26 +33,26 @@ namespace QIQO.Companies.Manager
         }
         public Task DeleteCompanyAsync(int companyKey)
         {
-            return Task.Factory.StartNew(() => _companyRepository.DeleteByID(companyKey));
+            return Task.Run(() => _companyRepository.DeleteByID(companyKey));
         }
 
         public Task<Company> GetCompanyAsync(string companyCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return new Company(_companyRepository.GetByCode(companyCode, string.Empty)); // _accountRepository.GetAll();
             });
         }
 
         public Task<List<Company>> GetCompaniesAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 return _companyEntityService.Map(_companyRepository.GetAll());
             });
         }
 
         public Task SaveCompanyAsync(Company company)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 _companyRepository.Save(_companyEntityService.Map(company));
                 _mqPublisher.Send(company, "company", "company.add", "company.add");
             });
