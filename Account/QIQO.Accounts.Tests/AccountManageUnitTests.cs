@@ -11,14 +11,12 @@ namespace QIQO.Accounts.Tests
     public class AccountManageUnitTests
     {
         private readonly Mock<ILogger<AccountsManager>> _mockLog;
-        private readonly Mock<IMQPublisher> _mqPublisher;
         private readonly Mock<IAccountRepository> _accountRepository;
         private readonly Mock<IAccountEntityService> _accountEntityService;
 
         public AccountManageUnitTests()
         {
             _mockLog = new Mock<ILogger<AccountsManager>>();
-            _mqPublisher = new Mock<IMQPublisher>();
             _accountRepository  = new Mock<IAccountRepository>();
             _accountEntityService = new Mock<IAccountEntityService>();
 
@@ -30,7 +28,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_GetAccountsAsync_IsEmpty()
         {
-            var sut = new AccountsManager(_mockLog.Object, _mqPublisher.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
 
             var retVal = await sut.GetAccountsAsync();
 
@@ -39,7 +37,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_GetAccountAsync_NotNull()
         {
-            var sut = new AccountsManager(_mockLog.Object, _mqPublisher.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
 
             var retVal = await sut.GetAccountAsync("TEST");
 
@@ -48,7 +46,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_DeleteAccountAsync_DoesntFail()
         {
-            var sut = new AccountsManager(_mockLog.Object, _mqPublisher.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
 
             await sut.DeleteAccountAsync(0);
 
@@ -57,7 +55,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_SaveAccountAsync_DoesntFail()
         {
-            var sut = new AccountsManager(_mockLog.Object, _mqPublisher.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
 
             await sut.SaveAccountAsync(new Account(new AccountData()));
 
