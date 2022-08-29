@@ -6,6 +6,10 @@ GET http://localhost:8080/api/v1/Accounts
 
 GET http://localhost:30621/api/v1/Accounts
 
+### for nginx
+
+GET http://qiqosoft.com:80/api/v1/accounts
+
 ### for dapr
 
 ### GET http://localhost:3500/v1.0/invoke/accounts-api/method/accounts

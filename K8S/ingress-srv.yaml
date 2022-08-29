@@ -10,11 +10,11 @@ spec:
     - host: qiqosoft.com
       http:
         paths:
-          - path: /api/account
+          - path: /api/v1/accounts
             pathType: Prefix
             backend:
               service:
-                name: accounts-api-clusterip-srv
+                name: accounts-clusterip-srv
                 port:
                   number: 80
           # - path: /api/c/platforms

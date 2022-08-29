@@ -14,9 +14,9 @@ spec:
       labels:
         app: accounts-api
       annotations:
-        dapr.io/enabled: "true"
-        dapr.io/app-id: "accounts-api"
-        dapr.io/app-port: "80"
+        dapr.io/enabled: 'true'
+        dapr.io/app-id: 'accounts-api'
+        dapr.io/app-port: '80'
     spec:
       containers:
         - name: accounts-api
@@ -26,13 +26,12 @@ spec:
           #   - containerPort: 80
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: accounts-api-np-srv
+  name: accounts-clusterip-srv
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: accounts-api
   ports:
