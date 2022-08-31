@@ -35,7 +35,7 @@ namespace QIQO.Business.Api
 
             services.AddStatsService();
             services.AddControllers();
-            services.AddApiVersioning();
+            services.AddApiVersioning().AddDaprClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
