@@ -16,7 +16,7 @@ namespace QIQO.Business.Api
         }
         public static IServiceCollection AddOrderDbContexts(this IServiceCollection services)
         {
-            return services.AddScoped<IOrderDbContext, OrderDbContext>();
+            return services.AddTransient<IOrderDbContext, OrderDbContext>();
         }
         public static IServiceCollection AddOrderManagers(this IServiceCollection services)
         {

@@ -1,9 +1,12 @@
+using QIQO.Business.Api;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddApiVersioning();
 builder.Services.AddControllers();
+builder.Services.AddOrderAll();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer().AddDaprClient();
 builder.Services.AddSwaggerGen();

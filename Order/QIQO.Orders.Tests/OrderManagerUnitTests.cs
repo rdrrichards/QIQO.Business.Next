@@ -1,3 +1,4 @@
+using Dapr.Client;
 using Microsoft.Extensions.Logging;
 using Moq;
 using QIQO.MQ;
@@ -11,14 +12,14 @@ namespace QIQO.Orders.Tests
     public class OrderManagerUnitTests
     {
         private readonly Mock<ILogger<OrdersManager>> _mockLog;
-        private readonly Mock<IMQPublisher> _mqPublisher;
+        private readonly Mock<DaprClient> _mqPublisher;
         private readonly Mock<IOrderHeaderRepository> _orderRepository;
         private readonly Mock<IOrderEntityService> _orderEntityService;
 
         public OrderManagerUnitTests()
         {
             _mockLog = new Mock<ILogger<OrdersManager>>();
-            _mqPublisher = new Mock<IMQPublisher>();
+            _mqPublisher = new Mock<DaprClient>();
             _orderRepository = new Mock<IOrderHeaderRepository>();
             _orderEntityService = new Mock<IOrderEntityService>();
 

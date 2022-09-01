@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using QIQO.MQ;
+﻿using Dapr.Client;
+using Microsoft.Extensions.Logging;
+using QIQO.Business.Core.Contracts;
 using QIQO.Orders.Data;
 using QIQO.Orders.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Orders.Manager
 {
@@ -22,13 +22,14 @@ namespace QIQO.Orders.Manager
         private readonly IOrderHeaderRepository _orderRepository;
         private readonly IOrderEntityService _orderEntityService;
         private readonly ILogger<OrdersManager> _log;
-        private readonly IMQPublisher _mqPublisher;
+        private readonly DaprClient _daprClient;
 
-        public OrdersManager(ILogger<OrdersManager> logger, IMQPublisher mqPublisher,
+
+        public OrdersManager(ILogger<OrdersManager> logger, DaprClient daprClient,
             IOrderHeaderRepository orderRepository, IOrderEntityService orderEntityService)
         {
             _log = logger;
-            _mqPublisher = mqPublisher;
+            _daprClient = daprClient;
             _orderRepository = orderRepository;
             _orderEntityService = orderEntityService;
         }
@@ -62,7 +63,8 @@ namespace QIQO.Orders.Manager
         {
             return Task.Run(() => {
                 _orderRepository.Save(_orderEntityService.Map(order));
-                _mqPublisher.Send(order, "order", "order.add", "order.add");
+                //_mqPublisher.Send(order, "order", "order.add", "order.add");
+                _daprClient.PublishEventAsync("qiqo-pubsub", "qiqo-order-save", order);
             });
         }
 
