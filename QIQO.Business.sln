@@ -69,7 +69,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Invoices.Api", "Invoic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Orders.Api", "Order\QIQO.Orders.Api\QIQO.Orders.Api.csproj", "{227B380A-D171-4AF4-9309-04020BB87C96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Products.Api", "Product\QIQO.Products.Api\QIQO.Products.Api.csproj", "{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Api", "Product\QIQO.Products.Api\QIQO.Products.Api.csproj", "{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{C853D6B2-7C82-42F3-9225-0BF16D36D3D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Business.Client", "Frontend\QIQO.Business.Client\QIQO.Business.Client.csproj", "{79623D20-E05C-4683-BC62-06242EAD1F13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +193,10 @@ Global
 		{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79623D20-E05C-4683-BC62-06242EAD1F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79623D20-E05C-4683-BC62-06242EAD1F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79623D20-E05C-4683-BC62-06242EAD1F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79623D20-E05C-4683-BC62-06242EAD1F13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -222,6 +230,7 @@ Global
 		{069224AA-392B-44C1-B8E8-4A87F057650B} = {D3B239AB-2E51-46D7-8CDB-75F890BB6B59}
 		{227B380A-D171-4AF4-9309-04020BB87C96} = {0219908B-DFAD-4690-8F74-AE1A6F95BEB7}
 		{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31} = {7C82921A-220D-4778-810C-3AA90A39EA2A}
+		{79623D20-E05C-4683-BC62-06242EAD1F13} = {C853D6B2-7C82-42F3-9225-0BF16D36D3D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D30E9C8-D743-4661-A00F-DE0CBBA8E57D}
