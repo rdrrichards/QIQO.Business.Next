@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapr.Client" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\QIQO.Business.Core\QIQO.Business.Core.csproj" />
     <ProjectReference Include="..\..\Common\QIQO.MQ\QIQO.MQ.csproj" />
     <ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />

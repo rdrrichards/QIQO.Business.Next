@@ -1,9 +1,9 @@
+using Dapr.Client;
 using Microsoft.Extensions.Logging;
 using Moq;
 using QIQO.Accounts.Data;
 using QIQO.Accounts.Domain;
 using QIQO.Accounts.Manager;
-using QIQO.MQ;
 using Xunit;
 
 namespace QIQO.Accounts.Tests
@@ -13,12 +13,14 @@ namespace QIQO.Accounts.Tests
         private readonly Mock<ILogger<AccountsManager>> _mockLog;
         private readonly Mock<IAccountRepository> _accountRepository;
         private readonly Mock<IAccountEntityService> _accountEntityService;
+        private readonly Mock<DaprClient> _daprClient;
 
         public AccountManageUnitTests()
         {
             _mockLog = new Mock<ILogger<AccountsManager>>();
             _accountRepository  = new Mock<IAccountRepository>();
             _accountEntityService = new Mock<IAccountEntityService>();
+            _daprClient = new Mock<DaprClient>();
 
             _accountRepository.Setup(m => m.GetByCode(It.IsAny<string>(), It.IsAny<string>())).Returns(new AccountData());
 
@@ -28,7 +30,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_GetAccountsAsync_IsEmpty()
         {
-            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _daprClient.Object, _accountRepository.Object, _accountEntityService.Object);
 
             var retVal = await sut.GetAccountsAsync();
 
@@ -37,7 +39,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_GetAccountAsync_NotNull()
         {
-            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _daprClient.Object, _accountRepository.Object, _accountEntityService.Object);
 
             var retVal = await sut.GetAccountAsync("TEST");
 
@@ -46,7 +48,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_DeleteAccountAsync_DoesntFail()
         {
-            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _daprClient.Object, _accountRepository.Object, _accountEntityService.Object);
 
             await sut.DeleteAccountAsync(0);
 
@@ -55,7 +57,7 @@ namespace QIQO.Accounts.Tests
         [Fact]
         public async void AccountsManager_SaveAccountAsync_DoesntFail()
         {
-            var sut = new AccountsManager(_mockLog.Object, _accountRepository.Object, _accountEntityService.Object);
+            var sut = new AccountsManager(_mockLog.Object, _daprClient.Object, _accountRepository.Object, _accountEntityService.Object);
 
             await sut.SaveAccountAsync(new Account(new AccountData()));
 

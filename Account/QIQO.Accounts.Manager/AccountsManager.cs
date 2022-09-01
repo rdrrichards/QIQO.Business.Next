@@ -5,6 +5,7 @@ using QIQO.MQ;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QIQO.Business.Core.Contracts;
+using Dapr.Client;
 
 namespace QIQO.Accounts.Manager
 {
@@ -19,13 +20,15 @@ namespace QIQO.Accounts.Manager
     public class AccountsManager : IAccountsManager
     {
         private readonly ILogger<AccountsManager> _log;
+        private readonly DaprClient _daprClient;
         private readonly IAccountRepository _accountRepository;
         private readonly IAccountEntityService _accountEntityService;
 
-        public AccountsManager(ILogger<AccountsManager> logger, 
+        public AccountsManager(ILogger<AccountsManager> logger, DaprClient daprClient,
             IAccountRepository accountRepository, IAccountEntityService accountEntityService)
         {
             _log = logger;
+            _daprClient = daprClient;
             _accountRepository = accountRepository;
             _accountEntityService = accountEntityService;
         }
@@ -61,6 +64,7 @@ namespace QIQO.Accounts.Manager
         {
             return Task.Run(() => {
                 _accountRepository.Save(_accountEntityService.Map(account));
+                _daprClient.PublishEventAsync("qiqo-pubsub", "qiqo-account-save", account);
                 //_mqPublisher.Send(account, "Invoice", "account.add", "account.add");
                 //_mqPublisher.Send(account, "Order", "account.add", "account.add");
                 // _mqPublisher.Send(account, "Invoice", "account.add", "account.add");
