@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Dapr.Client;
+using Microsoft.Extensions.Logging;
+using QIQO.Business.Core.Contracts;
 using QIQO.Invoices.Data;
 using QIQO.Invoices.Domain;
-using QIQO.MQ;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Invoices.Manager
 {
@@ -21,13 +21,16 @@ namespace QIQO.Invoices.Manager
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceEntityService _invoiceEntityService;
         private readonly ILogger<InvoicesManager> _log;
-        private readonly IMQPublisher _mqPublisher;
+        private readonly DaprClient _daprClient;
 
-        public InvoicesManager(ILogger<InvoicesManager> logger, IMQPublisher mqPublisher,
+        //private readonly IMQPublisher _mqPublisher;
+
+        public InvoicesManager(ILogger<InvoicesManager> logger, DaprClient daprClient, //IMQPublisher mqPublisher,
             IInvoiceRepository invoiceRepository, IInvoiceEntityService invoiceEntityService)
         {
             _log = logger;
-            _mqPublisher = mqPublisher;
+            _daprClient = daprClient;
+            //_mqPublisher = mqPublisher;
             _invoiceRepository = invoiceRepository;
             _invoiceEntityService = invoiceEntityService;
         }
@@ -61,7 +64,8 @@ namespace QIQO.Invoices.Manager
         {
             return Task.Run(() => {
                 _invoiceRepository.Save(_invoiceEntityService.Map(invoice));
-                _mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
+                //_mqPublisher.Send(invoice, "invoice", "invoice.add", "invoice.add");
+                _daprClient.PublishEventAsync("qiqo-pubsub", "qiqo-invoice-save", invoice);
             });
         }
 

@@ -1,3 +1,4 @@
+using Dapr.Client;
 using Microsoft.Extensions.Logging;
 using Moq;
 using QIQO.Invoices.Data;
@@ -11,14 +12,14 @@ namespace QIQO.Invoices.Tests
     public class InvoiceManagerUnitTests
     {
         private readonly Mock<ILogger<InvoicesManager>> _mockLog;
-        private readonly Mock<IMQPublisher> _mqPublisher;
+        private readonly Mock<DaprClient> _mqPublisher;
         private readonly Mock<IInvoiceRepository> _invoiceRepository;
         private readonly Mock<IInvoiceEntityService> _invoiceEntityService;
 
         public InvoiceManagerUnitTests()
         {
             _mockLog = new Mock<ILogger<InvoicesManager>>();
-            _mqPublisher = new Mock<IMQPublisher>();
+            _mqPublisher = new Mock<DaprClient>();
             _invoiceRepository = new Mock<IInvoiceRepository>();
             _invoiceEntityService = new Mock<IInvoiceEntityService>();
 
