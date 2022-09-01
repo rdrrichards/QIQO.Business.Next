@@ -11,11 +11,12 @@ namespace QIQO.Business.Api
                 .AddCompanyManagers()
                 .AddCompanyMQServices()
                 .AddCompanyMappers()
-                .AddCompanyRepos();
+                .AddCompanyRepos()
+                .AddCompanyEntityServices();
         }
         public static IServiceCollection AddCompanyDbContexts(this IServiceCollection services)
         {
-            return services.AddScoped<ICompanyDbContext, CompanyDbContext>();
+            return services.AddTransient<ICompanyDbContext, CompanyDbContext>();
         }
         public static IServiceCollection AddCompanyManagers(this IServiceCollection services)
         {
@@ -50,6 +51,10 @@ namespace QIQO.Business.Api
                 .AddTransient<IContactRepository, ContactRepository>()
                 .AddTransient<IFeeScheduleRepository, FeeScheduleRepository>()
                 .AddTransient<IPersonRepository, PersonRepository>();
+        }
+        public static IServiceCollection AddCompanyEntityServices(this IServiceCollection services)
+        {
+            return services.AddTransient<ICompanyEntityService, CompanyEntityService>();
         }
     }
 }

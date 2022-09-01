@@ -1,7 +1,7 @@
 ﻿using QIQO.Companies.Data;
 using QIQO.Companies.Domain;
 
-namespace QIQO.Accounts.Manager
+namespace QIQO.Companies.Manager
 {
     public class CommentEntityService : ICommentEntityService
     {

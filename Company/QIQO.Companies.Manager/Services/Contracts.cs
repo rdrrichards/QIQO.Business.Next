@@ -3,7 +3,7 @@ using QIQO.Companies.Data;
 using QIQO.Companies.Domain;
 using QIQO.Business.Core.Contracts;
 
-namespace QIQO.Accounts.Manager
+namespace QIQO.Companies.Manager
 {
     public interface IAddressEntityService : IEntityService<Address, AddressData> { }
     public interface IAddressTypeEntityService : IEntityService<AddressType, AddressTypeData> { }

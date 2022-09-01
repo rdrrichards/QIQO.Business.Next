@@ -1,25 +1,25 @@
 using Microsoft.Extensions.Logging;
 using Moq;
-using QIQO.Accounts.Manager;
+using QIQO.Companies.Manager;
 using QIQO.Companies.Data;
 using QIQO.Companies.Domain;
-using QIQO.Companies.Manager;
 using QIQO.MQ;
 using Xunit;
+using Dapr.Client;
 
 namespace QIQO.Companies.Tests
 {
     public class CompanyManagerUnitTests
     {
         private readonly Mock<ILogger<CompaniesManager>> _mockLog;
-        private readonly Mock<IMQPublisher> _mqPublisher;
+        private readonly Mock<DaprClient> _mqPublisher;
         private readonly Mock<ICompanyRepository> _companyRepository;
         private readonly Mock<ICompanyEntityService> _companyEntityService;
 
         public CompanyManagerUnitTests()
         {
             _mockLog = new Mock<ILogger<CompaniesManager>>();
-            _mqPublisher = new Mock<IMQPublisher>();
+            _mqPublisher = new Mock<DaprClient>();
             _companyRepository = new Mock<ICompanyRepository>();
             _companyEntityService = new Mock<ICompanyEntityService>();
 

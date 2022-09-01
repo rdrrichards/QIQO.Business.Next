@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using QIQO.Accounts.Manager;
+﻿using Dapr.Client;
+using Microsoft.Extensions.Logging;
+using QIQO.Business.Core.Contracts;
 using QIQO.Companies.Data;
 using QIQO.Companies.Domain;
-using QIQO.MQ;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Companies.Manager
 {
@@ -21,13 +20,16 @@ namespace QIQO.Companies.Manager
         private readonly ICompanyRepository _companyRepository;
         private readonly ICompanyEntityService _companyEntityService;
         private readonly ILogger<CompaniesManager> _log;
-        private readonly IMQPublisher _mqPublisher;
+        private readonly DaprClient _daprClient;
 
-        public CompaniesManager(ILogger<CompaniesManager> logger, IMQPublisher mqPublisher,
+        //private readonly IMQPublisher _mqPublisher;
+
+        public CompaniesManager(ILogger<CompaniesManager> logger, DaprClient daprClient, 
             ICompanyRepository companyRepository, ICompanyEntityService companyEntityService)
         {
             _log = logger;
-            _mqPublisher = mqPublisher;
+            _daprClient = daprClient;
+            //_mqPublisher = mqPublisher;
             _companyRepository = companyRepository;
             _companyEntityService = companyEntityService;
         }
@@ -39,7 +41,7 @@ namespace QIQO.Companies.Manager
         public Task<Company> GetCompanyAsync(string companyCode)
         {
             return Task.Run(() => {
-                return new Company(_companyRepository.GetByCode(companyCode, string.Empty)); // _accountRepository.GetAll();
+                return new Company(_companyRepository.GetByCode(companyCode, string.Empty));
             });
         }
 
@@ -54,7 +56,7 @@ namespace QIQO.Companies.Manager
         {
             return Task.Run(() => {
                 _companyRepository.Save(_companyEntityService.Map(company));
-                _mqPublisher.Send(company, "company", "company.add", "company.add");
+                _daprClient.PublishEventAsync("qiqo-pubsub", "qiqo-company-save", company);
             });
         }
     }
