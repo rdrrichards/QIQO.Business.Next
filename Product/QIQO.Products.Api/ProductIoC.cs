@@ -10,13 +10,14 @@ namespace QIQO.Business.Api
         {
             return  services.AddProductDbContexts()
                 .AddProductManagers()
-                .AddProductMQServices()
+                //.AddProductMQServices()
                 .AddProductMappers()
-                .AddProductRepos();
+                .AddProductRepos()
+                .AddProductEntityServices();
         }
         public static IServiceCollection AddProductDbContexts(this IServiceCollection services)
         {
-            return services.AddScoped<IProductDbContext, ProductDbContext>();
+            return services.AddTransient<IProductDbContext, ProductDbContext>();
         }
         public static IServiceCollection AddProductManagers(this IServiceCollection services)
         {
@@ -41,6 +42,10 @@ namespace QIQO.Business.Api
         {
             return services.AddTransient<IProductRepository, ProductRepository>()
             .AddTransient<IProductTypeRepository, ProductTypeRepository>();
+        }
+        public static IServiceCollection AddProductEntityServices(this IServiceCollection services)
+        {
+            return services.AddTransient<IProductEntityService, ProductEntityService>();
         }
     }
 }

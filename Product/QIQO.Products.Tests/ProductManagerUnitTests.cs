@@ -1,3 +1,4 @@
+using Dapr.Client;
 using Microsoft.Extensions.Logging;
 using Moq;
 using QIQO.MQ;
@@ -11,14 +12,14 @@ namespace QIQO.Products.Tests
     public class ProductManagerUnitTests
     {
         private readonly Mock<ILogger<ProductsManager>> _mockLog;
-        private readonly Mock<IMQPublisher> _mqPublisher;
+        private readonly Mock<DaprClient> _mqPublisher;
         private readonly Mock<IProductRepository> _companyRepository;
         private readonly Mock<IProductEntityService> _companyEntityService;
 
         public ProductManagerUnitTests()
         {
             _mockLog = new Mock<ILogger<ProductsManager>>();
-            _mqPublisher = new Mock<IMQPublisher>();
+            _mqPublisher = new Mock<DaprClient>();
             _companyRepository = new Mock<IProductRepository>();
             _companyEntityService = new Mock<IProductEntityService>();
 

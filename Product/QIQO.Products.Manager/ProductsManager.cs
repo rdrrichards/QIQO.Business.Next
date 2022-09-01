@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using QIQO.MQ;
 using QIQO.Products.Data;
 using QIQO.Products.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QIQO.Business.Core.Contracts;
+using Dapr.Client;
 
 namespace QIQO.Products.Manager
 {
@@ -17,15 +17,16 @@ namespace QIQO.Products.Manager
     public class ProductsManager : IProductsManager
     {
         private readonly ILogger<ProductsManager> _log;
-        private readonly IMQPublisher _mqPublisher;
+        private readonly DaprClient _daprClient;
+
         private readonly IProductRepository _productRepository;
         private readonly IProductEntityService _productEntityService;
 
-        public ProductsManager(ILogger<ProductsManager> logger, IMQPublisher mqPublisher,
+        public ProductsManager(ILogger<ProductsManager> logger, DaprClient daprClient,
             IProductRepository productRepository, IProductEntityService productEntityService)
         {
             _log = logger;
-            _mqPublisher = mqPublisher;
+            _daprClient = daprClient;
             _productRepository = productRepository;
             _productEntityService = productEntityService;
         }
@@ -52,7 +53,8 @@ namespace QIQO.Products.Manager
         {
             return Task.Run(() => {
                 _productRepository.Save(_productEntityService.Map(product));
-                _mqPublisher.Send(product, "product", "product.add", "product.add");
+                //_mqPublisher.Send(product, "product", "product.add", "product.add");
+                _daprClient.PublishEventAsync("qiqo-pubsub", "qiqo-product-save", product);
             });
         }
     }
