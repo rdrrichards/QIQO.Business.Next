@@ -22,20 +22,27 @@ spec:
         - name: accounts-api
           image: rdrrichards/qiqo-accounts-api
           imagePullPolicy: IfNotPresent
-          # ports:
-          #   - containerPort: 80
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: accounts-clusterip-srv
-spec:
-  type: ClusterIP
-  selector:
-    app: accounts-api
-  ports:
-    - name: accounts-api
-      protocol: TCP
-      port: 80
-      targetPort: 80
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: accounts-clusterip-srv
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: accounts-api
+#   ports:
+#     - name: accounts-api
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qiqo-frontend-deployment
+  labels:
+    app: qiqo-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qiqo-frontend
+  template:
+    metadata:
+      labels:
+        app: qiqo-frontend
+      annotations:
+        dapr.io/enabled: 'true'
+        dapr.io/app-id: 'qiqo-frontend'
+        dapr.io/app-port: '80'
+    spec:
+      containers:
+        - name: qiqo-frontend
+          image: rdrrichards/qiqo-frontend
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
