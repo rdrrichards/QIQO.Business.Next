@@ -18,7 +18,7 @@ namespace QIQO.Accounts.Data
         public override IEnumerable<AccountData> GetAll()
         {
             Log.LogInformation("Accessing AccountRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_account_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAccountAll"));
         }
 
         public IEnumerable<AccountData> GetAll(CompanyData company)

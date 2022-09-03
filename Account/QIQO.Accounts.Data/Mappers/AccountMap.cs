@@ -14,19 +14,19 @@ namespace QIQO.Accounts.Data
             {
                 return new AccountData()
                 {
-                    AccountKey = NullCheck<int>(record["account_key"]),
-                    CompanyKey = NullCheck<int>(record["company_key"]),
-                    AccountTypeKey = NullCheck<int>(record["account_type_key"]),
-                    AccountCode = NullCheck<string>(record["account_code"]),
-                    AccountName = NullCheck<string>(record["account_name"]),
-                    AccountDesc = NullCheck<string>(record["account_desc"]),
-                    AccountDba = NullCheck<string>(record["account_dba"]),
-                    AccountStartDate = NullCheck<DateTime>(record["account_start_date"]),
-                    AccountEndDate = NullCheck<DateTime>(record["account_end_date"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    AccountKey = NullCheck<int>(record["AccountKey"]),
+                    CompanyKey = NullCheck<int>(record["CompanyKey"]),
+                    AccountTypeKey = NullCheck<int>(record["AccountTypeKey"]),
+                    AccountCode = NullCheck<string>(record["AccountCode"]),
+                    AccountName = NullCheck<string>(record["AccountName"]),
+                    AccountDesc = NullCheck<string>(record["AccountDescription"]),
+                    AccountDba = NullCheck<string>(record["AccountDba"]),
+                    AccountStartDate = NullCheck<DateTime>(record["AccountStartDate"]),
+                    AccountEndDate = NullCheck<DateTime>(record["AccountEndDate"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditaddDatetime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDatetime"])
                 };
             }
             catch (Exception ex)
@@ -37,23 +37,23 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(AccountData entity) => new List<SqlParameter>
             {
-                BuildParam("@account_key", entity.AccountKey),
-                BuildParam("@company_key", entity.CompanyKey),
-                BuildParam("@account_type_key", entity.AccountTypeKey),
-                BuildParam("@account_code", entity.AccountCode),
-                BuildParam("@account_name", entity.AccountName),
-                BuildParam("@account_desc", entity.AccountDesc),
-                BuildParam("@account_dba", entity.AccountDba),
-                BuildParam("@account_start_date", entity.AccountStartDate),
-                BuildParam("@account_end_date", entity.AccountEndDate),
+                BuildParam("@AccountKey", entity.AccountKey),
+                BuildParam("@CompanyKey", entity.CompanyKey),
+                BuildParam("@AccountTypeKey", entity.AccountTypeKey),
+                BuildParam("@AccountCode", entity.AccountCode),
+                BuildParam("@AccountName", entity.AccountName),
+                BuildParam("@AccountDescription", entity.AccountDesc),
+                BuildParam("@AccountDba", entity.AccountDba),
+                BuildParam("@AccountStartDate", entity.AccountStartDate),
+                BuildParam("@AccountEndDate", entity.AccountEndDate),
                 GetOutParam()
             };
 
         public List<SqlParameter> MapParamsForDelete(AccountData entity) => MapParamsForDelete(entity.AccountKey);
 
-        public List<SqlParameter> MapParamsForDelete(int account_key) => new List<SqlParameter>
+        public List<SqlParameter> MapParamsForDelete(int accountKey) => new List<SqlParameter>
             {
-                BuildParam("@account_key", account_key),
+                BuildParam("@AccountKey", accountKey),
                 GetOutParam()
             };
     }
