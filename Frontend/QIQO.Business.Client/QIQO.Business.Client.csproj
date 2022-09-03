@@ -8,15 +8,11 @@
 	<SpaProxyServerUrl>https://localhost:44481</SpaProxyServerUrl>
 	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
 	<ImplicitUsings>enable</ImplicitUsings>
-	<UserSecretsId>17e224a7-aa14-42ec-ac5c-bc4da302df1e</UserSecretsId>
-	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	<DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
 	<PackageReference Include="Dapr.AspNetCore" Version="1.8.0" />
 	<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.8" />
-	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

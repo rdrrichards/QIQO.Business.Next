@@ -16,4 +16,10 @@
     <ProjectReference Include="..\QIQO.Products.Manager\QIQO.Products.Manager.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
