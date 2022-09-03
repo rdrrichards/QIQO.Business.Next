@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invoices-api-deployment
+  labels:
+    app: invoices-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: invoices-api
+  template:
+    metadata:
+      labels:
+        app: invoices-api
+      annotations:
+        dapr.io/enabled: 'true'
+        dapr.io/app-id: 'invoices-api'
+        dapr.io/app-port: '80'
+    spec:
+      containers:
+        - name: invoices-api
+          image: rdrrichards/qiqo-invoices-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: companies-api-deployment
+  labels:
+    app: companies-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: companies-api
+  template:
+    metadata:
+      labels:
+        app: companies-api
+      annotations:
+        dapr.io/enabled: 'true'
+        dapr.io/app-id: 'companies-api'
+        dapr.io/app-port: '80'
+    spec:
+      containers:
+        - name: companies-api
+          image: rdrrichards/qiqo-companies-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
