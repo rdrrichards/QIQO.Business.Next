@@ -18,28 +18,28 @@ namespace QIQO.Invoices.Data
         public override IEnumerable<InvoiceItemData> GetAll()
         {
             Log.LogInformation("Accessing InvoiceItemRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_item_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceItemAll"));
         }
 
         public IEnumerable<InvoiceItemData> GetAll(InvoiceData invoice)
         {
             Log.LogInformation("Accessing InvoiceItemRepo GetAll by InvoiceData function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@invoice_key", invoice.InvoiceKey) };
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_item_all", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceKey", invoice.InvoiceKey) };
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceItemAll", pcol));
         }
 
         public override InvoiceItemData GetByID(int invoice_item_key)
         {
             Log.LogInformation("Accessing InvoiceItemRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@invoice_item_key", invoice_item_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_item_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceItemKey", invoice_item_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceItemAll", pcol));
         }
 
         public InvoiceItemData GetByOrderItemID(int order_item_key)
         {
             Log.LogInformation("Accessing InvoiceItemRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@order_item_key", order_item_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_item_get_by_order_item", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@OrderItemKey", order_item_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceItemGetByOrderItem", pcol));
         }
 
         public override InvoiceItemData GetByCode(string invoice_item_code, string entity_code)
@@ -47,7 +47,7 @@ namespace QIQO.Invoices.Data
             Log.LogInformation("Accessing InvoiceItemRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@invoice_item_code", invoice_item_code),
-                Mapper.BuildParam("@company_code", entity_code)
+                Mapper.BuildParam("@CompanyCode", entity_code)
             };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_item_get_c", pcol));
         }
@@ -55,7 +55,7 @@ namespace QIQO.Invoices.Data
         public override void Insert(InvoiceItemData entity)
         {
             Log.LogInformation("Accessing InvoiceItemRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -64,7 +64,7 @@ namespace QIQO.Invoices.Data
         public override void Save(InvoiceItemData entity)
         {
             Log.LogInformation("Accessing InvoiceItemRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -73,7 +73,7 @@ namespace QIQO.Invoices.Data
         public override void Delete(InvoiceItemData entity)
         {
             Log.LogInformation("Accessing InvoiceItemRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_item_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceItemDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
@@ -84,15 +84,15 @@ namespace QIQO.Invoices.Data
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_item_del_c", pcol);
         }
 
-        public override void DeleteByID(int entity_key)
+        public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing InvoiceItemRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_item_del", Mapper.MapParamsForDelete(entity_key));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceItemDel", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(InvoiceItemData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_item_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceItemUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

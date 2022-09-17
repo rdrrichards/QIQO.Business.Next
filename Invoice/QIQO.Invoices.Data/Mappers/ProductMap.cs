@@ -14,18 +14,18 @@ namespace QIQO.Invoices.Data
             {
                 return new ProductData()
                 {
-                    ProductKey = NullCheck<int>(record["product_key"]),
-                    ProductTypeKey = NullCheck<int>(record["product_type_key"]),
-                    ProductCode = NullCheck<string>(record["product_code"]),
-                    ProductName = NullCheck<string>(record["product_name"]),
-                    ProductDesc = NullCheck<string>(record["product_desc"]),
-                    ProductNameShort = NullCheck<string>(record["product_name_short"]),
-                    ProductNameLong = NullCheck<string>(record["product_name_long"]),
-                    ProductImagePath = NullCheck<string>(record["product_image_path"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    ProductKey = NullCheck<int>(record["ProductKey"]),
+                    ProductTypeKey = NullCheck<int>(record["ProductTypeKey"]),
+                    ProductCode = NullCheck<string>(record["ProductCode"]),
+                    ProductName = NullCheck<string>(record["ProductName"]),
+                    ProductDesc = NullCheck<string>(record["ProductDescription"]),
+                    ProductNameShort = NullCheck<string>(record["ProductNameShort"]),
+                    ProductNameLong = NullCheck<string>(record["ProductNameLong"]),
+                    ProductImagePath = NullCheck<string>(record["ProductImagePath"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -36,14 +36,14 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForUpsert(ProductData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@product_key", entity.ProductKey),
-                new SqlParameter("@product_type_key", entity.ProductTypeKey),
-                new SqlParameter("@product_code", entity.ProductCode),
-                new SqlParameter("@product_name", entity.ProductName),
-                new SqlParameter("@product_desc", entity.ProductDesc),
-                new SqlParameter("@product_name_short", entity.ProductNameShort),
-                new SqlParameter("@product_name_long", entity.ProductNameLong),
-                new SqlParameter("@product_image_path", entity.ProductImagePath),
+                new SqlParameter("@ProductKey", entity.ProductKey),
+                new SqlParameter("@ProductTypeKey", entity.ProductTypeKey),
+                new SqlParameter("@ProductCode", entity.ProductCode),
+                new SqlParameter("@ProductName", entity.ProductName),
+                new SqlParameter("@ProductDescription", entity.ProductDesc),
+                new SqlParameter("@ProductNameShort", entity.ProductNameShort),
+                new SqlParameter("@ProductNameLong", entity.ProductNameLong),
+                new SqlParameter("@ProductImagePath", entity.ProductImagePath),
                 GetOutParam()
             };
 
@@ -51,7 +51,7 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForDelete(int product_key) => new List<SqlParameter>
             {
-                new SqlParameter("@product_key", product_key),
+                new SqlParameter("@ProductKey", product_key),
                 GetOutParam()
             };
     }

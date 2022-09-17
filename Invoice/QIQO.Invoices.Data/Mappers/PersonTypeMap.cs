@@ -14,14 +14,14 @@ namespace QIQO.Invoices.Data
             {
                 return new PersonTypeData()
                 {
-                    PersonTypeKey = NullCheck<int>(record["person_type_key"]),
-                    PersonTypeCode = NullCheck<string>(record["person_type_code"]),
-                    PersonTypeName = NullCheck<string>(record["person_type_name"]),
-                    PersonTypeDesc = NullCheck<string>(record["person_type_desc"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    PersonTypeKey = NullCheck<int>(record["PersonTypeKey"]),
+                    PersonTypeCode = NullCheck<string>(record["PersonTypeCode"]),
+                    PersonTypeName = NullCheck<string>(record["PersonTypeName"]),
+                    PersonTypeDesc = NullCheck<string>(record["PersonTypeDescription"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -32,10 +32,10 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForUpsert(PersonTypeData entity) => new List<SqlParameter>
             {
-                BuildParam("@person_type_key", entity.PersonTypeKey),
-                BuildParam("@person_type_code", entity.PersonTypeCode),
-                BuildParam("@person_type_name", entity.PersonTypeName),
-                BuildParam("@person_type_desc", entity.PersonTypeDesc),
+                BuildParam("@PersonTypeKey", entity.PersonTypeKey),
+                BuildParam("@PersonTypeCode", entity.PersonTypeCode),
+                BuildParam("@PersonTypeName", entity.PersonTypeName),
+                BuildParam("@PersonTypeDescription", entity.PersonTypeDesc),
                 GetOutParam()
             };
 
@@ -43,7 +43,7 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForDelete(int accountTypeKey) => new List<SqlParameter>
             {
-                BuildParam("@person_type_key", accountTypeKey),
+                BuildParam("@PersonTypeKey", accountTypeKey),
                 GetOutParam()
             };
     }

@@ -14,28 +14,28 @@ namespace QIQO.Invoices.Data
             {
                 return new InvoiceItemData()
                 {
-                    InvoiceItemKey = NullCheck<int>(record["invoice_item_key"]),
-                    InvoiceKey = NullCheck<int>(record["invoice_key"]),
-                    InvoiceItemSeq = NullCheck<int>(record["invoice_item_seq"]),
-                    ProductKey = NullCheck<int>(record["product_key"]),
-                    ProductName = NullCheck<string>(record["product_name"]),
-                    ProductDesc = NullCheck<string>(record["product_desc"]),
-                    InvoiceItemQuantity = NullCheck<int>(record["invoice_item_quantity"]),
-                    ShiptoAddrKey = NullCheck<int>(record["shipto_addr_key"]),
-                    BilltoAddrKey = NullCheck<int>(record["billto_addr_key"]),
-                    InvoiceItemEntryDate = (DBNull.Value == record["invoice_item_entry_date"]) ? null : record["invoice_item_entry_date"] as DateTime?,
-                    OrderItemShipDate = (DBNull.Value == record["order_item_ship_date"]) ? null : record["order_item_ship_date"] as DateTime?,
-                    InvoiceItemCompleteDate = (DBNull.Value == record["invoice_item_complete_date"]) ? null : record["invoice_item_complete_date"] as DateTime?,
-                    InvoiceItemPricePer = NullCheck<decimal>(record["invoice_item_price_per"]),
-                    InvoiceItemLineSum = NullCheck<decimal>(record["invoice_item_line_sum"]),
-                    InvoiceItemAccountRepKey = NullCheck<int>(record["invoice_item_account_rep_key"]),
-                    InvoiceItemSalesRepKey = NullCheck<int>(record["invoice_item_sales_rep_key"]),
-                    InvoiceItemStatusKey = NullCheck<int>(record["invoice_item_status_key"]),
-                    OrderItemKey = NullCheck<int>(record["order_item_key"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    InvoiceItemKey = NullCheck<int>(record["InvoiceItemKey"]),
+                    InvoiceKey = NullCheck<int>(record["InvoiceKey"]),
+                    InvoiceItemSeq = NullCheck<int>(record["InvoiceItemSeq"]),
+                    ProductKey = NullCheck<int>(record["ProductKey"]),
+                    ProductName = NullCheck<string>(record["ProductName"]),
+                    ProductDesc = NullCheck<string>(record["ProductDescription"]),
+                    InvoiceItemQuantity = NullCheck<int>(record["InvoiceItemQuantity"]),
+                    ShiptoAddrKey = NullCheck<int>(record["ShipToAddressKey"]),
+                    BilltoAddrKey = NullCheck<int>(record["BillToAddressKey"]),
+                    InvoiceItemEntryDate = (DBNull.Value == record["InvoiceItemEntryDate"]) ? null : record["InvoiceItemEntryDate"] as DateTime?,
+                    OrderItemShipDate = (DBNull.Value == record["OrderItemShipDate"]) ? null : record["OrderItemShipDate"] as DateTime?,
+                    InvoiceItemCompleteDate = (DBNull.Value == record["InvoiceItemCompleteDate"]) ? null : record["InvoiceItemCompleteDate"] as DateTime?,
+                    InvoiceItemPricePer = NullCheck<decimal>(record["InvoiceItemPricePer"]),
+                    InvoiceItemLineSum = NullCheck<decimal>(record["InvoiceItemLineSum"]),
+                    InvoiceItemAccountRepKey = NullCheck<int>(record["InvoiceItemAccountRepKey"]),
+                    InvoiceItemSalesRepKey = NullCheck<int>(record["InvoiceItemSalesRepKey"]),
+                    InvoiceItemStatusKey = NullCheck<int>(record["InvoiceItemStatusKey"]),
+                    OrderItemKey = NullCheck<int>(record["OrderItemKey"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -46,24 +46,24 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForUpsert(InvoiceItemData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@invoice_item_key", entity.InvoiceItemKey),
-                new SqlParameter("@invoice_key", entity.InvoiceKey),
-                new SqlParameter("@invoice_item_seq", entity.InvoiceItemSeq),
-                new SqlParameter("@product_key", entity.ProductKey),
-                new SqlParameter("@product_name", entity.ProductName),
-                new SqlParameter("@product_desc", entity.ProductDesc),
-                new SqlParameter("@invoice_item_quantity", entity.InvoiceItemQuantity),
-                new SqlParameter("@shipto_addr_key", entity.ShiptoAddrKey),
-                new SqlParameter("@billto_addr_key", entity.BilltoAddrKey),
-                new SqlParameter("@invoice_item_entry_date", entity.InvoiceItemEntryDate),
-                new SqlParameter("@order_item_ship_date", entity.OrderItemShipDate),
-                new SqlParameter("@invoice_item_complete_date", entity.InvoiceItemCompleteDate),
-                new SqlParameter("@invoice_item_price_per", entity.InvoiceItemPricePer),
-                new SqlParameter("@invoice_item_line_sum", entity.InvoiceItemLineSum),
-                new SqlParameter("@invoice_item_account_rep_key", entity.InvoiceItemAccountRepKey),
-                new SqlParameter("@invoice_item_sales_rep_key", entity.InvoiceItemSalesRepKey),
-                new SqlParameter("@invoice_item_status_key", entity.InvoiceItemStatusKey),
-                new SqlParameter("@order_item_key", entity.OrderItemKey),
+                new SqlParameter("@InvoiceItemKey", entity.InvoiceItemKey),
+                new SqlParameter("@InvoiceKey", entity.InvoiceKey),
+                new SqlParameter("@InvoiceItemSeq", entity.InvoiceItemSeq),
+                new SqlParameter("@ProductKey", entity.ProductKey),
+                new SqlParameter("@ProductName", entity.ProductName),
+                new SqlParameter("@ProductDescription", entity.ProductDesc),
+                new SqlParameter("@InvoiceItemQuantity", entity.InvoiceItemQuantity),
+                new SqlParameter("@ShipToAddressKey", entity.ShiptoAddrKey),
+                new SqlParameter("@BillToAddressKey", entity.BilltoAddrKey),
+                new SqlParameter("@InvoiceItemEntryDate", entity.InvoiceItemEntryDate),
+                new SqlParameter("@OrderItemShipDate", entity.OrderItemShipDate),
+                new SqlParameter("@InvoiceItemCompleteDate", entity.InvoiceItemCompleteDate),
+                new SqlParameter("@InvoiceItemPricePer", entity.InvoiceItemPricePer),
+                new SqlParameter("@InvoiceItemLineSum", entity.InvoiceItemLineSum),
+                new SqlParameter("@InvoiceItemAccountRepKey", entity.InvoiceItemAccountRepKey),
+                new SqlParameter("@InvoiceItemSalesRepKey", entity.InvoiceItemSalesRepKey),
+                new SqlParameter("@InvoiceItemStatusKey", entity.InvoiceItemStatusKey),
+                new SqlParameter("@OrderItemKey", entity.OrderItemKey),
                 GetOutParam()
             };
 
@@ -71,7 +71,7 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForDelete(int invoice_item_key) => new List<SqlParameter>
             {
-                new SqlParameter("@invoice_item_key", invoice_item_key),
+                new SqlParameter("@InvoiceItemKey", invoice_item_key),
                 GetOutParam()
             };
     }

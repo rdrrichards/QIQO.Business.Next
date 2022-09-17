@@ -18,30 +18,30 @@ namespace QIQO.Invoices.Data
         public override IEnumerable<InvoiceStatusData> GetAll()
         {
             Log.LogInformation("Accessing InvoiceStatusRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_status_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceStatusAll"));
         }
 
         public override InvoiceStatusData GetByID(int invoice_status_key)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@invoice_status_key", invoice_status_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_status_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceStatusKey", invoice_status_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceStatusGet", pcol));
         }
 
         public override InvoiceStatusData GetByCode(string invoice_status_code, string entity_code)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@invoice_status_code", invoice_status_code),
-                Mapper.BuildParam("@company_code", entity_code)
+                Mapper.BuildParam("@InvoiceStatusCode", invoice_status_code),
+                Mapper.BuildParam("@CompanyCode", entity_code)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_invoice_status_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceStatusGet", pcol));
         }
 
         public override void Insert(InvoiceStatusData entity)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -50,7 +50,7 @@ namespace QIQO.Invoices.Data
         public override void Save(InvoiceStatusData entity)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -59,26 +59,26 @@ namespace QIQO.Invoices.Data
         public override void Delete(InvoiceStatusData entity)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_status_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@invoice_status_code", entity_code) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceStatusCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_status_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", pcol);
         }
 
-        public override void DeleteByID(int entity_key)
+        public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing InvoiceStatusRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_status_del", Mapper.MapParamsForDelete(entity_key));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(InvoiceStatusData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_invoice_status_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

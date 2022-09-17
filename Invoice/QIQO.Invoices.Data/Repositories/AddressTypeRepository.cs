@@ -18,30 +18,30 @@ namespace QIQO.Invoices.Data
         public override IEnumerable<AddressTypeData> GetAll()
         {
             Log.LogInformation("Accessing AddressTypeRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_type_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressTypeAll"));
         }
 
-        public override AddressTypeData GetByID(int address_type_key)
+        public override AddressTypeData GetByID(int AddressTypeKey)
         {
             Log.LogInformation("Accessing AddressTypeRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@address_type_key", address_type_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_type_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressTypeKey", AddressTypeKey) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressTypeGet", pcol));
         }
 
         public override AddressTypeData GetByCode(string address_type_code, string entityCode)
         {
             Log.LogInformation("Accessing AddressTypeRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@address_type_code", address_type_code),
-                Mapper.BuildParam("@company_code", entityCode)
+                Mapper.BuildParam("@AddressTypeCode", address_type_code),
+                Mapper.BuildParam("@CompanyCode", entityCode)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_type_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressTypeGetByCompany", pcol));
         }
 
         public override void Insert(AddressTypeData entity)
         {
             Log.LogInformation("Accessing AddressTypeRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -50,7 +50,7 @@ namespace QIQO.Invoices.Data
         public override void Save(AddressTypeData entity)
         {
             Log.LogInformation("Accessing AddressTypeRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -59,26 +59,26 @@ namespace QIQO.Invoices.Data
         public override void Delete(AddressTypeData entity)
         {
             Log.LogInformation("Accessing AddressTypeRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_type_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressTypeDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing AddressTypeRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@address_type_code", entityCode) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressTypeCode", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_type_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressTypeDelByCompany", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing AddressTypeRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_type_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressTypeDel", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(AddressTypeData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_type_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressTypeUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

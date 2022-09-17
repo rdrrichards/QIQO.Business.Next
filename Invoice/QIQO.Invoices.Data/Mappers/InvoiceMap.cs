@@ -14,25 +14,25 @@ namespace QIQO.Invoices.Data
             {
                 return new InvoiceData()
                 {
-                    InvoiceKey = NullCheck<int>(record["invoice_key"]),
-                    FromEntityKey = NullCheck<int>(record["from_entity_key"]),
-                    AccountKey = NullCheck<int>(record["account_key"]),
-                    AccountContactKey = NullCheck<int>(record["account_contact_key"]),
-                    InvoiceNum = NullCheck<string>(record["invoice_num"]),
-                    InvoiceEntryDate = NullCheck<DateTime>(record["invoice_entry_date"]),
-                    OrderEntryDate = NullCheck<DateTime>(record["order_entry_date"]),
-                    InvoiceStatusKey = NullCheck<int>(record["invoice_status_key"]),
-                    InvoiceStatusDate = NullCheck<DateTime>(record["invoice_status_date"]),
-                    OrderShipDate = (DBNull.Value == record["order_ship_date"]) ? null : record["order_ship_date"] as DateTime?,
-                    AccountRepKey = NullCheck<int>(record["account_rep_key"]),
-                    SalesRepKey = NullCheck<int>(record["sales_rep_key"]),
-                    InvoiceCompleteDate = (DBNull.Value == record["invoice_complete_date"]) ? null : record["invoice_complete_date"] as DateTime?,
-                    InvoiceValueSum = NullCheck<decimal>(record["invoice_value_sum"]),
-                    InvoiceItemCount = NullCheck<int>(record["invoice_item_count"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    InvoiceKey = NullCheck<int>(record["InvoiceKey"]),
+                    FromEntityKey = NullCheck<int>(record["FromEntityKey"]),
+                    AccountKey = NullCheck<int>(record["AccountKey"]),
+                    AccountContactKey = NullCheck<int>(record["AccountContactKey"]),
+                    InvoiceNum = NullCheck<string>(record["InvoiceNumber"]),
+                    InvoiceEntryDate = NullCheck<DateTime>(record["InvoiceEntryDate"]),
+                    OrderEntryDate = NullCheck<DateTime>(record["OrderEntryDate"]),
+                    InvoiceStatusKey = NullCheck<int>(record["InvoiceStatusKey"]),
+                    InvoiceStatusDate = NullCheck<DateTime>(record["InvoiceStatusKey"]),
+                    OrderShipDate = (DBNull.Value == record["OrderShipDate"]) ? null : record["OrderShipDate"] as DateTime?,
+                    AccountRepKey = NullCheck<int>(record["AccountRepKey"]),
+                    SalesRepKey = NullCheck<int>(record["SalesRepKey"]),
+                    InvoiceCompleteDate = (DBNull.Value == record["InvoiceCompleteDate"]) ? null : record["InvoiceCompleteDate"] as DateTime?,
+                    InvoiceValueSum = NullCheck<decimal>(record["InvoiceValueSum"]),
+                    InvoiceItemCount = NullCheck<int>(record["InvoiceItemCount"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -42,21 +42,21 @@ namespace QIQO.Invoices.Data
         }
         public List<SqlParameter> MapParamsForUpsert(InvoiceData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@invoice_key", entity.InvoiceKey),
-                new SqlParameter("@from_entity_key", entity.FromEntityKey),
-                new SqlParameter("@account_key", entity.AccountKey),
-                new SqlParameter("@account_contact_key", entity.AccountContactKey),
+                new SqlParameter("@InvoiceKey", entity.InvoiceKey),
+                new SqlParameter("@FromEntityKey", entity.FromEntityKey),
+                new SqlParameter("@AccountKey", entity.AccountKey),
+                new SqlParameter("@AccountContactKey", entity.AccountContactKey),
                 new SqlParameter("@invoice_num", entity.InvoiceNum),
-                new SqlParameter("@invoice_entry_date", entity.InvoiceEntryDate),
-                new SqlParameter("@order_entry_date", entity.OrderEntryDate),
-                new SqlParameter("@invoice_status_key", entity.InvoiceStatusKey),
-                new SqlParameter("@invoice_status_date", entity.InvoiceStatusDate),
-                new SqlParameter("@order_ship_date", entity.OrderShipDate),
-                new SqlParameter("@account_rep_key", entity.AccountRepKey),
-                new SqlParameter("@sales_rep_key", entity.SalesRepKey),
-                new SqlParameter("@invoice_complete_date", entity.InvoiceCompleteDate),
-                new SqlParameter("@invoice_value_sum", entity.InvoiceValueSum),
-                new SqlParameter("@invoice_item_count", entity.InvoiceItemCount),
+                new SqlParameter("@InvoiceEntryDate", entity.InvoiceEntryDate),
+                new SqlParameter("@OrderEntryDate", entity.OrderEntryDate),
+                new SqlParameter("@InvoiceStatusKey", entity.InvoiceStatusKey),
+                new SqlParameter("@InvoiceStatusKey", entity.InvoiceStatusDate),
+                new SqlParameter("@OrderShipDate", entity.OrderShipDate),
+                new SqlParameter("@AccountRepKey", entity.AccountRepKey),
+                new SqlParameter("@SalesRepKey", entity.SalesRepKey),
+                new SqlParameter("@InvoiceCompleteDate", entity.InvoiceCompleteDate),
+                new SqlParameter("@InvoiceValueSum", entity.InvoiceValueSum),
+                new SqlParameter("@InvoiceItemCount", entity.InvoiceItemCount),
                 GetOutParam()
             };
 
@@ -64,7 +64,7 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForDelete(int invoice_key) => new List<SqlParameter>
             {
-                new SqlParameter("@invoice_key", invoice_key),
+                new SqlParameter("@InvoiceKey", invoice_key),
                 GetOutParam()
             };
     }

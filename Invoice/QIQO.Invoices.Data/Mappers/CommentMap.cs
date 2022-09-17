@@ -14,15 +14,15 @@ namespace QIQO.Invoices.Data
             {
                 return new CommentData()
                 {
-                    CommentKey = NullCheck<int>(record["comment_key"]),
-                    EntityKey = NullCheck<int>(record["entity_key"]),
-                    EntityType = NullCheck<int>(record["entity_type"]),
-                    CommentTypeKey = NullCheck<int>(record["comment_type_key"]),
-                    CommentValue = NullCheck<string>(record["comment_value"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    CommentKey = NullCheck<int>(record["CommentKey"]),
+                    EntityKey = NullCheck<int>(record["EntityKey"]),
+                    EntityType = NullCheck<int>(record["EntityTypeKey"]),
+                    CommentTypeKey = NullCheck<int>(record["CommentTypeKey"]),
+                    CommentValue = NullCheck<string>(record["CommentValue"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -33,11 +33,11 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForUpsert(CommentData entity) => new List<SqlParameter>
             {
-                BuildParam("@comment_key", entity.CommentKey),
-                BuildParam("@entity_key", entity.EntityKey),
-                BuildParam("@entity_type", entity.EntityType),
-                BuildParam("@comment_type_key", entity.CommentTypeKey),
-                BuildParam("@comment_value", entity.CommentValue),
+                BuildParam("@CommentKey", entity.CommentKey),
+                BuildParam("@EntityKey", entity.EntityKey),
+                BuildParam("@EntityTypeKey", entity.EntityType),
+                BuildParam("@CommentTypeKey", entity.CommentTypeKey),
+                BuildParam("@CommentValue", entity.CommentValue),
                 GetOutParam()
             };
 
@@ -45,7 +45,7 @@ namespace QIQO.Invoices.Data
 
         public List<SqlParameter> MapParamsForDelete(int comment_key) => new List<SqlParameter>
             {
-                BuildParam("@comment_key", comment_key),
+                BuildParam("@CommentKey", comment_key),
                 GetOutParam()
             };
     }

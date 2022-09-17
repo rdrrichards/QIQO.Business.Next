@@ -18,7 +18,7 @@ namespace QIQO.Invoices.Data
         public override IEnumerable<CommentData> GetAll()
         {
             Log.LogInformation("Accessing CommentRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentAll"));
         }
 
         public IEnumerable<CommentData> GetAll(int entityKey, int entityTypeKey)
@@ -26,17 +26,17 @@ namespace QIQO.Invoices.Data
             Log.LogInformation("Accessing CommentRepo GetAll function");
             var pcol = new List<SqlParameter>()
             {
-                Mapper.BuildParam("@entity_key", entityKey),
-                Mapper.BuildParam("@entity_type_key", entityTypeKey)
+                Mapper.BuildParam("@EntityKey", entityKey),
+                Mapper.BuildParam("@EntityTypeKey", entityTypeKey)
             };
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_all_by_entity", pcol));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentAllByEntity", pcol));
         }
 
         public override CommentData GetByID(int comment_key)
         {
             Log.LogInformation("Accessing CommentRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@comment_key", comment_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@CommentKey", comment_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentGet", pcol));
         }
 
         public override CommentData GetByCode(string commentCode, string entityCode)
@@ -45,15 +45,15 @@ namespace QIQO.Invoices.Data
             var pcol = new List<SqlParameter>()
             {
                 Mapper.BuildParam("@comment_code", commentCode),
-                Mapper.BuildParam("@company_code", entityCode)
+                Mapper.BuildParam("@CompanyCode", entityCode)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_comment_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentGetByCompany", pcol));
         }
 
         public override void Insert(CommentData entity)
         {
             Log.LogInformation("Accessing CommentRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -62,7 +62,7 @@ namespace QIQO.Invoices.Data
         public override void Save(CommentData entity)
         {
             Log.LogInformation("Accessing CommentRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -71,7 +71,7 @@ namespace QIQO.Invoices.Data
         public override void Delete(CommentData entity)
         {
             Log.LogInformation("Accessing CommentRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_comment_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
@@ -79,18 +79,18 @@ namespace QIQO.Invoices.Data
             Log.LogInformation("Accessing CommentRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@comment_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_comment_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelByCompany", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing CommentRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_comment_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(CommentData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_comment_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 
