@@ -63,10 +63,10 @@ namespace QIQO.Business.Core
 
         public abstract void Delete(T entity);
         public abstract void DeleteByCode(string entity_code);
-        public abstract void DeleteByID(int entity_key);
+        public abstract void DeleteByID(int entityKey);
         public abstract IEnumerable<T> GetAll();
         public abstract T GetByCode(string account_code, string entity_code);
-        public abstract T GetByID(int entity_key);
+        public abstract T GetByID(int entityKey);
         public abstract void Insert(T entity);
         public abstract void Save(T entity);
     }

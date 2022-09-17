@@ -13,7 +13,7 @@ namespace QIQO.Business.Core.Contracts
         T Map(IDataReader ds);
         List<SqlParameter> MapParamsForUpsert(T entity);
         List<SqlParameter> MapParamsForDelete(T entity);
-        List<SqlParameter> MapParamsForDelete(int entity_key);
+        List<SqlParameter> MapParamsForDelete(int entityKey);
         SqlParameter GetOutParam();
         SqlParameter BuildParam(string parameterName, object value);
     }

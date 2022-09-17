@@ -8,7 +8,7 @@ namespace QIQO.Business.Core.Contracts
         where T : class, IEntity, new()
     {
         IEnumerable<T> GetAll();
-        T GetByID(int entity_key);
+        T GetByID(int entityKey);
         T GetByCode(string account_code, string entity_code);
     }
 
@@ -17,7 +17,7 @@ namespace QIQO.Business.Core.Contracts
     {
         void Insert(T entity);
         void Delete(T entity);
-        void DeleteByID(int entity_key);
+        void DeleteByID(int entityKey);
         void DeleteByCode(string entity_code);
         void Save(T entity);
     }
