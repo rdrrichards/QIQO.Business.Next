@@ -14,17 +14,17 @@ namespace QIQO.Companies.Data
             {
                 return new AttributeData()
                 {
-                    AttributeKey = NullCheck<int>(record["attribute_key"]),
-                    EntityKey = NullCheck<int>(record["entity_key"]),
-                    EntityTypeKey = NullCheck<int>(record["entity_type_key"]),
-                    AttributeTypeKey = NullCheck<int>(record["attribute_type_key"]),
-                    AttributeValue = NullCheck<string>(record["attribute_value"]),
-                    AttributeDataTypeKey = NullCheck<int>(record["attribute_data_type_key"]),
-                    AttributeDisplayFormat = NullCheck<string>(record["attribute_display_format"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    AttributeKey = NullCheck<int>(record["AttributeKey"]),
+                    EntityKey = NullCheck<int>(record["EntityKey"]),
+                    EntityTypeKey = NullCheck<int>(record["EntityTypeKey"]),
+                    AttributeTypeKey = NullCheck<int>(record["AttributeTypeKey"]),
+                    AttributeValue = NullCheck<string>(record["AttributeValue"]),
+                    AttributeDataTypeKey = NullCheck<int>(record["AttributeDataTypeKey"]),
+                    AttributeDisplayFormat = NullCheck<string>(record["AttributeDisplayFormat"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -35,13 +35,13 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForUpsert(AttributeData entity) => new List<SqlParameter>
             {
-                BuildParam("@attribute_key", entity.AttributeKey),
-                BuildParam("@entity_key", entity.EntityKey),
-                BuildParam("@entity_type_key", entity.EntityTypeKey),
-                BuildParam("@attribute_type_key", entity.AttributeTypeKey),
-                BuildParam("@attribute_value", entity.AttributeValue),
-                BuildParam("@attribute_data_type_key", entity.AttributeDataTypeKey),
-                BuildParam("@attribute_display_format", entity.AttributeDisplayFormat),
+                BuildParam("@AttributeKey", entity.AttributeKey),
+                BuildParam("@EntityKey", entity.EntityKey),
+                BuildParam("@EntityTypeKey", entity.EntityTypeKey),
+                BuildParam("@AttributeTypeKey", entity.AttributeTypeKey),
+                BuildParam("@AttributeValue", entity.AttributeValue),
+                BuildParam("@AttributeDataTypeKey", entity.AttributeDataTypeKey),
+                BuildParam("@AttributeDisplayFormat", entity.AttributeDisplayFormat),
                 GetOutParam()
             };
 
@@ -49,7 +49,7 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForDelete(int attribute_key) => new List<SqlParameter>
             {
-                BuildParam("@attribute_key", attribute_key),
+                BuildParam("@AttributeKey", attribute_key),
                 GetOutParam()
             };
     }

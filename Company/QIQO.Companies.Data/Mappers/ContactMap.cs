@@ -14,17 +14,17 @@ namespace QIQO.Companies.Data
             {
                 return new ContactData()
                 {
-                    ContactKey = NullCheck<int>(record["contact_key"]),
-                    EntityKey = NullCheck<int>(record["entity_key"]),
-                    EntityTypeKey = NullCheck<int>(record["entity_type_key"]),
-                    ContactTypeKey = NullCheck<int>(record["contact_type_key"]),
-                    ContactValue = NullCheck<string>(record["contact_value"]),
-                    ContactDefaultFlg = NullCheck<int>(record["contact_default_flg"]),
-                    ContactActiveFlg = NullCheck<int>(record["contact_active_flg"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"]),
+                    ContactKey = NullCheck<int>(record["ContactKey"]),
+                    EntityKey = NullCheck<int>(record["EntityKey"]),
+                    EntityTypeKey = NullCheck<int>(record["EntityTypeKey"]),
+                    ContactTypeKey = NullCheck<int>(record["ContactTypeKey"]),
+                    ContactValue = NullCheck<string>(record["ContactValue"]),
+                    ContactDefaultFlg = NullCheck<int>(record["ContactDefaultFlag"]),
+                    ContactActiveFlg = NullCheck<int>(record["ContactActiveFlag"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"]),
                 };
             }
             catch (Exception ex)
@@ -35,13 +35,13 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForUpsert(ContactData entity) => new List<SqlParameter>
             {
-                BuildParam("@contact_key", entity.ContactKey),
-                BuildParam("@entity_key", entity.EntityKey),
-                BuildParam("@entity_type_key", entity.EntityTypeKey),
-                BuildParam("@contact_type_key", entity.ContactTypeKey),
-                BuildParam("@contact_value", entity.ContactValue),
-                BuildParam("@contact_default_flg", entity.ContactDefaultFlg),
-                BuildParam("@contact_active_flg", entity.ContactActiveFlg),
+                BuildParam("@ContactKey", entity.ContactKey),
+                BuildParam("@EntityKey", entity.EntityKey),
+                BuildParam("@EntityTypeKey", entity.EntityTypeKey),
+                BuildParam("@ContactTypeKey", entity.ContactTypeKey),
+                BuildParam("@ContactValue", entity.ContactValue),
+                BuildParam("@ContactDefaultFlag", entity.ContactDefaultFlg),
+                BuildParam("@ContactActiveFlag", entity.ContactActiveFlg),
                 GetOutParam()
             };
 
@@ -49,7 +49,7 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForDelete(int contact_key) => new List<SqlParameter>
             {
-                BuildParam("@contact_key", contact_key),
+                BuildParam("@ContactKey", contact_key),
                 GetOutParam()
             };
     }

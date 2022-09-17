@@ -18,41 +18,41 @@ namespace QIQO.Companies.Data
         public override IEnumerable<PersonData> GetAll()
         {
             Log.LogInformation("Accessing PersonRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonAll"));
         }
 
         public IEnumerable<PersonData> GetAll(CompanyData comp)
         {
             Log.LogInformation("Accessing PersonRepo GetAll by Company function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@company_key", comp.CompanyKey) };
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_all_by_company", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@CompanyKey", comp.CompanyKey) };
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonAllByCompany", pcol));
         }
 
         //public IEnumerable<PersonData> GetAll(AccountData acct)
         //{
         //    Log.LogInformation("Accessing PersonRepo GetAll by Company function");
-        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@account_key", acct.AccountKey) };
-        //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_all_by_account", pcol));
+        //    var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AccountKey", acct.AccountKey) };
+        //    using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonAllByAccount", pcol));
         //}
 
         public override PersonData GetByCode(string account_code, string entityCode)
         {
             Log.LogInformation("Accessing PersonRepo GetByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@person_code", entityCode) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_get_c", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@PersonCode", entityCode) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonGetByCode", pcol));
         }
 
         public override PersonData GetByID(int entityKey)
         {
             Log.LogInformation("Accessing PersonRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@person_key", entityKey) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@PersonKey", entityKey) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonGet", pcol));
         }
 
         public override void Insert(PersonData entity)
         {
             Log.LogInformation("Accessing PersonRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -61,7 +61,7 @@ namespace QIQO.Companies.Data
         public override void Save(PersonData entity)
         {
             Log.LogInformation("Accessing PersonRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -70,43 +70,43 @@ namespace QIQO.Companies.Data
         public override void Delete(PersonData entity)
         {
             Log.LogInformation("Accessing PersonRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_person_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspPersonDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing PersonRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@person_code", entityCode) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@PersonCode", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_person_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspPersonDeleteByCode", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing PersonRepo DeleteByID function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_person_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspPersonDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
         public PersonData GetByUserName(string user_name)
         {
             Log.LogInformation("Accessing PersonRepo GetByUserName function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@user_name", user_name) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_by_creds", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@UserName", user_name) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonGetByCredentials", pcol));
         }
 
         public IEnumerable<PersonData> GetAllReps(CompanyData comp, int rep_type)
         {
             Log.LogInformation("Accessing PersonRepo GetAllReps by Company function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@company_key", comp.CompanyKey),
-                Mapper.BuildParam("@rep_type", rep_type)
+                Mapper.BuildParam("@CompanyKey", comp.CompanyKey),
+                Mapper.BuildParam("@RepType", rep_type)
             };
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_person_all_by_company_reponly", pcol));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspPersonAllByCompanyRepOnly", pcol));
         }
 
         private void Upsert(PersonData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_person_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspPersonUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 

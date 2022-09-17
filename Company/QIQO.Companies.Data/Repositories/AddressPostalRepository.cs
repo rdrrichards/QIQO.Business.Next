@@ -18,22 +18,22 @@ namespace QIQO.Companies.Data
         public override IEnumerable<AddressPostalData> GetAll()
         {
             Log.LogInformation("Accessing AddressPostalRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_postal_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressPostalAll"));
         }
 
         public override AddressPostalData GetByID(int address_postal_key)
         {
             Log.LogInformation("Accessing AddressPostalRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@address_postal_key", address_postal_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_postal_get", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressPostalGet", pcol));
         }
 
         public override AddressPostalData GetByCode(string address_code, string entityCode)
         {
             Log.LogInformation("Accessing AddressPostalRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@address_code", address_code),
-                Mapper.BuildParam("@company_code", entityCode)
+                Mapper.BuildParam("@AddressCode", address_code),
+                Mapper.BuildParam("@CompanyCode", entityCode)
             };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_address_postal_get_c", pcol));
         }
@@ -41,7 +41,7 @@ namespace QIQO.Companies.Data
         public override void Insert(AddressPostalData entity)
         {
             Log.LogInformation("Accessing AddressPostalRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -50,7 +50,7 @@ namespace QIQO.Companies.Data
         public override void Save(AddressPostalData entity)
         {
             Log.LogInformation("Accessing AddressPostalRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -59,13 +59,13 @@ namespace QIQO.Companies.Data
         public override void Delete(AddressPostalData entity)
         {
             Log.LogInformation("Accessing AddressPostalRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_postal_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressPostalDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
             Log.LogInformation("Accessing AddressPostalRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@address_code", entityCode) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressCode", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_postal_del_c", pcol);
         }
@@ -73,12 +73,12 @@ namespace QIQO.Companies.Data
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing AddressPostalRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_postal_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressPostalDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(AddressPostalData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_postal_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressPostalUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

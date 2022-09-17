@@ -14,26 +14,26 @@ namespace QIQO.Companies.Data
             {
                 return new AddressData()
                 {
-                    AddressKey = NullCheck<int>(record["address_key"]),
-                    AddressTypeKey = NullCheck<int>(record["address_type_key"]),
-                    EntityKey = NullCheck<int>(record["entity_key"]),
-                    EntityTypeKey = NullCheck<int>(record["entity_type_key"]),
-                    AddressLine1 = NullCheck<string>(record["address_line_1"]),
-                    AddressLine2 = NullCheck<string>(record["address_line_2"]),
-                    AddressLine3 = NullCheck<string>(record["address_line_3"]),
-                    AddressLine4 = NullCheck<string>(record["address_line_4"]),
-                    AddressCity = NullCheck<string>(record["address_city"]),
-                    AddressStateProv = NullCheck<string>(record["address_state_prov"]),
-                    AddressCounty = NullCheck<string>(record["address_county"]),
-                    AddressCountry = NullCheck<string>(record["address_country"]),
-                    AddressPostalCode = NullCheck<string>(record["address_postal_code"]),
-                    AddressNotes = NullCheck<string>(record["address_notes"]),
-                    AddressDefaultFlg = NullCheck<int>(record["address_default_flg"]),
-                    AddressActiveFlg = NullCheck<int>(record["address_active_flg"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    AddressKey = NullCheck<int>(record["AddressKey"]),
+                    AddressTypeKey = NullCheck<int>(record["AddressTypeKey"]),
+                    EntityKey = NullCheck<int>(record["EntityKey"]),
+                    EntityTypeKey = NullCheck<int>(record["EntityTypeKey"]),
+                    AddressLine1 = NullCheck<string>(record["AddressLine1"]),
+                    AddressLine2 = NullCheck<string>(record["AddressLine2"]),
+                    AddressLine3 = NullCheck<string>(record["AddressLine3"]),
+                    AddressLine4 = NullCheck<string>(record["AddressLine4"]),
+                    AddressCity = NullCheck<string>(record["AddressCity"]),
+                    AddressStateProv = NullCheck<string>(record["AddressStateProv"]),
+                    AddressCounty = NullCheck<string>(record["AddressCounty"]),
+                    AddressCountry = NullCheck<string>(record["AddressCountry"]),
+                    AddressPostalCode = NullCheck<string>(record["AddressPostalCode"]),
+                    AddressNotes = NullCheck<string>(record["AddressNotes"]),
+                    AddressDefaultFlg = NullCheck<int>(record["AddressDefaultFlag"]),
+                    AddressActiveFlg = NullCheck<int>(record["AddressActiveFlag"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
 
             }
@@ -45,22 +45,22 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForUpsert(AddressData entity) => new List<SqlParameter>
             {
-                BuildParam("@address_key", entity.AddressKey),
-                BuildParam("@address_type_key", entity.AddressTypeKey),
-                BuildParam("@entity_key", entity.EntityKey),
-                BuildParam("@entity_type_key", entity.EntityTypeKey),
-                BuildParam("@address_line_1", entity.AddressLine1),
-                BuildParam("@address_line_2", entity.AddressLine2),
-                BuildParam("@address_line_3", entity.AddressLine3),
-                BuildParam("@address_line_4", entity.AddressLine4),
-                BuildParam("@address_city", entity.AddressCity),
-                BuildParam("@address_state_prov", entity.AddressStateProv),
-                BuildParam("@address_county", entity.AddressCounty),
-                BuildParam("@address_country", entity.AddressCountry),
-                BuildParam("@address_postal_code", entity.AddressPostalCode),
-                BuildParam("@address_notes", entity.AddressNotes),
-                BuildParam("@address_default_flg", entity.AddressDefaultFlg),
-                BuildParam("@address_active_flg", entity.AddressActiveFlg),
+                BuildParam("@AddressKey", entity.AddressKey),
+                BuildParam("@AddressTypeKey", entity.AddressTypeKey),
+                BuildParam("@EntityKey", entity.EntityKey),
+                BuildParam("@EntityTypeKey", entity.EntityTypeKey),
+                BuildParam("@AddressLine1", entity.AddressLine1),
+                BuildParam("@AddressLine2", entity.AddressLine2),
+                BuildParam("@AddressLine3", entity.AddressLine3),
+                BuildParam("@AddressLine4", entity.AddressLine4),
+                BuildParam("@AddressCity", entity.AddressCity),
+                BuildParam("@AddressStateProv", entity.AddressStateProv),
+                BuildParam("@AddressCounty", entity.AddressCounty),
+                BuildParam("@AddressCountry", entity.AddressCountry),
+                BuildParam("@AddressPostalCode", entity.AddressPostalCode),
+                BuildParam("@AddressNotes", entity.AddressNotes),
+                BuildParam("@AddressDefaultFlag", entity.AddressDefaultFlg),
+                BuildParam("@AddressActiveFlag", entity.AddressActiveFlg),
                 GetOutParam()
             };
 
@@ -68,7 +68,7 @@ namespace QIQO.Companies.Data
 
         public List<SqlParameter> MapParamsForDelete(int addressKey) => new List<SqlParameter>
             {
-                BuildParam("@address_key", addressKey),
+                BuildParam("@AddressKey", addressKey),
                 GetOutParam()
             };
     }
