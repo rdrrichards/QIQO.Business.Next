@@ -14,14 +14,14 @@ namespace QIQO.Accounts.Data
             {
                 return new CompanyData()
                 {
-                    CompanyKey = NullCheck<int>(record["company_key"]),
-                    CompanyCode = NullCheck<string>(record["company_code"]),
-                    CompanyName = NullCheck<string>(record["company_name"]),
-                    CompanyDesc = NullCheck<string>(record["company_desc"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    CompanyKey = NullCheck<int>(record["CompanyKey"]),
+                    CompanyCode = NullCheck<string>(record["CompanyCode"]),
+                    CompanyName = NullCheck<string>(record["CompanyName"]),
+                    CompanyDesc = NullCheck<string>(record["CompanyDescription"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -32,10 +32,10 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(CompanyData entity) => new List<SqlParameter>
             {
-                BuildParam("@company_key", entity.CompanyKey),
-                BuildParam("@company_code", entity.CompanyCode),
-                BuildParam("@company_name", entity.CompanyName),
-                BuildParam("@company_desc", entity.CompanyDesc),
+                BuildParam("@CompanyKey", entity.CompanyKey),
+                BuildParam("@CompanyCode", entity.CompanyCode),
+                BuildParam("@CompanyName", entity.CompanyName),
+                BuildParam("@CompanyDescription", entity.CompanyDesc),
                 GetOutParam()
             };
 
@@ -43,7 +43,7 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForDelete(int company_key) => new List<SqlParameter>
             {
-                BuildParam("@company_key", company_key),
+                BuildParam("@CompanyKey", company_key),
                 GetOutParam()
             };
     }

@@ -14,20 +14,20 @@ namespace QIQO.Accounts.Data
             {
                 return new AuditLogData()
                 {
-                    AuditLogKey = NullCheck<int>(record["audit_log_key"]),
-                    AuditAction = NullCheck<string>(record["audit_action"]),
-                    AuditBusObj = NullCheck<string>(record["audit_bus_obj"]),
-                    AuditDatetime = NullCheck<DateTime>(record["audit_datetime"]),
-                    AuditUserId = NullCheck<string>(record["audit_user_id"]),
-                    AuditAppName = NullCheck<string>(record["audit_app_name"]),
-                    AuditHostName = NullCheck<string>(record["audit_host_name"]),
-                    AuditComment = NullCheck<string>(record["audit_comment"]),
-                    AuditDataOld = NullCheck<string>(record["audit_data_old"]),
-                    AuditDataNew = NullCheck<string>(record["audit_data_new"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    AuditLogKey = NullCheck<int>(record["LogKey"]),
+                    AuditAction = NullCheck<string>(record["Action"]),
+                    AuditBusObj = NullCheck<string>(record["BusinessObject"]),
+                    AuditDatetime = NullCheck<DateTime>(record["AuditDateTime"]),
+                    AuditUserId = NullCheck<string>(record["UserId"]),
+                    AuditAppName = NullCheck<string>(record["Application"]),
+                    AuditHostName = NullCheck<string>(record["Host"]),
+                    AuditComment = NullCheck<string>(record["Comment"]),
+                    AuditDataOld = NullCheck<string>(record["DataOld"]),
+                    AuditDataNew = NullCheck<string>(record["DataNew"]),
+                    //AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    //AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    //AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    //AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -38,24 +38,24 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(AuditLogData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@audit_log_key", entity.AuditLogKey),
-                new SqlParameter("@audit_action", entity.AuditAction),
-                new SqlParameter("@audit_bus_obj", entity.AuditBusObj),
-                new SqlParameter("@audit_datetime", entity.AuditDatetime),
-                new SqlParameter("@audit_user_id", entity.AuditUserId),
-                new SqlParameter("@audit_app_name", entity.AuditAppName),
-                new SqlParameter("@audit_host_name", entity.AuditHostName),
-                new SqlParameter("@audit_comment", entity.AuditComment),
-                new SqlParameter("@audit_data_old", entity.AuditDataOld),
-                new SqlParameter("@audit_data_new", entity.AuditDataNew),
+                new SqlParameter("@LogKey", entity.AuditLogKey),
+                new SqlParameter("@Action", entity.AuditAction),
+                new SqlParameter("@BusinessObject", entity.AuditBusObj),
+                new SqlParameter("@AuditDateTime", entity.AuditDatetime),
+                new SqlParameter("@UserId", entity.AuditUserId),
+                new SqlParameter("@Application", entity.AuditAppName),
+                new SqlParameter("@Host", entity.AuditHostName),
+                new SqlParameter("@Comment", entity.AuditComment),
+                new SqlParameter("@DataOld", entity.AuditDataOld),
+                new SqlParameter("@DataNew", entity.AuditDataNew),
                 GetOutParam()
             };
 
         public List<SqlParameter> MapParamsForDelete(AuditLogData entity) => MapParamsForDelete(entity.AuditLogKey);
 
-        public List<SqlParameter> MapParamsForDelete(int audit_log_key) => new List<SqlParameter>
+        public List<SqlParameter> MapParamsForDelete(int LogKey) => new List<SqlParameter>
             {
-                new SqlParameter("@audit_log_key", audit_log_key),
+                new SqlParameter("@LogKey", LogKey),
                 GetOutParam()
             };
     }

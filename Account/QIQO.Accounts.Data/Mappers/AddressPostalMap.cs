@@ -14,13 +14,13 @@ namespace QIQO.Accounts.Data
             {
                 return new AddressPostalData()
                 {
-                    Country = NullCheck<string>(record["country"]),
-                    PostalCode = NullCheck<string>(record["postal_code"]),
-                    StateCode = NullCheck<string>(record["state_code"]),
-                    StateFullName = NullCheck<string>(record["state_full_name"]),
-                    CityName = NullCheck<string>(record["city_name"]),
-                    CountyName = NullCheck<string>(record["county_name"]),
-                    TimeZone = NullCheck<int>(record["time_zone"])
+                    Country = NullCheck<string>(record["Country"]),
+                    PostalCode = NullCheck<string>(record["PostalCode"]),
+                    StateCode = NullCheck<string>(record["StateCode"]),
+                    StateFullName = NullCheck<string>(record["StateFullName"]),
+                    CityName = NullCheck<string>(record["CityName"]),
+                    CountyName = NullCheck<string>(record["CountyName"]),
+                    TimeZone = NullCheck<int>(record["TimeZone"])
                 };
             }
             catch (Exception ex)
@@ -31,25 +31,25 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(AddressPostalData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@country", entity.Country),
-                new SqlParameter("@postal_code", entity.PostalCode),
-                new SqlParameter("@state_code", entity.StateCode),
-                new SqlParameter("@state_full_name", entity.StateFullName),
-                new SqlParameter("@city_name", entity.CityName),
-                new SqlParameter("@county_name", entity.CountyName),
-                new SqlParameter("@time_zone", entity.TimeZone),
+                new SqlParameter("@Country", entity.Country),
+                new SqlParameter("@PostalCode", entity.PostalCode),
+                new SqlParameter("@StateCode", entity.StateCode),
+                new SqlParameter("@StateFullName", entity.StateFullName),
+                new SqlParameter("@CityName", entity.CityName),
+                new SqlParameter("@CountyName", entity.CountyName),
+                new SqlParameter("@TimeZone", entity.TimeZone),
                 GetOutParam()
             };
 
         public List<SqlParameter> MapParamsForDelete(AddressPostalData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@postal_code", entity.PostalCode),
+                new SqlParameter("@PostalCode", entity.PostalCode),
                 GetOutParam()
             };
 
-        public List<SqlParameter> MapParamsForDelete(int address_key) => new List<SqlParameter>
+        public List<SqlParameter> MapParamsForDelete(int AddressKey) => new List<SqlParameter>
             {
-                new SqlParameter("@postal_code", address_key),
+                new SqlParameter("@PostalCode", AddressKey),
                 GetOutParam()
             };
     }

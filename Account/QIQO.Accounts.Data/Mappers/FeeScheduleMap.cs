@@ -14,22 +14,22 @@ namespace QIQO.Accounts.Data
             {
                 return new FeeScheduleData()
                 {
-                    FeeScheduleKey = NullCheck<int>(record["fee_schedule_key"]),
-                    CompanyKey = NullCheck<int>(record["company_key"]),
-                    AccountKey = NullCheck<int>(record["account_key"]),
-                    ProductKey = NullCheck<int>(record["product_key"]),
-                    FeeScheduleStartDate = NullCheck<DateTime>(record["fee_schedule_start_date"]),
-                    FeeScheduleEndDate = NullCheck<DateTime>(record["fee_schedule_end_date"]),
-                    FeeScheduleType = NullCheck<string>(record["fee_schedule_type"]),
-                    FeeScheduleValue = NullCheck<decimal>(record["fee_schedule_value"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"]),
-                    ProductDesc = NullCheck<string>(record["product_desc"]),
-                    ProductCode = NullCheck<string>(record["product_code"]),
-                    AccountCode = NullCheck<string>(record["account_code"]),
-                    AccountName = NullCheck<string>(record["account_name"])
+                    FeeScheduleKey = NullCheck<int>(record["FeeScheduleKey"]),
+                    CompanyKey = NullCheck<int>(record["CompanyKey"]),
+                    AccountKey = NullCheck<int>(record["AccountKey"]),
+                    ProductKey = NullCheck<int>(record["ProductKey"]),
+                    FeeScheduleStartDate = NullCheck<DateTime>(record["FeeScheduleStartDate"]),
+                    FeeScheduleEndDate = NullCheck<DateTime>(record["FeeScheduleEndDate"]),
+                    FeeScheduleType = NullCheck<string>(record["FeeScheduleType"]),
+                    FeeScheduleValue = NullCheck<decimal>(record["FeeScheduleValue"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"]),
+                    ProductDesc = NullCheck<string>(record["ProductDescription"]),
+                    ProductCode = NullCheck<string>(record["ProductCode"]),
+                    AccountCode = NullCheck<string>(record["AccountCode"]),
+                    AccountName = NullCheck<string>(record["AccountName"])
                 };
             }
             catch (Exception ex)
@@ -40,14 +40,14 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(FeeScheduleData entity) => new List<SqlParameter>
             {
-                BuildParam("@fee_schedule_key", entity.FeeScheduleKey),
-                BuildParam("@company_key", entity.CompanyKey),
-                BuildParam("@account_key", entity.AccountKey),
-                BuildParam("@product_key", entity.ProductKey),
-                BuildParam("@fee_schedule_start_date", entity.FeeScheduleStartDate),
-                BuildParam("@fee_schedule_end_date", entity.FeeScheduleEndDate),
-                BuildParam("@fee_schedule_type", entity.FeeScheduleType),
-                BuildParam("@fee_schedule_value", entity.FeeScheduleValue),
+                BuildParam("@FeeScheduleKey", entity.FeeScheduleKey),
+                BuildParam("@CompanyKey", entity.CompanyKey),
+                BuildParam("@AccountKey", entity.AccountKey),
+                BuildParam("@ProductKey", entity.ProductKey),
+                BuildParam("@FeeScheduleStartDate", entity.FeeScheduleStartDate),
+                BuildParam("@FeeScheduleEndDate", entity.FeeScheduleEndDate),
+                BuildParam("@FeeScheduleType", entity.FeeScheduleType),
+                BuildParam("@FeeScheduleValue", entity.FeeScheduleValue),
                 GetOutParam()
             };
 
@@ -55,7 +55,7 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForDelete(int fee_schedule_key) => new List<SqlParameter>
             {
-                BuildParam("@fee_schedule_key", fee_schedule_key),
+                BuildParam("@FeeScheduleKey", fee_schedule_key),
                 GetOutParam()
             };
     }

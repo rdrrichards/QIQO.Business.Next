@@ -14,17 +14,17 @@ namespace QIQO.Accounts.Data
             {
                 return new PersonData()
                 {
-                    PersonKey = NullCheck<int>(record["person_key"]),
-                    PersonCode = NullCheck<string>(record["person_code"]),
-                    PersonFirstName = NullCheck<string>(record["person_first_name"]),
-                    PersonMi = NullCheck<string>(record["person_mi"]),
-                    PersonLastName = NullCheck<string>(record["person_last_name"]),
-                    ParentPersonKey = NullCheck<int>(record["parent_person_key"]),
-                    PersonDob = (DBNull.Value == record["person_dob"]) ? null : record["person_dob"] as DateTime?,
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    PersonKey = NullCheck<int>(record["PersonKey"]),
+                    PersonCode = NullCheck<string>(record["PersonCode"]),
+                    PersonFirstName = NullCheck<string>(record["PersonFirstName"]),
+                    PersonMi = NullCheck<string>(record["PersonMiddleInitial"]),
+                    PersonLastName = NullCheck<string>(record["PersonLastName"]),
+                    ParentPersonKey = NullCheck<int>(record["ParentPersonKey"]),
+                    PersonDob = NullCheck<DateTime?>(record["AuditAddDateTime"]), //(DBNull.Value == record["PersonDob"]) ? null : record["PersonDob"] as DateTime?,
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -35,13 +35,13 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForUpsert(PersonData entity) => new List<SqlParameter>
             {
-                BuildParam("@person_key", entity.PersonKey),
-                BuildParam("@person_code", entity.PersonCode),
-                BuildParam("@person_first_name", entity.PersonFirstName),
-                BuildParam("@person_mi", entity.PersonMi),
-                BuildParam("@person_last_name", entity.PersonLastName),
-                BuildParam("@parent_person_key", entity.ParentPersonKey),
-                BuildParam("@person_dob", entity.PersonDob),
+                BuildParam("@PersonKey", entity.PersonKey),
+                BuildParam("@PersonCode", entity.PersonCode),
+                BuildParam("@PersonFirstName", entity.PersonFirstName),
+                BuildParam("@PersonMiddleInitial", entity.PersonMi),
+                BuildParam("@PersonLastName", entity.PersonLastName),
+                BuildParam("@ParentPersonKey", entity.ParentPersonKey),
+                BuildParam("@PersonDob", entity.PersonDob),
                 GetOutParam()
             };
 
@@ -49,7 +49,7 @@ namespace QIQO.Accounts.Data
 
         public List<SqlParameter> MapParamsForDelete(int person_key) => new List<SqlParameter>
             {
-                BuildParam("@person_key", person_key),
+                BuildParam("@PersonKey", person_key),
                 GetOutParam()
             };
     }
