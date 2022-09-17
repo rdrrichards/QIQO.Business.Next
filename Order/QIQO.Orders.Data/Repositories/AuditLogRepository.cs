@@ -18,14 +18,14 @@ namespace QIQO.Orders.Data
         public override IEnumerable<AuditLogData> GetAll()
         {
             Log.LogInformation("Accessing AuditLogRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_audit_log_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAuditLogAll"));
         }
 
-        public override AuditLogData GetByID(int audit_log_key)
+        public override AuditLogData GetByID(int LogKey)
         {
             Log.LogInformation("Accessing AuditLogRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@audit_log_key", audit_log_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_audit_log_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@LogKey", LogKey) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAuditLogGet", pcol));
         }
 
         public override AuditLogData GetByCode(string audit_log_code, string entityCode)
@@ -33,15 +33,15 @@ namespace QIQO.Orders.Data
             Log.LogInformation("Accessing AuditLogRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@audit_log_code", audit_log_code),
-                Mapper.BuildParam("@company_code", entityCode)
+                Mapper.BuildParam("@CompanyCode", entityCode)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_audit_log_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAuditLogGetByCompany", pcol));
         }
 
         public override void Insert(AuditLogData entity)
         {
             Log.LogInformation("Accessing AuditLogRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -50,7 +50,7 @@ namespace QIQO.Orders.Data
         public override void Save(AuditLogData entity)
         {
             Log.LogInformation("Accessing AuditLogRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -59,7 +59,7 @@ namespace QIQO.Orders.Data
         public override void Delete(AuditLogData entity)
         {
             Log.LogInformation("Accessing AuditLogRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAuditLogDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
@@ -67,18 +67,18 @@ namespace QIQO.Orders.Data
             Log.LogInformation("Accessing AuditLogRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@audit_log_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAuditLogDelByCompany", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing AuditLogRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_del", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAuditLogDel", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(AuditLogData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_audit_log_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAuditLogUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

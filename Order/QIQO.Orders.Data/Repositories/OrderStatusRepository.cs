@@ -18,30 +18,30 @@ namespace QIQO.Orders.Data
         public override IEnumerable<OrderStatusData> GetAll()
         {
             Log.LogInformation("Accessing OrderStatusRepo GetAll function");
-            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_status_all"));
+            using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspOrderStatusAll"));
         }
 
         public override OrderStatusData GetByID(int order_status_key)
         {
             Log.LogInformation("Accessing OrderStatusRepo GetByID function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@order_status_key", order_status_key) };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_status_get", pcol));
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@OrderStatusKey", order_status_key) };
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspOrderStatusGet", pcol));
         }
 
         public override OrderStatusData GetByCode(string order_status_code, string entity_code)
         {
             Log.LogInformation("Accessing OrderStatusRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
-                Mapper.BuildParam("@order_status_code", order_status_code),
-                Mapper.BuildParam("@company_code", entity_code)
+                Mapper.BuildParam("@OrderStatusCode", order_status_code),
+                Mapper.BuildParam("@CompanyCode", entity_code)
             };
-            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("usp_order_status_get_c", pcol));
+            using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspOrderStatusGet", pcol));
         }
 
         public override void Insert(OrderStatusData entity)
         {
             Log.LogInformation("Accessing OrderStatusRepo Insert function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -50,7 +50,7 @@ namespace QIQO.Orders.Data
         public override void Save(OrderStatusData entity)
         {
             Log.LogInformation("Accessing OrderStatusRepo Save function");
-            if (entity != null)
+            if (entity is not null)
                 Upsert(entity);
             else
                 throw new ArgumentException(nameof(entity));
@@ -59,26 +59,26 @@ namespace QIQO.Orders.Data
         public override void Delete(OrderStatusData entity)
         {
             Log.LogInformation("Accessing OrderStatusRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_order_status_del", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspOrderStatusDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
         {
             Log.LogInformation("Accessing OrderStatusRepo DeleteByCode function");
-            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@order_status_code", entity_code) };
+            var pcol = new List<SqlParameter>() { Mapper.BuildParam("@OrderStatusCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_order_status_del_c", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspOrderStatusDel", pcol);
         }
 
-        public override void DeleteByID(int entity_key)
+        public override void DeleteByID(int entityKey)
         {
             Log.LogInformation("Accessing OrderStatusRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_order_status_del", Mapper.MapParamsForDelete(entity_key));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspOrderStatusDel", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(OrderStatusData entity)
         {
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_order_status_ups", Mapper.MapParamsForUpsert(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspOrderStatusUpsert", Mapper.MapParamsForUpsert(entity));
         }
     }
 }

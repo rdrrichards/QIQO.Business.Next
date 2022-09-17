@@ -14,14 +14,14 @@ namespace QIQO.Orders.Data
             {
                 return new CommentTypeData()
                 {
-                    CommentTypeKey = NullCheck<int>(record["comment_type_key"]),
-                    CommentTypeCode = NullCheck<string>(record["comment_type_code"]),
-                    CommentTypeName = NullCheck<string>(record["comment_type_name"]),
-                    CommentTypeDesc = NullCheck<string>(record["comment_type_desc"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    CommentTypeKey = NullCheck<int>(record["CommentTypeKey"]),
+                    CommentTypeCode = NullCheck<string>(record["CommentTypeCode"]),
+                    CommentTypeName = NullCheck<string>(record["CommentTypeName"]),
+                    CommentTypeDesc = NullCheck<string>(record["CommentTypeDescription"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -32,10 +32,10 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForUpsert(CommentTypeData entity) => new List<SqlParameter>
             {
-                BuildParam("@comment_type_key", entity.CommentTypeKey),
-                BuildParam("@comment_type_code", entity.CommentTypeCode),
-                BuildParam("@comment_type_name", entity.CommentTypeName),
-                BuildParam("@comment_type_desc", entity.CommentTypeDesc),
+                BuildParam("@CommentTypeKey", entity.CommentTypeKey),
+                BuildParam("@CommentTypeCode", entity.CommentTypeCode),
+                BuildParam("@CommentTypeName", entity.CommentTypeName),
+                BuildParam("@CommentTypeDescription", entity.CommentTypeDesc),
                 GetOutParam()
             };
 
@@ -43,7 +43,7 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForDelete(int accountTypeKey) => new List<SqlParameter>
             {
-                BuildParam("@comment_type_key", accountTypeKey),
+                BuildParam("@CommentTypeKey", accountTypeKey),
                 GetOutParam()
             };
     }

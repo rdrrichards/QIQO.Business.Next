@@ -14,14 +14,14 @@ namespace QIQO.Orders.Data
             {
                 return new AccountTypeData()
                 {
-                    AccountTypeKey = NullCheck<int>(record["account_type_key"]),
-                    AccountTypeCode = NullCheck<string>(record["account_type_code"]),
-                    AccountTypeName = NullCheck<string>(record["account_type_name"]),
-                    AccountTypeDesc = NullCheck<string>(record["account_type_desc"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    AccountTypeKey = NullCheck<int>(record["AccountTypeKey"]),
+                    AccountTypeCode = NullCheck<string>(record["AccountTypeCode"]),
+                    AccountTypeName = NullCheck<string>(record["AccountTypeName"]),
+                    AccountTypeDesc = NullCheck<string>(record["AccountTypeDescription"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -32,10 +32,10 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForUpsert(AccountTypeData entity) => new List<SqlParameter>
             {
-                BuildParam("@account_type_key", entity.AccountTypeKey),
-                BuildParam("@account_type_code", entity.AccountTypeCode),
-                BuildParam("@account_type_name", entity.AccountTypeName),
-                BuildParam("@account_type_desc", entity.AccountTypeDesc),
+                BuildParam("@AccountTypeKey", entity.AccountTypeKey),
+                BuildParam("@AccountTypeCode", entity.AccountTypeCode),
+                BuildParam("@AccountTypeName", entity.AccountTypeName),
+                BuildParam("@AccountTypeDescription", entity.AccountTypeDesc),
                 GetOutParam()
             };
 
@@ -43,7 +43,7 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForDelete(int accountTypeKey) => new List<SqlParameter>
             {
-                BuildParam("@account_type_key", accountTypeKey),
+                BuildParam("@AccountTypeKey", accountTypeKey),
                 GetOutParam()
             };
     }

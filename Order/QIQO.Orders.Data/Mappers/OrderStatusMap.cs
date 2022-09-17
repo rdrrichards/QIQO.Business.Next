@@ -14,15 +14,15 @@ namespace QIQO.Orders.Data
             {
                 return new OrderStatusData()
                 {
-                    OrderStatusKey = NullCheck<int>(record["order_status_key"]),
-                    OrderStatusCode = NullCheck<string>(record["order_status_code"]),
-                    OrderStatusName = NullCheck<string>(record["order_status_name"]),
-                    OrderStatusType = NullCheck<string>(record["order_status_type"]),
-                    OrderStatusDesc = NullCheck<string>(record["order_status_desc"]),
-                    AuditAddUserId = NullCheck<string>(record["audit_add_user_id"]),
-                    AuditAddDatetime = NullCheck<DateTime>(record["audit_add_datetime"]),
-                    AuditUpdateUserId = NullCheck<string>(record["audit_update_user_id"]),
-                    AuditUpdateDatetime = NullCheck<DateTime>(record["audit_update_datetime"])
+                    OrderStatusKey = NullCheck<int>(record["OrderStatusKey"]),
+                    OrderStatusCode = NullCheck<string>(record["OrderStatusCode"]),
+                    OrderStatusName = NullCheck<string>(record["OrderStatusName"]),
+                    OrderStatusType = NullCheck<string>(record["OrderStatusType"]),
+                    OrderStatusDesc = NullCheck<string>(record["OrderStatusDescription"]),
+                    AuditAddUserId = NullCheck<string>(record["AuditAddUserId"]),
+                    AuditAddDatetime = NullCheck<DateTime>(record["AuditAddDateTime"]),
+                    AuditUpdateUserId = NullCheck<string>(record["AuditUpdateUserId"]),
+                    AuditUpdateDatetime = NullCheck<DateTime>(record["AuditUpdateDateTime"])
                 };
             }
             catch (Exception ex)
@@ -33,11 +33,11 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForUpsert(OrderStatusData entity) => new List<SqlParameter>
             {
-                new SqlParameter("@order_status_key", entity.OrderStatusKey),
-                new SqlParameter("@order_status_code", entity.OrderStatusCode),
-                new SqlParameter("@order_status_name", entity.OrderStatusName),
-                new SqlParameter("@order_status_type", entity.OrderStatusType),
-                new SqlParameter("@order_status_desc", entity.OrderStatusDesc),
+                new SqlParameter("@OrderStatusKey", entity.OrderStatusKey),
+                new SqlParameter("@OrderStatusCode", entity.OrderStatusCode),
+                new SqlParameter("@OrderStatusName", entity.OrderStatusName),
+                new SqlParameter("@OrderStatusType", entity.OrderStatusType),
+                new SqlParameter("@OrderStatusDesc", entity.OrderStatusDesc),
                 GetOutParam()
             };
 
@@ -45,7 +45,7 @@ namespace QIQO.Orders.Data
 
         public List<SqlParameter> MapParamsForDelete(int order_status_key) => new List<SqlParameter>
             {
-                new SqlParameter("@order_status_key", order_status_key),
+                new SqlParameter("@OrderStatusKey", order_status_key),
                 GetOutParam()
             };
     }
