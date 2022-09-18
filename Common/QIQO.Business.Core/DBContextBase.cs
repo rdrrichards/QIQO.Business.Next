@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Logging;
 using QIQO.Business.Core.Contracts;
 
 namespace QIQO.Business.Core
@@ -10,11 +9,9 @@ namespace QIQO.Business.Core
     public class DbContextBase : IDbContext
     {
         protected readonly SqlConnection _connection;
-        protected readonly ILogger<DbContextBase> Log;
 
-        public DbContextBase(ILogger<DbContextBase> logger, string connectionString)
+        public DbContextBase(string connectionString)
         {
-            Log = logger;
             _connection = new SqlConnection(connectionString);
         }
 
@@ -35,9 +32,8 @@ namespace QIQO.Business.Core
                 _connection.Close();
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally
@@ -59,9 +55,8 @@ namespace QIQO.Business.Core
                 _connection.Close();
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally
@@ -88,9 +83,8 @@ namespace QIQO.Business.Core
                 _connection.Close();
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally
@@ -124,9 +118,8 @@ namespace QIQO.Business.Core
                 _connection.Open();
                 return cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
         }
@@ -140,9 +133,8 @@ namespace QIQO.Business.Core
                 _connection.Open();
                 return cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
         }

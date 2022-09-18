@@ -10,11 +10,9 @@ namespace QIQO.Business.Core
         where T : class, IEntity, new()
     {
         protected readonly IMapper<T> Mapper;
-        protected readonly ILogger<T> Log;
 
-        public RepositoryBase(ILogger<T> logger, IMapper<T> map)
+        public RepositoryBase(IMapper<T> map)
         {
-            Log = logger;
             Mapper = map;
         }
 
@@ -33,10 +31,8 @@ namespace QIQO.Business.Core
                     dr.Dispose();
                     return rows;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Log.LogError(ex.Message);
-                    Log.LogError(ex.StackTrace);
                     throw;
                 }
             else return new List<T>();
@@ -52,10 +48,8 @@ namespace QIQO.Business.Core
                     else
                         return new T();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Log.LogError(ex.Message);
-                    Log.LogError(ex.StackTrace);
                     throw;
                 }
             else return new T();
