@@ -1,25 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<TargetFramework>net6.0</TargetFramework>
 
-    <IsPackable>false</IsPackable>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.18.2" />
-    <PackageReference Include="xunit" Version="2.4.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+	<PackageReference Include="Moq" Version="4.18.2" />
+	<PackageReference Include="xunit" Version="2.4.2" />
+	<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+	</PackageReference>
+	<DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />
-    <ProjectReference Include="..\QIQO.Accounts.Domain\QIQO.Accounts.Domain.csproj" />
-    <ProjectReference Include="..\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj" />
+	<ProjectReference Include="..\QIQO.Accounts.Data\QIQO.Accounts.Data.csproj" />
+	<ProjectReference Include="..\QIQO.Accounts.Domain\QIQO.Accounts.Domain.csproj" />
+	<ProjectReference Include="..\QIQO.Accounts.Manager\QIQO.Accounts.Manager.csproj" />
   </ItemGroup>
 
 </Project>
