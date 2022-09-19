@@ -12,14 +12,14 @@ namespace QIQO.Accounts.Data
     public interface IAccountDbContext : IDbContext { }
     public class AccountDbContext : DbContextBase, IAccountDbContext //, IDisposable
     {
-        public AccountDbContext() : this(null, null)
+        public AccountDbContext(string connectionString) : base(connectionString)
         {
 
         }
-        public AccountDbContext(ILogger<AccountDbContext> logger, IConfiguration configuration) : base(logger, configuration.GetConnectionString("AccountManagement"))
-        {
-            // Log.LogInformation("Hello from the AccountDbContext!");
-        }
+        //public AccountDbContext(ILogger<AccountDbContext> logger, IConfiguration configuration) : base(logger, configuration["ConnectionStrings:AccountManagement"])
+        //{
+        //    // _logger.LogInformation("Hello from the AccountDbContext!");
+        //}
 
         public override int ExecuteProcedureNonQuery(string procedureName, IEnumerable<SqlParameter> parameters)
         {
@@ -42,9 +42,8 @@ namespace QIQO.Accounts.Data
                 }
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally

@@ -1,3 +1,4 @@
+using QIQO.Accounts.Data;
 using QIQO.Business.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApiVersioning();
 builder.Services.AddAccountAll();
+builder.Services.AddDataAccessServices(options =>
+{
+    options.ConnectionString = builder.Configuration["ConnectionStrings:AccountManagement"];
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer().AddDaprClient();

@@ -9,7 +9,7 @@ namespace QIQO.Accounts.Tests
     public class AccountDataIntegrationTests
     {
         private readonly Mock<ILogger<AccountDbContext>> _mockLog;
-        private readonly Mock<IConfiguration> _configuration;
+        // private readonly Mock<IConfiguration> _configuration;
         private readonly IAccountDbContext _accountDbContext;
         private readonly IAccountMap _accountMapper;
         private readonly Mock<ILogger<AccountData>> _accountDataLog;
@@ -17,9 +17,9 @@ namespace QIQO.Accounts.Tests
         public AccountDataIntegrationTests()
         {
             _mockLog = new Mock<ILogger<AccountDbContext>>();
-            _configuration = new Mock<IConfiguration>();
-            _configuration.Setup(m => m["ConnectionStrings:AccountManagement"]).Returns(@"Data Source=RDRRL8\D1;User ID=businessuser;Password=businessuser512;Database=AccountManagement;Application Name=QIQOBusinessAccountsIntegrationTester");
-            _accountDbContext = new AccountDbContext(_mockLog.Object, _configuration.Object);
+            // _configuration = new Mock<IConfiguration>();
+            // _configuration.Setup(m => m["ConnectionStrings:AccountManagement"]).Returns();
+            _accountDbContext = new AccountDbContext(@"Data Source=RDRRL8\D1;User ID=businessuser;Password=businessuser512;Database=AccountManagement;Application Name=QIQOBusinessAccountsIntegrationTester");
             _accountMapper = new AccountMap();
             _accountDataLog = new Mock<ILogger<AccountData>>();
         }

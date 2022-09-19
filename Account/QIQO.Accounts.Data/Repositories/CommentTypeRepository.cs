@@ -10,27 +10,30 @@ namespace QIQO.Accounts.Data
                                      ICommentTypeRepository
     {
         private readonly IAccountDbContext entityContext;
-        public CommentTypeRepository(IAccountDbContext dbc, ICommentTypeMap map, ILogger<CommentTypeData> log) : base(log, map)
+        private readonly ILogger<CommentTypeData> _logger;
+
+        public CommentTypeRepository(IAccountDbContext dbc, ICommentTypeMap map, ILogger<CommentTypeData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<CommentTypeData> GetAll()
         {
-            Log.LogInformation("Accessing CommentTypeRepo GetAll function");
+            _logger.LogInformation("Accessing CommentTypeRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentTypeAll"));
         }
 
         public override CommentTypeData GetByID(int comment_type_key)
         {
-            Log.LogInformation("Accessing CommentTypeRepo GetByID function");
+            _logger.LogInformation("Accessing CommentTypeRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@CommentTypeKey", comment_type_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentTypeGet", pcol));
         }
 
         public override CommentTypeData GetByCode(string comment_type_code, string entityCode)
         {
-            Log.LogInformation("Accessing CommentTypeRepo GetByCode function");
+            _logger.LogInformation("Accessing CommentTypeRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@CommentTypeCode", comment_type_code),
                 Mapper.BuildParam("@CompanyCode", entityCode)
@@ -40,7 +43,7 @@ namespace QIQO.Accounts.Data
 
         public override void Insert(CommentTypeData entity)
         {
-            Log.LogInformation("Accessing CommentTypeRepo Insert function");
+            _logger.LogInformation("Accessing CommentTypeRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -49,7 +52,7 @@ namespace QIQO.Accounts.Data
 
         public override void Save(CommentTypeData entity)
         {
-            Log.LogInformation("Accessing CommentTypeRepo Save function");
+            _logger.LogInformation("Accessing CommentTypeRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -58,13 +61,13 @@ namespace QIQO.Accounts.Data
 
         public override void Delete(CommentTypeData entity)
         {
-            Log.LogInformation("Accessing CommentTypeRepo Delete function");
+            _logger.LogInformation("Accessing CommentTypeRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentTypeDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
-            Log.LogInformation("Accessing CommentTypeRepo DeleteByCode function");
+            _logger.LogInformation("Accessing CommentTypeRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@CommentTypeCode", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_comment_type_del_c", pcol);
@@ -72,7 +75,7 @@ namespace QIQO.Accounts.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing CommentTypeRepo Delete function");
+            _logger.LogInformation("Accessing CommentTypeRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentTypeDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
