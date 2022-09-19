@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using QIQO.Business.Core;
+﻿using QIQO.Business.Core;
 using QIQO.Business.Core.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,14 +10,7 @@ namespace QIQO.Companies.Data
     public interface ICompanyDbContext : IDbContext { }
     public class CompanyDbContext : DbContextBase, ICompanyDbContext //, IDisposable
     {
-        public CompanyDbContext() : this(null, null)
-        {
-
-        }
-        public CompanyDbContext(ILogger<CompanyDbContext> logger, IConfiguration configuration) : base(logger, configuration.GetConnectionString("CompanyManagement"))
-        {
-            // Log.LogInformation("Hello from the AccountDbContext!");
-        }
+        public CompanyDbContext(string connectionString) : base(connectionString) { }
 
         public override int ExecuteProcedureNonQuery(string procedureName, IEnumerable<SqlParameter> parameters)
         {
@@ -42,9 +33,8 @@ namespace QIQO.Companies.Data
                 }
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally

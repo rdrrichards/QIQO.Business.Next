@@ -9,21 +9,23 @@ namespace QIQO.Companies.Data
     public class AddressRepository : RepositoryBase<AddressData>, IAddressRepository
     {
         private readonly ICompanyDbContext entityContext;
+        private readonly ILogger<AddressData> _logger;
 
-        public AddressRepository(ICompanyDbContext dbc, IAddressMap map, ILogger<AddressData> log) : base(log, map)
+        public AddressRepository(ICompanyDbContext dbc, IAddressMap map, ILogger<AddressData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<AddressData> GetAll()
         {
-            Log.LogInformation("Accessing AddressRepo GetAll function");
+            _logger.LogInformation("Accessing AddressRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressAll"));
         }
 
         public IEnumerable<AddressData> GetAll(int entityKey, int entity_type)
         {
-            Log.LogInformation("Accessing AddressRepo GetAll by keys function");
+            _logger.LogInformation("Accessing AddressRepo GetAll by keys function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@EntityKey", entityKey),
                 Mapper.BuildParam("@EntityTypeKey", entity_type)
@@ -33,14 +35,14 @@ namespace QIQO.Companies.Data
 
         public override AddressData GetByID(int AddressKey)
         {
-            Log.LogInformation("Accessing AddressRepo GetByID function");
+            _logger.LogInformation("Accessing AddressRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressKey", AddressKey) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressGet", pcol));
         }
 
         public override AddressData GetByCode(string address_code, string entity_code)
         {
-            Log.LogInformation("Accessing AddressRepo GetByCode function");
+            _logger.LogInformation("Accessing AddressRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@AddressCode", address_code),
                 Mapper.BuildParam("@CompanyCode", entity_code)
@@ -50,7 +52,7 @@ namespace QIQO.Companies.Data
 
         public override void Insert(AddressData entity)
         {
-            Log.LogInformation("Accessing AddressRepo Insert function");
+            _logger.LogInformation("Accessing AddressRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -59,7 +61,7 @@ namespace QIQO.Companies.Data
 
         public override void Save(AddressData entity)
         {
-            Log.LogInformation("Accessing AddressRepo Save function");
+            _logger.LogInformation("Accessing AddressRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -68,13 +70,13 @@ namespace QIQO.Companies.Data
 
         public override void Delete(AddressData entity)
         {
-            Log.LogInformation("Accessing AddressRepo Delete function");
+            _logger.LogInformation("Accessing AddressRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
         {
-            Log.LogInformation("Accessing AddressRepo DeleteByCode function");
+            _logger.LogInformation("Accessing AddressRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressDelByCode", pcol);
@@ -82,7 +84,7 @@ namespace QIQO.Companies.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing AddressRepo Delete function");
+            _logger.LogInformation("Accessing AddressRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressDel", Mapper.MapParamsForDelete(entityKey));
         }
 

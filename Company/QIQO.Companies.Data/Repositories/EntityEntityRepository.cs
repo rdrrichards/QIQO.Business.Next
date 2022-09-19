@@ -10,27 +10,30 @@ namespace QIQO.Companies.Data
                                      IEntityEntityRepository
     {
         private readonly ICompanyDbContext entityContext;
-        public EntityEntityRepository(ICompanyDbContext dbc, IEntityEntityMap map, ILogger<EntityEntityData> log) : base(log, map)
+        private readonly ILogger<EntityEntityData> _logger;
+
+        public EntityEntityRepository(ICompanyDbContext dbc, IEntityEntityMap map, ILogger<EntityEntityData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<EntityEntityData> GetAll()
         {
-            Log.LogInformation("Accessing EntityEntityRepo GetAll function");
+            _logger.LogInformation("Accessing EntityEntityRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspEntityEntityAll"));
         }
 
         public override EntityEntityData GetByID(int entity_entity_key)
         {
-            Log.LogInformation("Accessing EntityEntityRepo GetByID function");
+            _logger.LogInformation("Accessing EntityEntityRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@EntityEntityKey", entity_entity_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspEntityEntityGet", pcol));
         }
 
         public override EntityEntityData GetByCode(string entity_entity_code, string entityCode)
         {
-            Log.LogInformation("Accessing EntityEntityRepo GetByCode function");
+            _logger.LogInformation("Accessing EntityEntityRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@entity_entity_code", entity_entity_code),
                 Mapper.BuildParam("@CompanyCode", entityCode)
@@ -40,7 +43,7 @@ namespace QIQO.Companies.Data
 
         public override void Insert(EntityEntityData entity)
         {
-            Log.LogInformation("Accessing EntityEntityRepo Insert function");
+            _logger.LogInformation("Accessing EntityEntityRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -49,7 +52,7 @@ namespace QIQO.Companies.Data
 
         public override void Save(EntityEntityData entity)
         {
-            Log.LogInformation("Accessing EntityEntityRepo Save function");
+            _logger.LogInformation("Accessing EntityEntityRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -58,13 +61,13 @@ namespace QIQO.Companies.Data
 
         public override void Delete(EntityEntityData entity)
         {
-            Log.LogInformation("Accessing EntityEntityRepo Delete function");
+            _logger.LogInformation("Accessing EntityEntityRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspEntityEntityDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
-            Log.LogInformation("Accessing EntityEntityRepo DeleteByCode function");
+            _logger.LogInformation("Accessing EntityEntityRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@entity_entity_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_entity_entity_del_c", pcol);
@@ -72,7 +75,7 @@ namespace QIQO.Companies.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing EntityEntityRepo Delete function");
+            _logger.LogInformation("Accessing EntityEntityRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspEntityEntityDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
