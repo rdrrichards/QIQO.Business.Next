@@ -10,27 +10,30 @@ namespace QIQO.Orders.Data
                                      IAddressPostalRepository
     {
         private readonly IOrderDbContext entityContext;
-        public AddressPostalRepository(IOrderDbContext dbc, IAddressPostalMap map, ILogger<AddressPostalData> log) : base(log, map)
+        private readonly ILogger<AddressPostalData> _logger;
+
+        public AddressPostalRepository(IOrderDbContext dbc, IAddressPostalMap map, ILogger<AddressPostalData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<AddressPostalData> GetAll()
         {
-            Log.LogInformation("Accessing AddressPostalRepo GetAll function");
+            _logger.LogInformation("Accessing AddressPostalRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressPostalAll"));
         }
 
         public override AddressPostalData GetByID(int address_postal_key)
         {
-            Log.LogInformation("Accessing AddressPostalRepo GetByID function");
+            _logger.LogInformation("Accessing AddressPostalRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@address_postal_key", address_postal_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspAddressPostalGet", pcol));
         }
 
         public override AddressPostalData GetByCode(string address_code, string entityCode)
         {
-            Log.LogInformation("Accessing AddressPostalRepo GetByCode function");
+            _logger.LogInformation("Accessing AddressPostalRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@AddressCode", address_code),
                 Mapper.BuildParam("@CompanyCode", entityCode)
@@ -40,7 +43,7 @@ namespace QIQO.Orders.Data
 
         public override void Insert(AddressPostalData entity)
         {
-            Log.LogInformation("Accessing AddressPostalRepo Insert function");
+            _logger.LogInformation("Accessing AddressPostalRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -49,7 +52,7 @@ namespace QIQO.Orders.Data
 
         public override void Save(AddressPostalData entity)
         {
-            Log.LogInformation("Accessing AddressPostalRepo Save function");
+            _logger.LogInformation("Accessing AddressPostalRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -58,13 +61,13 @@ namespace QIQO.Orders.Data
 
         public override void Delete(AddressPostalData entity)
         {
-            Log.LogInformation("Accessing AddressPostalRepo Delete function");
+            _logger.LogInformation("Accessing AddressPostalRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressPostalDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
-            Log.LogInformation("Accessing AddressPostalRepo DeleteByCode function");
+            _logger.LogInformation("Accessing AddressPostalRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@AddressCode", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("usp_address_postal_del_c", pcol);
@@ -72,7 +75,7 @@ namespace QIQO.Orders.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing AddressPostalRepo Delete function");
+            _logger.LogInformation("Accessing AddressPostalRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspAddressPostalDelete", Mapper.MapParamsForDelete(entityKey));
         }
 

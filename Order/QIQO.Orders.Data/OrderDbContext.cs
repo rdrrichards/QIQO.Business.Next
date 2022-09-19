@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using QIQO.Business.Core;
+﻿using QIQO.Business.Core;
 using QIQO.Business.Core.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,14 +10,7 @@ namespace QIQO.Orders.Data
     public interface IOrderDbContext : IDbContext { }
     public class OrderDbContext : DbContextBase, IOrderDbContext //, IDisposable
     {
-        public OrderDbContext() : this(null, null)
-        {
-
-        }
-        public OrderDbContext(ILogger<OrderDbContext> logger, IConfiguration configuration) : base(logger, configuration.GetConnectionString("OrderManagement"))
-        {
-            // Log.LogInformation("Hello from the AccountDbContext!");
-        }
+        public OrderDbContext(string connectionString) : base(connectionString) { }
 
         public override int ExecuteProcedureNonQuery(string procedureName, IEnumerable<SqlParameter> parameters)
         {
@@ -42,9 +33,8 @@ namespace QIQO.Orders.Data
                 }
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally

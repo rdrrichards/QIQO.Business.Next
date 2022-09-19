@@ -9,29 +9,31 @@ namespace QIQO.Orders.Data
     public class ProductRepository : RepositoryBase<ProductData>, IProductRepository
     {
         private readonly IOrderDbContext entityContext;
+        private readonly ILogger<ProductData> _logger;
 
-        public ProductRepository(IOrderDbContext dbc, IProductMap map, ILogger<ProductData> log) : base(log, map)
+        public ProductRepository(IOrderDbContext dbc, IProductMap map, ILogger<ProductData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<ProductData> GetAll()
         {
-            Log.LogInformation("Accessing ProductRepo GetAll function");
+            _logger.LogInformation("Accessing ProductRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspProductAll"));
         }
 
 
         public override ProductData GetByID(int product_key)
         {
-            Log.LogInformation("Accessing ProductRepo GetByID function");
+            _logger.LogInformation("Accessing ProductRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@ProductKey", product_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspProductGet", pcol));
         }
 
         public override ProductData GetByCode(string product_code, string entity_code)
         {
-            Log.LogInformation("Accessing ProductRepo GetByCode function");
+            _logger.LogInformation("Accessing ProductRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@ProductCode", product_code),
                 Mapper.BuildParam("@CompanyCode", entity_code)
@@ -41,7 +43,7 @@ namespace QIQO.Orders.Data
 
         public override void Insert(ProductData entity)
         {
-            Log.LogInformation("Accessing ProductRepo Insert function");
+            _logger.LogInformation("Accessing ProductRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -50,7 +52,7 @@ namespace QIQO.Orders.Data
 
         public override void Save(ProductData entity)
         {
-            Log.LogInformation("Accessing ProductRepo Save function");
+            _logger.LogInformation("Accessing ProductRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -59,13 +61,13 @@ namespace QIQO.Orders.Data
 
         public override void Delete(ProductData entity)
         {
-            Log.LogInformation("Accessing ProductRepo Delete function");
+            _logger.LogInformation("Accessing ProductRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
         {
-            Log.LogInformation("Accessing ProductRepo DeleteByCode function");
+            _logger.LogInformation("Accessing ProductRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@ProductCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductDeleteByCode", pcol);
@@ -73,7 +75,7 @@ namespace QIQO.Orders.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing ProductRepo Delete function");
+            _logger.LogInformation("Accessing ProductRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
