@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using QIQO.Business.Core;
+﻿using QIQO.Business.Core;
 using QIQO.Business.Core.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,16 +10,9 @@ namespace QIQO.Invoices.Data
     public interface IInvoiceDbContext : IDbContext { }
     public class InvoiceDbContext : DbContextBase, IInvoiceDbContext //, IDisposable
     {
-        public InvoiceDbContext() : this(null, null)
-        {
+        public InvoiceDbContext(string connectionString) : base(connectionString) { }
 
-        }
-        public InvoiceDbContext(ILogger<InvoiceDbContext> logger, IConfiguration configuration) : base(logger, configuration.GetConnectionString("InvoiceManagement"))
-        {
-            // Log.LogInformation("Hello from the AccountDbContext!");
-        }
-
-        public override int ExecuteProcedureNonQuery(string procedureName, IEnumerable<SqlParameter> parameters)
+    public override int ExecuteProcedureNonQuery(string procedureName, IEnumerable<SqlParameter> parameters)
         {
             var cmd = new SqlCommand(procedureName, _connection) { CommandType = CommandType.StoredProcedure };
             int ret_val;
@@ -42,9 +33,8 @@ namespace QIQO.Invoices.Data
                 }
                 return ret_val;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogError(ex.Message);
                 throw;
             }
             finally

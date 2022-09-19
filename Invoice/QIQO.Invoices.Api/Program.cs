@@ -1,4 +1,5 @@
 using QIQO.Business.Api;
+using QIQO.Invoices.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApiVersioning();
 builder.Services.AddControllers();
 builder.Services.AddInvoiceAll();
+builder.Services.AddDataAccessServices(options =>
+{
+    options.ConnectionString = builder.Configuration["ConnectionStrings:InoiceManagement"];
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer().AddDaprClient();
 builder.Services.AddSwaggerGen();

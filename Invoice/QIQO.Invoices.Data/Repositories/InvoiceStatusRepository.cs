@@ -9,28 +9,30 @@ namespace QIQO.Invoices.Data
     public class InvoiceStatusRepository : RepositoryBase<InvoiceStatusData>, IInvoiceStatusRepository
     {
         private readonly IInvoiceDbContext entityContext;
+        private readonly ILogger<InvoiceStatusData> _logger;
 
-        public InvoiceStatusRepository(IInvoiceDbContext dbc, IInvoiceStatusMap map, ILogger<InvoiceStatusData> log) : base(log, map)
+        public InvoiceStatusRepository(IInvoiceDbContext dbc, IInvoiceStatusMap map, ILogger<InvoiceStatusData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<InvoiceStatusData> GetAll()
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo GetAll function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceStatusAll"));
         }
 
         public override InvoiceStatusData GetByID(int invoice_status_key)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo GetByID function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceStatusKey", invoice_status_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspInvoiceStatusGet", pcol));
         }
 
         public override InvoiceStatusData GetByCode(string invoice_status_code, string entity_code)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo GetByCode function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo GetByCode function");
             var pcol = new List<SqlParameter>() {
                 Mapper.BuildParam("@InvoiceStatusCode", invoice_status_code),
                 Mapper.BuildParam("@CompanyCode", entity_code)
@@ -40,7 +42,7 @@ namespace QIQO.Invoices.Data
 
         public override void Insert(InvoiceStatusData entity)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo Insert function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -49,7 +51,7 @@ namespace QIQO.Invoices.Data
 
         public override void Save(InvoiceStatusData entity)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo Save function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -58,13 +60,13 @@ namespace QIQO.Invoices.Data
 
         public override void Delete(InvoiceStatusData entity)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo Delete function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo DeleteByCode function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@InvoiceStatusCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", pcol);
@@ -72,7 +74,7 @@ namespace QIQO.Invoices.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing InvoiceStatusRepo Delete function");
+            _logger.LogInformation("Accessing InvoiceStatusRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspInvoiceStatusDel", Mapper.MapParamsForDelete(entityKey));
         }
 

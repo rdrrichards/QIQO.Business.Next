@@ -9,21 +9,23 @@ namespace QIQO.Invoices.Data
     public class CommentRepository : RepositoryBase<CommentData>, ICommentRepository
     {
         private readonly IInvoiceDbContext entityContext;
+        private readonly ILogger<CommentData> _logger;
 
-        public CommentRepository(IInvoiceDbContext dbc, ICommentMap map, ILogger<CommentData> log) : base(log, map)
+        public CommentRepository(IInvoiceDbContext dbc, ICommentMap map, ILogger<CommentData> logger) : base(map)
         {
             entityContext = dbc;
+            _logger = logger;
         }
 
         public override IEnumerable<CommentData> GetAll()
         {
-            Log.LogInformation("Accessing CommentRepo GetAll function");
+            _logger.LogInformation("Accessing CommentRepo GetAll function");
             using (entityContext) return MapRows(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentAll"));
         }
 
         public IEnumerable<CommentData> GetAll(int entityKey, int entityTypeKey)
         {
-            Log.LogInformation("Accessing CommentRepo GetAll function");
+            _logger.LogInformation("Accessing CommentRepo GetAll function");
             var pcol = new List<SqlParameter>()
             {
                 Mapper.BuildParam("@EntityKey", entityKey),
@@ -34,14 +36,14 @@ namespace QIQO.Invoices.Data
 
         public override CommentData GetByID(int comment_key)
         {
-            Log.LogInformation("Accessing CommentRepo GetByID function");
+            _logger.LogInformation("Accessing CommentRepo GetByID function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@CommentKey", comment_key) };
             using (entityContext) return MapRow(entityContext.ExecuteProcedureAsSqlDataReader("uspCommentGet", pcol));
         }
 
         public override CommentData GetByCode(string commentCode, string entityCode)
         {
-            Log.LogInformation("Accessing CommentRepo GetByCode function");
+            _logger.LogInformation("Accessing CommentRepo GetByCode function");
             var pcol = new List<SqlParameter>()
             {
                 Mapper.BuildParam("@comment_code", commentCode),
@@ -52,7 +54,7 @@ namespace QIQO.Invoices.Data
 
         public override void Insert(CommentData entity)
         {
-            Log.LogInformation("Accessing CommentRepo Insert function");
+            _logger.LogInformation("Accessing CommentRepo Insert function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -61,7 +63,7 @@ namespace QIQO.Invoices.Data
 
         public override void Save(CommentData entity)
         {
-            Log.LogInformation("Accessing CommentRepo Save function");
+            _logger.LogInformation("Accessing CommentRepo Save function");
             if (entity is not null)
                 Upsert(entity);
             else
@@ -70,13 +72,13 @@ namespace QIQO.Invoices.Data
 
         public override void Delete(CommentData entity)
         {
-            Log.LogInformation("Accessing CommentRepo Delete function");
+            _logger.LogInformation("Accessing CommentRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entityCode)
         {
-            Log.LogInformation("Accessing CommentRepo DeleteByCode function");
+            _logger.LogInformation("Accessing CommentRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@comment_code", entityCode) };
             pcol.Add(Mapper.GetOutParam());
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelByCompany", pcol);
@@ -84,7 +86,7 @@ namespace QIQO.Invoices.Data
 
         public override void DeleteByID(int entityKey)
         {
-            Log.LogInformation("Accessing CommentRepo Delete function");
+            _logger.LogInformation("Accessing CommentRepo Delete function");
             using (entityContext) entityContext.ExecuteProcedureNonQuery("uspCommentDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
