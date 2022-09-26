@@ -67,7 +67,7 @@ namespace QIQO.Products.Data
         public override void Delete(ProductTypeData entity)
         {
             _logger.LogInformation("Accessing ProductTypeRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDel", Mapper.MapParamsForDelete(entity));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDelete", Mapper.MapParamsForDelete(entity));
         }
 
         public override void DeleteByCode(string entity_code)
@@ -75,13 +75,13 @@ namespace QIQO.Products.Data
             _logger.LogInformation("Accessing ProductTypeRepo DeleteByCode function");
             var pcol = new List<SqlParameter>() { Mapper.BuildParam("@ProductTypeCode", entity_code) };
             pcol.Add(Mapper.GetOutParam());
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDelByCode", pcol);
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDeleteByCode", pcol);
         }
 
         public override void DeleteByID(int entityKey)
         {
             _logger.LogInformation("Accessing ProductTypeRepo Delete function");
-            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDel", Mapper.MapParamsForDelete(entityKey));
+            using (entityContext) entityContext.ExecuteProcedureNonQuery("uspProductTypeDelete", Mapper.MapParamsForDelete(entityKey));
         }
 
         private void Upsert(ProductTypeData entity)

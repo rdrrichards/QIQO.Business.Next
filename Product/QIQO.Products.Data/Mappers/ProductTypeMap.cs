@@ -37,7 +37,7 @@ namespace QIQO.Products.Data
                 new SqlParameter("@ProductTypeCategory", entity.ProductTypeCategory),
                 new SqlParameter("@ProductTypeCode", entity.ProductTypeCode),
                 new SqlParameter("@ProductTypeName", entity.ProductTypeName),
-                new SqlParameter("@ProductTypeDesc", entity.ProductTypeDesc),
+                new SqlParameter("@ProductTypeDescription", entity.ProductTypeDesc),
                 GetOutParam()
             };
 
