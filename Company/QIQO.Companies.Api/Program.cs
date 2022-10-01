@@ -25,6 +25,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHsts(options => options.MaxAge(days: 365)
+    .IncludeSubdomains());
+app.UseXContentTypeOptions();
+app.UseXXssProtection(options => options.EnabledWithBlockMode());
+app.UseXfo(options => options.SameOrigin());
+app.UseReferrerPolicy(opts => opts.NoReferrer());
+app.UseCsp(options => options.DefaultSources(s => s.Self())
+    .StyleSources(s => s.Self()
+    .UnsafeInline()
+).ScriptSources(s => s.Self()
+    .UnsafeInline()
+    .UnsafeEval())
+);
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
