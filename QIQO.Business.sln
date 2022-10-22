@@ -73,7 +73,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Products.Api", "Produc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{C853D6B2-7C82-42F3-9225-0BF16D36D3D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Business.Client", "Frontend\QIQO.Business.Client\QIQO.Business.Client.csproj", "{79623D20-E05C-4683-BC62-06242EAD1F13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIQO.Business.Client", "Frontend\QIQO.Business.Client\QIQO.Business.Client.csproj", "{79623D20-E05C-4683-BC62-06242EAD1F13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIQO.Code.Generators", "Common\QIQO.Code.Generators\QIQO.Code.Generators.csproj", "{D260CA88-B3EF-4864-A156-277519B8BAF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +199,10 @@ Global
 		{79623D20-E05C-4683-BC62-06242EAD1F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79623D20-E05C-4683-BC62-06242EAD1F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79623D20-E05C-4683-BC62-06242EAD1F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D260CA88-B3EF-4864-A156-277519B8BAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D260CA88-B3EF-4864-A156-277519B8BAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D260CA88-B3EF-4864-A156-277519B8BAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D260CA88-B3EF-4864-A156-277519B8BAF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +237,7 @@ Global
 		{227B380A-D171-4AF4-9309-04020BB87C96} = {0219908B-DFAD-4690-8F74-AE1A6F95BEB7}
 		{DD8E4C07-5CFB-407C-BF8C-EC8706C60B31} = {7C82921A-220D-4778-810C-3AA90A39EA2A}
 		{79623D20-E05C-4683-BC62-06242EAD1F13} = {C853D6B2-7C82-42F3-9225-0BF16D36D3D9}
+		{D260CA88-B3EF-4864-A156-277519B8BAF9} = {7C98BCCF-E95A-442B-BEE7-1D319E1AAACC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D30E9C8-D743-4661-A00F-DE0CBBA8E57D}
