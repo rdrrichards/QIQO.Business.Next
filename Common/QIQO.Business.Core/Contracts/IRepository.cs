@@ -5,20 +5,20 @@ namespace QIQO.Business.Core.Contracts
     public interface IRepository { }
 
     public interface IReadRepository<T> : IRepository
-        where T : class, IEntity, new()
+        where T : class, IReadOnlyEntity, new()
     {
         IEnumerable<T> GetAll();
         T GetByID(int entityKey);
-        T GetByCode(string account_code, string entity_code);
+        T GetByCode(string accountCode, string entityCode);
     }
 
     public interface IWriteRepository<T> : IRepository
-        where T : class, IEntity, new()
+        where T : class, IWriteOnlyEntity, new()
     {
         void Insert(T entity);
         void Delete(T entity);
         void DeleteByID(int entityKey);
-        void DeleteByCode(string entity_code);
+        void DeleteByCode(string entityCode);
         void Save(T entity);
     }
 
